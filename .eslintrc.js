@@ -27,6 +27,11 @@ module.exports = {
   rules: {
     'prettier/prettier': ['warn', prettierOptions],
     "object-curly-newline": "warn",
+    'operator-linebreak': ["warn", "before", {"overrides": { 
+      "=": "after",  
+      "&&": "after", 
+      "||": "after",
+    }}],
   },
   settings: {
     react: {
