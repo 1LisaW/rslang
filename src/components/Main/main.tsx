@@ -4,8 +4,8 @@ function Main() {
   return (
     <main className="main">
       <section className="start-page">
-        <div className="start-page__img" />
-        <div className="start-page__background-main-color" />
+        <div className="start-page__hero-img" />
+        <div className="start-page__decoration-container" />
         <div className="start-page__text">
           <h4 className="start-page__subtitle">IngLang team</h4>
           <h2>Learning English is so fanny!</h2>
