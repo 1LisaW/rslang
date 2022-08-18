@@ -50,7 +50,7 @@ class Api {
 
     fetchOptionAuth.withCredentials = true;
     fetchOptionAuth.headers.Authorization = `Bearer ${
-      auth === Auth.auth ? this.token : this.refreshToken
+      auth === Auth.Auth ? this.token : this.refreshToken
     }`;
 
     return fetchOptionAuth;
@@ -63,7 +63,7 @@ class Api {
     data = {},
   ) => {
     const fetchOptions =
-      auth === Auth.auth
+      auth === Auth.Auth
         ? this.getFetchOptionAuth(method, auth, data)
         : this.getFetchOption(method, data);
 
@@ -110,11 +110,11 @@ class Api {
     const optionsToStr = this.convertNumberAttrToStr(options);
     const params = new URLSearchParams(optionsToStr).toString();
     const searchParams = params ? `?${params}` : params;
-    const path = `${Endpoints.words}${searchParams}`;
+    const path = `${Endpoints.Words}${searchParams}`;
     const words: WordResponse[] | ErrorResponse = await this.requestMethod(
       Methods.GET,
       path,
-      Auth.unAuth,
+      Auth.UnAuth,
     );
 
     return words;
@@ -123,11 +123,11 @@ class Api {
   static getWord = async (
     id: string,
   ): Promise<WordResponse | ErrorResponse> => {
-    const path = `${Endpoints.words}/${id}`;
+    const path = `${Endpoints.Words}/${id}`;
     const word: WordResponse | ErrorResponse = await this.requestMethod(
       Methods.GET,
       path,
-      Auth.unAuth,
+      Auth.UnAuth,
     );
 
     return word;
@@ -138,8 +138,8 @@ class Api {
   ): Promise<UserResponse | ErrorResponse> => {
     const user: UserResponse | ErrorResponse = await this.requestMethod(
       Methods.POST,
-      Endpoints.users,
-      Auth.unAuth,
+      Endpoints.Users,
+      Auth.UnAuth,
       userInfo,
     );
     return user;
@@ -148,11 +148,11 @@ class Api {
   static getUser = async (
     id: string,
   ): Promise<UserResponse | ErrorResponse> => {
-    const path = `${Endpoints.users}/${id}`;
+    const path = `${Endpoints.Users}/${id}`;
     const user: UserResponse | ErrorResponse = await this.requestMethod(
       Methods.GET,
       path,
-      Auth.auth,
+      Auth.Auth,
     );
     return user;
   };
@@ -161,29 +161,29 @@ class Api {
     id: string,
     userInfo: UpdateUserData,
   ): Promise<UserResponse | ErrorResponse> => {
-    const path = `${Endpoints.users}/${id}`;
+    const path = `${Endpoints.Users}/${id}`;
     const updatedUser: UserResponse | ErrorResponse = await this.requestMethod(
       Methods.PUT,
       path,
-      Auth.auth,
+      Auth.Auth,
       userInfo,
     );
     return updatedUser;
   };
 
   static deleteUser = async (id: string): Promise<void> => {
-    const path = `${Endpoints.users}/${id}`;
-    await this.requestMethod(Methods.DELETE, path, Auth.auth);
+    const path = `${Endpoints.Users}/${id}`;
+    await this.requestMethod(Methods.DELETE, path, Auth.Auth);
   };
 
   static getUserTokens = async (
     id: string,
   ): Promise<TokenResponse | ErrorResponse> => {
-    const path = `${Endpoints.users}/${id}/${Endpoints.token}`;
+    const path = `${Endpoints.Users}/${id}/${Endpoints.Token}`;
     const tokens: TokenResponse | ErrorResponse = await this.requestMethod(
       Methods.GET,
       path,
-      Auth.refresh,
+      Auth.Refresh,
     );
     return tokens;
   };
@@ -191,9 +191,9 @@ class Api {
   static getUsersWords = async (
     userId: string,
   ): Promise<UsersWordResponse[] | ErrorResponse> => {
-    const path = `${Endpoints.users}/${userId}/${Endpoints.words}`;
+    const path = `${Endpoints.Users}/${userId}/${Endpoints.Words}`;
     const usersWords: UsersWordResponse[] | ErrorResponse =
-      await this.requestMethod(Methods.GET, path, Auth.auth);
+      await this.requestMethod(Methods.GET, path, Auth.Auth);
 
     return usersWords;
   };
@@ -203,9 +203,9 @@ class Api {
     wordId: string,
     data: UsersWordData,
   ): Promise<UsersWordResponse | ErrorResponse> => {
-    const path = `${Endpoints.users}/${userId}/${Endpoints.words}/${wordId}`;
+    const path = `${Endpoints.Users}/${userId}/${Endpoints.Words}/${wordId}`;
     const usersWord: UsersWordResponse | ErrorResponse =
-      await this.requestMethod(Methods.POST, path, Auth.auth, data);
+      await this.requestMethod(Methods.POST, path, Auth.Auth, data);
 
     return usersWord;
   };
@@ -214,9 +214,9 @@ class Api {
     userId: string,
     wordId: string,
   ): Promise<UsersWordResponse | ErrorResponse> => {
-    const path = `${Endpoints.users}/${userId}/${Endpoints.words}/${wordId}`;
+    const path = `${Endpoints.Users}/${userId}/${Endpoints.Words}/${wordId}`;
     const usersWords: UsersWordResponse | ErrorResponse =
-      await this.requestMethod(Methods.GET, path, Auth.auth);
+      await this.requestMethod(Methods.GET, path, Auth.Auth);
 
     return usersWords;
   };
@@ -226,9 +226,9 @@ class Api {
     wordId: string,
     data: UpdateUsersWordData,
   ): Promise<UsersWordResponse | ErrorResponse> => {
-    const path = `${Endpoints.users}/${userId}/${Endpoints.words}/${wordId}`;
+    const path = `${Endpoints.Users}/${userId}/${Endpoints.Words}/${wordId}`;
     const usersWord: UsersWordResponse | ErrorResponse =
-      await this.requestMethod(Methods.PUT, path, Auth.auth, data);
+      await this.requestMethod(Methods.PUT, path, Auth.Auth, data);
 
     return usersWord;
   };
@@ -237,8 +237,8 @@ class Api {
     userId: string,
     wordId: string,
   ): Promise<void> => {
-    const path = `${Endpoints.users}/${userId}/${Endpoints.words}/${wordId}`;
-    await this.requestMethod(Methods.DELETE, path, Auth.auth);
+    const path = `${Endpoints.Users}/${userId}/${Endpoints.Words}/${wordId}`;
+    await this.requestMethod(Methods.DELETE, path, Auth.Auth);
   };
 
   static getUserAggregatedWords = async (
@@ -248,9 +248,9 @@ class Api {
     const convertedParams = this.convertNumberAttrToStr(options);
     const params = new URLSearchParams(convertedParams).toString();
     const searchParams = params ? `?${params}` : params;
-    const path = `${Endpoints.words}/${userId}/${Endpoints.aggregatedWords}${searchParams}`;
+    const path = `${Endpoints.Words}/${userId}/${Endpoints.AggregatedWords}${searchParams}`;
     const usersAggregatedWords: UsersAggregatedWordsResponse | ErrorResponse =
-      await this.requestMethod(Methods.GET, path, Auth.auth);
+      await this.requestMethod(Methods.GET, path, Auth.Auth);
 
     return usersAggregatedWords;
   };
@@ -259,9 +259,9 @@ class Api {
     userId: string,
     wordId: string,
   ): Promise<PaginatedResults[] | ErrorResponse> => {
-    const path = `${Endpoints.words}/${userId}/${Endpoints.aggregatedWords}/${wordId}`;
+    const path = `${Endpoints.Words}/${userId}/${Endpoints.AggregatedWords}/${wordId}`;
     const usersAggregatedWord: PaginatedResults[] | ErrorResponse =
-      await this.requestMethod(Methods.GET, path, Auth.auth);
+      await this.requestMethod(Methods.GET, path, Auth.Auth);
 
     return usersAggregatedWord;
   };
@@ -269,9 +269,9 @@ class Api {
   static getUserStatistic = async (
     userId: string,
   ): Promise<StatisticResponse | ErrorResponse> => {
-    const path = `${Endpoints.users}/${userId}/${Endpoints.statistics}`;
+    const path = `${Endpoints.Users}/${userId}/${Endpoints.Statistics}`;
     const usersAggregatedWord: StatisticResponse | ErrorResponse =
-      await this.requestMethod(Methods.GET, path, Auth.auth);
+      await this.requestMethod(Methods.GET, path, Auth.Auth);
 
     return usersAggregatedWord;
   };
@@ -280,9 +280,9 @@ class Api {
     userId: string,
     statisticData: StatisticData,
   ): Promise<StatisticResponse | ErrorResponse> => {
-    const path = `${Endpoints.users}/${userId}/${Endpoints.statistics}`;
+    const path = `${Endpoints.Users}/${userId}/${Endpoints.Statistics}`;
     const usersAggregatedWord: StatisticResponse | ErrorResponse =
-      await this.requestMethod(Methods.GET, path, Auth.auth, statisticData);
+      await this.requestMethod(Methods.GET, path, Auth.Auth, statisticData);
 
     return usersAggregatedWord;
   };
@@ -290,9 +290,9 @@ class Api {
   static getUserSettings = async (
     userId: string,
   ): Promise<SettingsResponse | ErrorResponse> => {
-    const path = `${Endpoints.users}/${userId}/${Endpoints.settings}`;
+    const path = `${Endpoints.Users}/${userId}/${Endpoints.Settings}`;
     const usersAggregatedWord: SettingsResponse | ErrorResponse =
-      await this.requestMethod(Methods.GET, path, Auth.auth);
+      await this.requestMethod(Methods.GET, path, Auth.Auth);
 
     return usersAggregatedWord;
   };
@@ -301,9 +301,9 @@ class Api {
     userId: string,
     settingsData: SettingsData,
   ): Promise<SettingsResponse | ErrorResponse> => {
-    const path = `${Endpoints.users}/${userId}/${Endpoints.settings}`;
+    const path = `${Endpoints.Users}/${userId}/${Endpoints.Settings}`;
     const usersAggregatedWord: SettingsResponse | ErrorResponse =
-      await this.requestMethod(Methods.GET, path, Auth.auth, settingsData);
+      await this.requestMethod(Methods.GET, path, Auth.Auth, settingsData);
 
     return usersAggregatedWord;
   };
@@ -311,11 +311,11 @@ class Api {
   static signin = async (
     userInfo: UpdateUserData,
   ): Promise<TokenResponse | ErrorResponse> => {
-    const path = `${Endpoints.signin}`;
+    const path = `${Endpoints.Signin}`;
     const tokens: TokenResponse | ErrorResponse = await this.requestMethod(
       Methods.POST,
       path,
-      Auth.unAuth,
+      Auth.UnAuth,
       userInfo,
     );
     return tokens;

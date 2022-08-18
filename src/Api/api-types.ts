@@ -6,24 +6,24 @@ export enum Methods {
 }
 
 export enum Endpoints {
-  users = 'users',
-  words = 'words',
-  token = 'token',
-  aggregatedWords = 'aggregatedWords',
-  statistics = 'statistics',
-  settings = 'settings',
-  signin = 'signin',
+  Users = 'users',
+  Words = 'words',
+  Token = 'token',
+  AggregatedWords = 'aggregatedWords',
+  Statistics = 'statistics',
+  Settings = 'settings',
+  Signin = 'signin',
 }
 
 export enum Difficulty {
-  weak = 'weak',
-  hard = 'hard',
+  Weak = 'weak',
+  Hard = 'hard',
 }
 
 export enum Auth {
-  auth = 'auth',
-  unAuth = 'unAuth',
-  refresh = 'refresh',
+  Auth = 'auth',
+  UnAuth = 'unAuth',
+  Refresh = 'refresh',
 }
 
 export type QueryParams = {
