@@ -24,7 +24,7 @@ import {
   Auth,
 } from './api-types';
 
-const PATH_TO_SERVER = 'https://learnwords-rsslang-project.herokuapp.com/';
+const { PATH_TO_SERVER } = process.env;
 
 class Api {
   static token: string;
