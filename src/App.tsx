@@ -1,4 +1,5 @@
 import React from 'react';
+import './global/global.scss';
 import {
   BrowserRouter,
   Routes,
@@ -14,7 +15,7 @@ import Statistic from './components/Statistic/statistic';
 
 function App() {
   return (
-    <div>
+    <div className="body__container">
       <BrowserRouter>
         <Header />
         <Routes>
