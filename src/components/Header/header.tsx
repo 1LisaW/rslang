@@ -6,11 +6,13 @@ import Autorisation from '../Autorisation/autorisation';
 function Header() {
   return (
     <header className="header">
-      <div className="logo__container">
-        <h1 className="logo__title">IngLang</h1>
+      <div className="header__container">
+        <div className="logo__container">
+          <h1 className="logo__title">IngLang</h1>
+        </div>
+        <Navbar />
+        <Autorisation />
       </div>
-      <Navbar />
-      <Autorisation />
     </header>
   );
 }

@@ -11,7 +11,16 @@ $BODY-CONTAINER-WIDTH: 1440px;
   font-weight: 400;
   src: url('../assets/fonts/Humblle\ Rought\ Caps.woff') format('woff');
 }
-
+@font-face {
+  font-family: "OpenSans"; 
+  src: url('../assets/fonts/open-sans.woff') format('woff');
+  font-style: normal;
+}
+@font-face {
+  font-family: "Teko"; 
+  src: url('../assets/fonts/Teko-Regular.woff') format('woff');
+  font-style: normal;
+}
 @mixin flex ($justify-content) {
   display: flex;
   justify-content: $justify-content;

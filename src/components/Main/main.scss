@@ -1,0 +1,30 @@
+@import '../../global/library';
+
+$BODY-CONTAINER-WIDTH: 1440px;
+$HERO-IMG-WIDTH: 978px;
+$HERO-IMG-HEIGHT: 590px;
+$DECORATION-CONTAINER-WIDTH: 490px;
+$DECORATION-CONTAINER-HEIGHT: 330px;
+
+.main {
+  background-color: $MAIN-COLOR--PRIMARY-DARK; 
+}
+.start-page {
+  width: 90%;
+  margin: 0 auto;
+}
+.start-page__hero-img {
+  height: $HERO-IMG-HEIGHT;
+  width: $HERO-IMG-WIDTH;
+  background-image: url('../../assets/imgs/start-page-__hero-img.jpg');
+  background-size: cover;
+}
+.start-page__decoration-container {
+  height: $DECORATION-CONTAINER-HEIGHT;
+  width: $DECORATION-CONTAINER-WIDTH;
+  background-color: $MAIN-COLOR--SECONDARY;
+  position: relative;
+  bottom: 65px;
+  z-index: 0;
+  margin-left: auto;
+}
