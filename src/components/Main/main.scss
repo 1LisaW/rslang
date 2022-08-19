@@ -5,6 +5,8 @@ $HERO-IMG-WIDTH: 978px;
 $HERO-IMG-HEIGHT: 590px;
 $DECORATION-CONTAINER-WIDTH: 490px;
 $DECORATION-CONTAINER-HEIGHT: 330px;
+$START-PAGE-TEXT-WIDTH: 490px;
+$START-PAGE-TEXT-HEIGHT: 400px;
 
 .main {
   background-color: $MAIN-COLOR--PRIMARY-DARK; 
@@ -16,7 +18,7 @@ $DECORATION-CONTAINER-HEIGHT: 330px;
 .start-page__hero-img {
   height: $HERO-IMG-HEIGHT;
   width: $HERO-IMG-WIDTH;
-  background-image: url('../../assets/imgs/start-page-__hero-img.jpg');
+  background-image: url('../../assets/imgs/25.jpg');
   background-size: cover;
 }
 .start-page__decoration-container {
@@ -24,7 +26,33 @@ $DECORATION-CONTAINER-HEIGHT: 330px;
   width: $DECORATION-CONTAINER-WIDTH;
   background-color: $MAIN-COLOR--SECONDARY;
   position: relative;
-  bottom: 65px;
+  bottom: 17em;
   z-index: 0;
   margin-left: auto;
+}
+.start-page__text {
+  height: $START-PAGE-TEXT-HEIGHT;
+  width: $START-PAGE-TEXT-WIDTH;
+  background-color: $MAIN-COLOR--PRIMARY-LIGHT;
+  position: relative;
+  bottom: 50em;
+  right: 6em;
+  z-index: 1;
+  margin-left: auto;
+  padding: 65px;
+  box-sizing: border-box;
+  .start-page__subtitle {
+    @include font(0.5em, OpenSans);
+    letter-spacing: 2.8px;
+    color: $MAIN-COLOR--PRIMARY;
+  }
+  .start-page__title {
+    @include font(3em, Teko);
+    width: 70%;
+    margin-bottom: 1em;
+  }
+  .start-page__text {
+    @include font(1em, Teko);
+    color: $MAIN-COLOR--PRIMARY-DARK;
+  }
 }
