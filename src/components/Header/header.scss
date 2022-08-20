@@ -4,10 +4,14 @@ $HEADER-LOGO-CONTAINER--HEIGHT: 140px;
 $HEADER--HEIGHT: 67px;
 
 .header {
+  background-color: $MAIN-COLOR--PRIMARY-DARK;
+  width:100%;
+}
+.header__container {
   @include flex(space-between);
-  height: $HEADER--HEIGHT;
   width:90%;
   margin: 0 auto;
+  height: $HEADER--HEIGHT;
   background-color: $MAIN-COLOR--PRIMARY-DARK;
   position: fixed;
   top: 0;
@@ -20,9 +24,10 @@ $HEADER--HEIGHT: 67px;
   height: $HEADER-LOGO-CONTAINER--HEIGHT;
   @include flex(center);
   .logo__title {
-    font-family: Rought;
+    font-family: Teko;
     color: $MAIN-COLOR--PRIMARY-LIGHT;
     letter-spacing: 5px;
     padding-top: 10%;
+    font-size: 3.5em;
   }
 }

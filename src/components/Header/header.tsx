@@ -1,16 +1,18 @@
 import React from 'react';
 import './header.scss';
 import Navbar from '../NavBar/navBar';
-import Autorisation from '../Autorisation/autorisation';
+import Athorization from '../Athorization/athorization';
 
 function Header() {
   return (
     <header className="header">
-      <div className="logo__container">
-        <h1 className="logo__title">IngLang</h1>
+      <div className="header__container">
+        <div className="logo__container">
+          <h1 className="logo__title">IngLang</h1>
+        </div>
+        <Navbar />
+        <Athorization />
       </div>
-      <Navbar />
-      <Autorisation />
     </header>
   );
 }

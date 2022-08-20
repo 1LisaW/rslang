@@ -1,5 +1,6 @@
 import React from 'react';
 import './global/global.scss';
+import './global/reset.css';
 import {
   BrowserRouter,
   Routes,
