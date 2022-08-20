@@ -1,0 +1,7 @@
+@import './library';
+
+.body__container {
+  width: $BODY-CONTAINER-WIDTH;
+  margin: 0 auto;
+  background-color: $MAIN-COLOR--PRIMARY-DARK;
+}
