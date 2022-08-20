@@ -12,6 +12,11 @@ $HEADER--HEIGHT: 67px;
   width:90%;
   margin: 0 auto;
   height: $HEADER--HEIGHT;
+  background-color: $MAIN-COLOR--PRIMARY-DARK;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
 }
 .logo__container {
   width: 20%;
