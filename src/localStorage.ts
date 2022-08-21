@@ -1,5 +1,4 @@
-const STORAGE_NAME = 'RSLang_Project_Storage';
-
+const { STORAGE_NAME } = process.env;
 class StorageWorker {
   private myStorageUserId;
 
