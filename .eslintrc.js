@@ -26,7 +26,11 @@ module.exports = {
   plugins: ['prettier', 'react', '@typescript-eslint'],
   rules: {
     'prettier/prettier': ['warn', prettierOptions],
-    "object-curly-newline": "warn",
+    "object-curly-newline": ['warn', {
+      "ObjectPattern": { 'multiline': true },}
+    ],
+    "arrow-parens": ["warn", "as-needed"],
+    "react/jsx-props-no-spreading": 'off',
     'operator-linebreak': ["warn", "before", {"overrides": { 
       "=": "after",  
       "&&": "after", 

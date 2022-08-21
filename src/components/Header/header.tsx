@@ -1,7 +1,7 @@
 import React from 'react';
-import './header.scss';
 import Navbar from '../NavBar/navBar';
-import Athorization from '../Athorization/athorization';
+import Authorization from '../Authorization/authorization';
+import './header.scss';
 
 function Header() {
   return (
@@ -11,7 +11,7 @@ function Header() {
           <h1 className="logo__title">IngLang</h1>
         </div>
         <Navbar />
-        <Athorization />
+        <Authorization />
       </div>
     </header>
   );
