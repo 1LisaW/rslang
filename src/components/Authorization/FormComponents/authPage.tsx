@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useState } from 'react';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import { TypeOf } from 'zod';

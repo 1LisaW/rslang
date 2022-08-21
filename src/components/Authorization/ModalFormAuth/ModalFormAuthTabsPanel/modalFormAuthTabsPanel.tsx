@@ -1,5 +1,4 @@
 /* eslint-disable react/require-default-props */
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';

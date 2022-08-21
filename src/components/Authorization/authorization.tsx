@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useState, useCallback } from 'react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import NoAccountsIcon from '@mui/icons-material/NoAccounts';

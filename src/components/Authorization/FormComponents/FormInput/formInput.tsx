@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { TextField, TextFieldProps } from '@mui/material';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
