@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
-import { TypeOf } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Typography, InputAdornment, IconButton } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
@@ -8,31 +7,34 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import FormInput from './FormInput/formInput';
 import {
-  registerSchemaSignIn,
+  registerSchemaLogIn,
   registerSchemaSignUp,
   fieldsList,
   InputTypes,
 } from './FormInput/registerSchema';
+import { LogInActionResponse } from '../LogIn/logInAction';
+import { SignUpActionResponse } from '../SignUp/signUpAction';
+import { AuthData } from '../../../Api/api-types';
+import { RegisterInput } from '../auth-types';
 
-type RegisterSignInInput = TypeOf<typeof registerSchemaSignIn>;
-type RegisterSignUpInput = TypeOf<typeof registerSchemaSignUp>;
-type RegisterInput = RegisterSignInInput | RegisterSignUpInput;
+type LogInFieldsType = Omit<typeof fieldsList, 'name' | 'passwordConfirm'>;
 
-type AuthFieldsTypes =
-  | Omit<typeof fieldsList, 'name' | 'passwordConfirm'>
-  | typeof fieldsList;
+type AuthFieldsTypes = LogInFieldsType | typeof fieldsList;
 
 type PropTypes = {
   authFields: AuthFieldsTypes;
   formRole: FormRole;
+  action: (
+    userInfo: AuthData,
+  ) => Promise<LogInActionResponse | SignUpActionResponse>;
 };
 
 export const enum FormRole {
-  SignIn = 'signIn',
+  LogIn = 'logIn',
   SignUp = 'signUp',
 }
 
-function AuthPage({ authFields, formRole }: PropTypes) {
+function AuthPage({ authFields, formRole, action }: PropTypes) {
   const [loading, setLoading] = useState(false);
   const [values, setValues] = React.useState({
     showPassword: false,
@@ -53,9 +55,7 @@ function AuthPage({ authFields, formRole }: PropTypes) {
 
   const methods = useForm<RegisterInput>({
     resolver: zodResolver(
-      formRole === FormRole.SignUp
-        ? registerSchemaSignUp
-        : registerSchemaSignIn,
+      formRole === FormRole.SignUp ? registerSchemaSignUp : registerSchemaLogIn,
     ),
   });
 
@@ -72,10 +72,15 @@ function AuthPage({ authFields, formRole }: PropTypes) {
   }, [isSubmitSuccessful]);
 
   const onSubmitHandler: SubmitHandler<RegisterInput> = formValues => {
-    console.log('formValues', formValues);
+    const authData: AuthData = {
+      name: 'name' in formValues ? formValues.name : '',
+      email: formValues.email,
+      password: formValues.password,
+    };
+    action(authData);
     setLoading(true);
   };
-  console.log(errors);
+  console.log('errors', errors);
 
   const passwordProps = {
     endAdornment: (
