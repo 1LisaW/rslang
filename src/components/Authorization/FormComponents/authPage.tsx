@@ -72,7 +72,7 @@ function AuthPage({ authFields, formRole }: PropTypes) {
     }
   }, [isSubmitSuccessful]);
 
-  const onSubmitHandler: SubmitHandler<RegisterInput> = (formValues) => {
+  const onSubmitHandler: SubmitHandler<RegisterInput> = formValues => {
     console.log('formValues', formValues);
     setLoading(true);
   };

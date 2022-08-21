@@ -6,11 +6,13 @@ import './header.scss';
 function Header() {
   return (
     <header className="header">
-      <div className="logo__container">
-        <h1 className="logo__title">IngLang</h1>
+      <div className="header__container">
+        <div className="logo__container">
+          <h1 className="logo__title">IngLang</h1>
+        </div>
+        <Navbar />
+        <Authorization />
       </div>
-      <Navbar />
-      <Authorization />
     </header>
   );
 }

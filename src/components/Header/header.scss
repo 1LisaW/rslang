@@ -1,3 +1,33 @@
+@import '../../global/library';
+
+$HEADER-LOGO-CONTAINER--HEIGHT: 140px;
+$HEADER--HEIGHT: 67px;
+
 .header {
-  display: flex;
+  background-color: $MAIN-COLOR--PRIMARY-DARK;
+  width:100%;
+}
+.header__container {
+  @include flex(space-between);
+  width:90%;
+  margin: 0 auto;
+  height: $HEADER--HEIGHT;
+  background-color: $MAIN-COLOR--PRIMARY-DARK;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.logo__container {
+  width: 20%;
+  background-color: $MAIN-COLOR--SECONDARY;
+  height: $HEADER-LOGO-CONTAINER--HEIGHT;
+  @include flex(center);
+  .logo__title {
+    font-family: Teko;
+    color: $MAIN-COLOR--PRIMARY-LIGHT;
+    letter-spacing: 5px;
+    padding-top: 10%;
+    font-size: 3.5em;
+  }
 }

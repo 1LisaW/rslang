@@ -6,10 +6,11 @@ import Tutorial from './components/Tutorial/tutorial';
 import Audiocall from './components/GameAudiocall/audiocall';
 import Sprint from './components/GameSprint/sprint';
 import Statistic from './components/Statistic/statistic';
+import './global/global.scss';
+import './global/reset.css';
 
 function App() {
   return (
-    // <div>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<TemplatePage />}>

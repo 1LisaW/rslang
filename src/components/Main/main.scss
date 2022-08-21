@@ -1,0 +1,134 @@
+@import '../../global/library';
+
+$HERO-IMG-WIDTH: 978px;
+$HERO-IMG-HEIGHT: 590px;
+
+$DECORATION-CONTAINER-WIDTH: 490px;
+$DECORATION-CONTAINER-HEIGHT: 330px;
+$DECORATION-CONTAINER-BOTTOM-INDENT:15em;
+
+$START-PAGE-TEXT-WIDTH: 490px;
+$START-PAGE-TEXT-HEIGHT: 400px;
+
+$REGISTRATION-BUTTON-WIDTH: 45%;
+$REGISTRATION-BUTTON-HEIGHT: 4em;
+
+.main {
+  background-color: $MAIN-COLOR--PRIMARY-DARK; 
+}
+/******************************************************/
+/*********************start page***********************/
+.start-page {
+  width: 90%;
+  margin: 0 auto;
+  height: calc($HERO-IMG-HEIGHT + 4em);
+}
+.start-page__hero-img {
+  height: $HERO-IMG-HEIGHT;
+  width: $HERO-IMG-WIDTH;
+  background-image: url('../../assets/imgs/25.jpg');
+  background-size: cover;
+}
+.start-page__decoration-container {
+  height: $DECORATION-CONTAINER-HEIGHT;
+  width: $DECORATION-CONTAINER-WIDTH;
+  background-color: $MAIN-COLOR--SECONDARY;
+  position: relative;
+  bottom: $DECORATION-CONTAINER-BOTTOM-INDENT;
+  z-index: 0;
+  margin-left: auto;
+}
+.start-page__content {
+  height: $START-PAGE-TEXT-HEIGHT;
+  width: $START-PAGE-TEXT-WIDTH;
+  background-color: $MAIN-COLOR--PRIMARY-LIGHT;
+  position: relative;
+  bottom: 50em;
+  right: 6em;
+  z-index: 1;
+  margin-left: auto;
+  padding: 65px;
+  box-sizing: border-box;
+  .start-page__subtitle {
+    @include font(0.8em, OpenSans);
+    font-weight: 600;
+    letter-spacing: 2.8px;
+    color: $MAIN-COLOR--PRIMARY;
+  }
+  .start-page__title {
+    @include font(3em, Teko);
+    width: 70%;
+    margin-bottom: 0.5em;
+  }
+  .start-page__text {
+    @include font(1em, OpenSans);
+    color: $MAIN-COLOR--PRIMARY-DARK;
+    margin-bottom: 1em;
+  }
+  .start-page__registration-form {
+    @include flex(space-between);
+    .registration-button {
+      width: $REGISTRATION-BUTTON-WIDTH;
+      height: $REGISTRATION-BUTTON-HEIGHT;
+      color: $MAIN-COLOR--PRIMARY-LIGHT;
+      @include font(0.8em, OpenSans);
+      letter-spacing: 2.8px;
+      transition: 1s all ease;
+      cursor: pointer;
+    }
+  }
+}
+.login__button,
+.registration__button {
+  transition: all 0.5s;
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(215, 215, 215, 0.9);
+    transition: all 0.3s;
+  }
+  &:hover::before {
+    opacity: 0 ;
+    transform: scale(0.5,0.5);
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: all 0.5s;
+    transform: scale(1.4,1.4);
+  }
+  &:hover::after {
+    opacity: 1;
+    transform: scale(1,1);
+  }
+}
+.login__button {
+  background-color: $MAIN-COLOR--SECONDARY;
+  &::before {
+    background-color: rgba(201, 201, 201, 0.2);
+  }
+}
+.registration__button {
+  background-color: $MAIN-COLOR--PRIMARY-DARK;
+  &::before {
+    background-color: rgba(114, 114, 114, 0.3);
+  }
+}
+/******************************************************/
+/*********************our team*************************/
+.our-team {/*в будущем страница о комманде*/
+  height: 100px; 
+  background-color: $MAIN-COLOR--PRIMARY-LIGHT;
+}

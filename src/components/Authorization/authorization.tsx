@@ -14,7 +14,7 @@ function Authorization() {
   const [confirmOpen, setConfirmOpen] = useState(false);
 
   const openModal = useCallback(() => {
-    setConfirmOpen((openState) => !openState);
+    setConfirmOpen(openState => !openState);
   }, [confirmOpen]);
 
   const onCloseModal = useCallback(() => {
