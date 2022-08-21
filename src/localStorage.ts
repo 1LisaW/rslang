@@ -1,4 +1,4 @@
-const { STORAGE_NAME } = process.env;
+const { REACT_APP_STORAGE_NAME } = process.env;
 class StorageWorker {
   private myStorageUserId;
 
@@ -7,9 +7,9 @@ class StorageWorker {
   private myStorageRefreshToken;
 
   constructor() {
-    this.myStorageUserId = `${STORAGE_NAME}_UserId`;
-    this.myStorageToken = `${STORAGE_NAME}_Token`;
-    this.myStorageRefreshToken = `${STORAGE_NAME}_RefreshToken`;
+    this.myStorageUserId = `${REACT_APP_STORAGE_NAME}_UserId`;
+    this.myStorageToken = `${REACT_APP_STORAGE_NAME}_Token`;
+    this.myStorageRefreshToken = `${REACT_APP_STORAGE_NAME}_RefreshToken`;
   }
 
   get userId() {
@@ -58,4 +58,6 @@ class StorageWorker {
   };
 }
 
-export default new StorageWorker();
+const StorageInstance = new StorageWorker();
+
+export default StorageInstance;
