@@ -1,4 +1,5 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 function Main() {
   return (
@@ -10,10 +11,11 @@ function Main() {
           <h4 className="start-page__subtitle">IngLang team</h4>
           <h2>Learning English is so fanny!</h2>
           <p>Присоединяйся уже сегодня и начни весело изучать английский с нами</p>
-          <div className="start-page__registration-form">
+          {/* <div className="start-page__registration-form">
             <button className="login__button" type="button">Sign in</button>
             <button className="registration__button" type="button">Registration</button>
-          </div>
+          </div> */}
+          <Outlet />
         </div>
       </section>
     </main>
