@@ -147,8 +147,10 @@ class Api {
     );
     if ('id' in user) {
       StorageWorker.userId = user.id;
-      const tokenData = await this.getUserTokens(user.id);
-      this.setTokens(tokenData);
+      const { name, ...updatedUser } = userInfo;
+      this.signin(updatedUser);
+      // const tokenData = await this.getUserTokens(user.id);
+      // this.setTokens(tokenData);
     }
     return user;
   };
