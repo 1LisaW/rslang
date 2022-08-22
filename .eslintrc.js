@@ -31,6 +31,7 @@ module.exports = {
       "ObjectPattern": { 'multiline': true },}
     ],
     "arrow-parens": ["warn", "as-needed"],
+    "linebreak-style": 'off',
     "react/jsx-props-no-spreading": 'off',
     "class-methods-use-this": 'off',
     'no-underscore-dangle': ['warn', { 'enforceInClassFields': false }],
