@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { off } = require('process');
 
 const prettierOptions = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, '.prettierrc'), 'utf8'),
@@ -31,6 +32,8 @@ module.exports = {
     ],
     "arrow-parens": ["warn", "as-needed"],
     "react/jsx-props-no-spreading": 'off',
+    "class-methods-use-this": 'off',
+    'no-underscore-dangle': ['warn', { 'enforceInClassFields': false }],
     'operator-linebreak': ["warn", "before", {"overrides": { 
       "=": "after",  
       "&&": "after", 
