@@ -4,8 +4,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
-import SignIn from '../../SignIn/signin';
 import SignUpPage from '../../SignUp/signUp';
+import LogInPage from '../../LogIn/logIn';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -51,14 +51,9 @@ export default function AuthFormTabs() {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
+          <Tab label="LOG IN" component={Link} to="#logIn" {...a11yProps(0)} />
           <Tab
-            label="SIGN IN"
-            component={Link}
-            to="#signIn"
-            {...a11yProps(0)}
-          />
-          <Tab
-            label="SiGN UP"
+            label="SIGN UP"
             component={Link}
             to="#signUp"
             {...a11yProps(1)}
@@ -66,7 +61,7 @@ export default function AuthFormTabs() {
         </Tabs>
       </Box>
       <ModalFormAuthTabsPanel value={value} index={0}>
-        <SignIn />
+        <LogInPage />
       </ModalFormAuthTabsPanel>
       <ModalFormAuthTabsPanel value={value} index={1}>
         <SignUpPage />
