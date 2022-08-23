@@ -6,22 +6,18 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+// import { boolean } from 'zod';
 import { PaginatedResults } from '../../Api/api-types';
+// import AudioButton from '../AudioFiles/audioFiles';
 import img from './8.jpg';
 
 interface CardInput {
   data: PaginatedResults;
 }
 const useStyles = makeStyles({
-  root: {
-    padding: '10px',
-  },
   media: {
     height: 290,
     width: '40%',
-  },
-  pos: {
-    paddingTop: 0,
   },
 });
 
@@ -58,7 +54,7 @@ function WordCard({ data }:CardInput) {
                 {data.transcription}
               </Typography>
             </Box>
-            <div>Audio</div>
+            {/* <AudioButton audio={true}/> */}
           </Box>
           <Box>
             <Typography
