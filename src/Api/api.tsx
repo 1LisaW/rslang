@@ -23,14 +23,11 @@ import {
   SettingsData,
   Auth,
 } from './api-types';
+import StorageWorker from '../localStorage';
 
-const { PATH_TO_SERVER } = process.env;
+const { REACT_APP_PATH_TO_SERVER } = process.env;
 
 class Api {
-  static token: string;
-
-  static refreshToken: string;
-
   static getFetchOption = (method: Methods, data = {}) => {
     const hasBody = method === Methods.PUT || method === Methods.POST;
     const body = hasBody ? { body: JSON.stringify(data) } : data;
@@ -45,12 +42,18 @@ class Api {
     return { ...fetchOption, ...body };
   };
 
+  static setTokens = (tokenData: TokenResponse | ErrorResponse) => {
+    StorageWorker.token = 'token' in tokenData ? tokenData.token : '';
+    StorageWorker.refreshToken =
+      'refreshToken' in tokenData ? tokenData.refreshToken : '';
+  };
+
   static getFetchOptionAuth = (method: Methods, auth: Auth, data = {}) => {
     const fetchOptionAuth = this.getFetchOption(method, data);
 
     fetchOptionAuth.withCredentials = true;
     fetchOptionAuth.headers.Authorization = `Bearer ${
-      auth === Auth.Auth ? this.token : this.refreshToken
+      auth === Auth.Auth ? StorageWorker.token : StorageWorker.refreshToken
     }`;
 
     return fetchOptionAuth;
@@ -68,7 +71,7 @@ class Api {
         : this.getFetchOption(method, data);
 
     try {
-      const response = await fetch(`${PATH_TO_SERVER}${path}`, fetchOptions);
+      const response = await fetch(`${REACT_APP_PATH_TO_SERVER}${path}`, fetchOptions);
       const content = await response.json();
       if (response.ok) {
         return content;
@@ -142,6 +145,13 @@ class Api {
       Auth.UnAuth,
       userInfo,
     );
+    if ('id' in user) {
+      StorageWorker.userId = user.id;
+      const { name, ...updatedUser } = userInfo;
+      this.signin(updatedUser);
+      // const tokenData = await this.getUserTokens(user.id);
+      // this.setTokens(tokenData);
+    }
     return user;
   };
 
@@ -185,6 +195,7 @@ class Api {
       path,
       Auth.Refresh,
     );
+    this.setTokens(tokens);
     return tokens;
   };
 
@@ -318,6 +329,10 @@ class Api {
       Auth.UnAuth,
       userInfo,
     );
+    if ('userId' in tokens) {
+      StorageWorker.userId = tokens.userId;
+      this.setTokens(tokens);
+    }
     return tokens;
   };
 }

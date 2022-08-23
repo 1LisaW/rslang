@@ -26,14 +26,14 @@ function Authorization() {
     <NoAccountsIcon fontSize="large" sx={{ color: 'gray' }} />
   );
 
-  console.log(setAuth);
+  console.log('setAuth ', setAuth);
 
   return (
     <div>
-      <IconButton component={Link} to="#signIn" onClick={openModal}>
+      <IconButton component={Link} to="#logIn" onClick={openModal}>
         {icon}
       </IconButton>
-      {(location.hash === '#signIn' || location.hash === '#signUp') && (
+      {(location.hash === '#logIn' || location.hash === '#signUp') && (
         <ModalPopup onClose={onCloseModal} />
       )}
     </div>

@@ -1,0 +1,30 @@
+@import '../../global/library';
+
+.card {
+  box-shadow: rgb(0 0 0 / 15%) 0px 0px 10px;
+  border-radius: 10px;
+}
+.card-word__container {
+  display: flex;
+}
+.MuiCardActionArea-root {
+  display: flex;
+  flex-direction: row;
+}
+.card__title {
+  @include flex(left);
+  width: 50%;
+}
+.card__header {
+  width: 100%;
+  @include flex(space-between);
+  padding: 10px;
+  box-sizing: border-box;
+}
+.card__content {
+  width: 60%;
+}
+.card__transcription, .card__translate {
+  padding-top: 0;
+  padding-left: 10px;
+}
