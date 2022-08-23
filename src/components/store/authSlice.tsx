@@ -9,7 +9,7 @@ export type AuthState = {
 };
 
 const initialState: AuthState = {
-  isAuth: StorageInstance.token || false,
+  isAuth: !!StorageInstance.token,
   authUserId: StorageInstance.userId || '',
   authUserName: 'user-name',
   // TODO get name from API by user_id
@@ -34,6 +34,6 @@ export const authSlice = createSlice({
 export const { updateAuth } = authSlice.actions;
 
 export const isAuth = (state: RootState) => state.auth.isAuth;
-export const getCurentUserName = (state: RootState) => state.auth.authUserName;
+export const getCurrentUserName = (state: RootState) => state.auth.authUserName;
 
 export default authSlice.reducer;
