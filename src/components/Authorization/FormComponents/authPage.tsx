@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Typography, InputAdornment, IconButton } from '@mui/material';
+import { Box, Typography, InputAdornment, IconButton, Alert } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -39,6 +39,7 @@ function AuthPage({ authFields, formRole, action }: PropTypes) {
   const [values, setValues] = React.useState({
     showPassword: false,
   });
+  const [submitErr, setSubmitError] = useState('');
 
   const handleClickShowPassword = () => {
     setValues({
@@ -72,13 +73,20 @@ function AuthPage({ authFields, formRole, action }: PropTypes) {
   }, [isSubmitSuccessful]);
 
   const onSubmitHandler: SubmitHandler<RegisterInput> = formValues => {
+    setSubmitError('');
     const authData: AuthData = {
       name: 'name' in formValues ? formValues.name : '',
       email: formValues.email,
       password: formValues.password,
     };
-    action(authData);
     setLoading(true);
+    action(authData)
+      .then(resp => {
+        if (!resp.success) {
+          setSubmitError(resp.data.toString());
+        }
+      })
+      .finally(() => setLoading(false));
   };
   console.log('errors', errors);
 
@@ -139,6 +147,11 @@ function AuthPage({ authFields, formRole, action }: PropTypes) {
           >
             {formRole}
           </LoadingButton>
+          {submitErr && (
+            <Alert severity="warning" className="submit-error">
+              {submitErr}
+            </Alert>
+          )}
         </Box>
       </FormProvider>
     </Box>
