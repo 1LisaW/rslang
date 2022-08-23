@@ -40,6 +40,12 @@ module.exports = {
       "&&": "after", 
       "||": "after",
     }}],
+    'no-param-reassign': ['error', {
+      props: true,
+      ignorePropertyModificationsFor: [
+        'state',
+      ]
+    }],
   },
   settings: {
     react: {
