@@ -4,8 +4,12 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 
 type Handler = (play: boolean) => void;
-// const audioPath = 'files/01_0606.mp3';
-function AudioButton(play: boolean, handler: Handler) {
+interface IAudio {
+  play: boolean,
+  handler: Handler
+}
+
+function AudioButton({ play, handler }:IAudio) {
   return (
     <IconButton onClick={() => handler(play)}>
       {play ? <VolumeOffIcon /> : <VolumeUpIcon />}

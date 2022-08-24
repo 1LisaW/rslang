@@ -3,6 +3,8 @@
 .card {
   box-shadow: rgb(0 0 0 / 15%) 0px 0px 10px;
   border-radius: 10px;
+  background-color: $MAIN-COLOR--PRIMARY;
+  overflow: hidden;
 }
 .card-word__container {
   display: flex;
@@ -23,6 +25,7 @@
 }
 .card__content {
   width: 60%;
+  padding: 10px 20px;
 }
 .card__transcription, .card__translate {
   padding-top: 0;

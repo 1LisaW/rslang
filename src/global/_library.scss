@@ -5,6 +5,9 @@ $MAIN-COLOR--SECONDARY: rgb(205, 124, 67);
 
 $BODY-CONTAINER-WIDTH: 1300px;
 
+$HEADER-LOGO-CONTAINER--HEIGHT: 140px;
+$HEADER--HEIGHT: 67px;
+
 @mixin flex ($justify-content) {
   display: flex;
   justify-content: $justify-content;

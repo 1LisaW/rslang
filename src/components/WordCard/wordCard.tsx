@@ -6,9 +6,8 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-// import { boolean } from 'zod';
 import { PaginatedResults } from '../../Api/api-types';
-// import AudioButton from '../AudioFiles/audioFiles';
+import AudioButton from '../AudioFiles/audioFiles';
 import img from './8.jpg';
 
 interface CardInput {
@@ -23,6 +22,12 @@ const useStyles = makeStyles({
 
 function WordCard({ data }:CardInput) {
   const classes = useStyles();
+  const audioButtonHandler = {
+    play: true,
+    handler: (play: boolean) => {
+      console.log(play);
+    },
+  };
 
   return (
     <Card>
@@ -39,50 +44,52 @@ function WordCard({ data }:CardInput) {
           title={data.word}
         />
         <Box className="card__content">
-          <Box className="card__header">
-            <Box className="card__title">
-              <Typography gutterBottom variant="h4" component="h2">
-                {data.word}
-              </Typography>
+          <Box>
+            <Box className="card__header">
+              <Box className="card__title">
+                <Typography gutterBottom variant="h4" component="h2">
+                  {data.word}
+                </Typography>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="h2"
+                  className="card__transcription"
+                  color="textSecondary"
+                >
+                  {data.transcription}
+                </Typography>
+              </Box>
+              <AudioButton {...audioButtonHandler} />
+            </Box>
+            <Box>
               <Typography
                 gutterBottom
                 variant="h5"
-                component="h2"
-                className="card__transcription"
+                component="h5"
                 color="textSecondary"
+                className="card__translate"
               >
-                {data.transcription}
+                {data.wordTranslate}
               </Typography>
             </Box>
-            {/* <AudioButton audio={true}/> */}
+            <CardContent>
+              <Typography variant="body1">
+                {data.textMeaning}
+              </Typography>
+              <Typography variant="body1" color="textSecondary">
+                {data.textMeaningTranslate}
+              </Typography>
+            </CardContent>
+            <CardContent>
+              <Typography variant="body1">
+                {data.textExample}
+              </Typography>
+              <Typography variant="body1" color="textSecondary">
+                {data.textExampleTranslate}
+              </Typography>
+            </CardContent>
           </Box>
-          <Box>
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="h5"
-              color="textSecondary"
-              className="card__translate"
-            >
-              {data.wordTranslate}
-            </Typography>
-          </Box>
-          <CardContent>
-            <Typography variant="body1">
-              {data.textMeaning}
-            </Typography>
-            <Typography variant="body1" color="textSecondary">
-              {data.textMeaningTranslate}
-            </Typography>
-          </CardContent>
-          <CardContent>
-            <Typography variant="body1">
-              {data.textExample}
-            </Typography>
-            <Typography variant="body1" color="textSecondary">
-              {data.textExampleTranslate}
-            </Typography>
-          </CardContent>
         </Box>
       </Box>
     </Card>

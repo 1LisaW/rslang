@@ -1,21 +1,18 @@
 @import '../../global/library';
 
-$HEADER-LOGO-CONTAINER--HEIGHT: 140px;
-$HEADER--HEIGHT: 67px;
-
 .header {
   background-color: $MAIN-COLOR--PRIMARY-DARK;
   width:100%;
 }
 .header__container {
   @include flex(space-between);
-  width:90%;
+  width:$BODY-CONTAINER-WIDTH;
   margin: 0 auto;
   height: $HEADER--HEIGHT;
   background-color: $MAIN-COLOR--PRIMARY-DARK;
   position: fixed;
   top: 0;
-  left: 0;
+  left: auto;
   z-index: 2;
 }
 .logo__container {
