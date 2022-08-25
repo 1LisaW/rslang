@@ -1,7 +1,5 @@
 import * as React from 'react';
-import CircularProgress, {
-  CircularProgressProps,
-} from '@mui/material/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -16,14 +14,15 @@ const theme = createTheme({
     },
   },
 });
+interface IValue {
+  value: number
+}
 
-function CircularProgressWithLabel(
-  props: CircularProgressProps & { value: number },
-) {
+export default function CircularProgressWithLabel({ value }:IValue) {
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ position: 'relative', display: 'inline-flex' }}>
-        <CircularProgress variant="determinate" {...props} color="secondary" />
+        <CircularProgress variant="determinate" value={value} color="secondary" />
         <Box
           sx={{
             top: 0,
@@ -41,25 +40,10 @@ function CircularProgressWithLabel(
             component="div"
             color="text.secondary"
           >
-            {`${Math.round(props.value)}%`}
+            {`${Math.round(value)}%`}
           </Typography>
         </Box>
       </Box>
     </ThemeProvider>
   );
-}
-
-export default function CircularStatic() {
-  const [progress, setProgress] = React.useState(10);
-
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + 10));
-    }, 800);
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
-
-  return <CircularProgressWithLabel value={progress} />;
 }

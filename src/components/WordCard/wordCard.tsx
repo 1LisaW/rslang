@@ -10,7 +10,7 @@ import { PaginatedResults } from '../../Api/api-types';
 import AudioButton from '../AudioFiles/audioFiles';
 import img from './8.jpg';
 import CardButton from './CardButton/cardButton';
-import CircularStatic from './CircularProgress/сircularProgress';
+import CircularProgressWithLabel from './CircularProgress/сircularProgress';
 
 interface CardInput {
   data: PaginatedResults;
@@ -24,6 +24,7 @@ const useStyles = makeStyles({
 
 function WordCard({ data }:CardInput) {
   const classes = useStyles();
+
   const audioButtonHandler = {
     play: true,
     handler: (play: boolean) => {
@@ -45,6 +46,9 @@ function WordCard({ data }:CardInput) {
     handler: (play: boolean) => {
       console.log(play);
     },
+  };
+  const progress = {
+    value: 25,
   };
 
   return (
@@ -110,7 +114,7 @@ function WordCard({ data }:CardInput) {
             <CardButton {...buttonDifficultyHandler} />
             <CardButton {...buttonLearnedHandler} />
           </div>
-          <CircularStatic />
+          <CircularProgressWithLabel {...progress} />
         </Box>
       </Box>
     </Card>
