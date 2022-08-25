@@ -15,13 +15,9 @@ export type LogInActionResponse =
 
 async function logInAction(userInfo: AuthData): Promise<LogInActionResponse> {
   const response = await Api.signin(userInfo);
-  console.log('loginAction ', response);
 
   if ('error' in response) {
-    return {
-      success: false,
-      data: 'Login failed. Combination of e-mail and password incorrect',
-    };
+    return { success: false, data: 'Login failed. Combination of e-mail and password is not correct' };
   }
 
   return { success: true, data: response };

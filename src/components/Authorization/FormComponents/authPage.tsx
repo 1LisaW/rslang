@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Typography, InputAdornment, IconButton, Alert } from '@mui/material';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+
+import {
+  Box,
+  Typography,
+  InputAdornment,
+  IconButton,
+  Alert,
+} from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -16,6 +25,10 @@ import { LogInActionResponse } from '../LogIn/logInAction';
 import { SignUpActionResponse } from '../SignUp/signUpAction';
 import { AuthData } from '../../../Api/api-types';
 import { RegisterInput } from '../auth-types';
+import { isAuth } from '../../store/authSlice';
+import { AppDispatch } from '../../store/store';
+import { fetchAuth } from '../../store/authFetch';
+import StorageWorker from '../../../localStorage';
 
 type LogInFieldsType = Omit<typeof fieldsList, 'name' | 'passwordConfirm'>;
 
@@ -40,6 +53,10 @@ function AuthPage({ authFields, formRole, action }: PropTypes) {
     showPassword: false,
   });
   const [submitErr, setSubmitError] = useState('');
+  const isAuthorized = useSelector(isAuth);
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleClickShowPassword = () => {
     setValues({
@@ -61,18 +78,20 @@ function AuthPage({ authFields, formRole, action }: PropTypes) {
   });
 
   const {
-    reset,
+    // reset,
     handleSubmit,
     formState: { isSubmitSuccessful, errors },
   } = methods;
 
   useEffect(() => {
     if (isSubmitSuccessful) {
-      reset();
+      // reset();
+      // if (isAuthorized) navigate(location.pathname);
+      // console.log('location.pathname ', location);
     }
-  }, [isSubmitSuccessful]);
+  }, [isSubmitSuccessful, isAuthorized]);
 
-  const onSubmitHandler: SubmitHandler<RegisterInput> = formValues => {
+  const onSubmitHandler: SubmitHandler<RegisterInput> = (formValues) => {
     setSubmitError('');
     const authData: AuthData = {
       name: 'name' in formValues ? formValues.name : '',
@@ -84,6 +103,9 @@ function AuthPage({ authFields, formRole, action }: PropTypes) {
       .then(resp => {
         if (!resp.success) {
           setSubmitError(resp.data.toString());
+        } else {
+          dispatch(fetchAuth(StorageWorker.userId));
+          navigate(location.pathname);
         }
       })
       .finally(() => setLoading(false));
