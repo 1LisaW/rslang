@@ -4,7 +4,9 @@ import './footer.scss';
 function Footer() {
   return (
     <footer className="footer">
-      <div className="footer__rs-logo" />
+      <a className="footer__rs-logo-link" href="https://rs.school/index.html" target="_blank" rel="noreferrer">
+        <div className="footer__rs-logo" />
+      </a>
       <div className="footer__github-info">
         <a className="footer__github-link" href="https://github.com/1lisaw" target="_blank" rel="noreferrer">1lisaw</a>
         <a className="footer__github-link" href="https://github.com/Weranika" target="_blank" rel="noreferrer">Weranika</a>

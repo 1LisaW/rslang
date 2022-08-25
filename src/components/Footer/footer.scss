@@ -10,6 +10,9 @@ $FOOTER-RS-LOGO-HEIGHT: 113px;
   background: linear-gradient(#eeeeee, #ffffff);
   border-radius: 10px 10px 0;
 }
+.footer__rs-logo-link {
+  height: 100%;
+}
 .footer__rs-logo {
   background-image: url(../../assets/icons/rs_school_img.svg);
   height: 100%;
