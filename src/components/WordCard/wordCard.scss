@@ -1,5 +1,7 @@
 @import '../../global/library';
 
+$CARD-CONTENT-PADDING: 10px 20px;
+
 .card {
   box-shadow: rgb(0 0 0 / 15%) 0px 0px 10px;
   border-radius: 10px;
@@ -25,9 +27,23 @@
 }
 .card__content {
   width: 60%;
-  padding: 10px 20px;
+}
+.card__text {
+  padding: $CARD-CONTENT-PADDING;
 }
 .card__transcription, .card__translate {
   padding-top: 0;
   padding-left: 10px;
+}
+.card__authorized-section {
+  background-color: $MAIN-COLOR--PRIMARY-LIGHT;
+  height: 20%;
+  border-top: 1px solid beige;
+  @include flex(space-between);
+  padding: $CARD-CONTENT-PADDING;
+}
+.card__buttons-container {
+  width: 45%;
+  @include flex(space-between);
+  height: 50px;
 }
