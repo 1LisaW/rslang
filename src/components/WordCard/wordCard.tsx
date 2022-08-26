@@ -6,17 +6,18 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-// import { boolean } from 'zod';
 import { PaginatedResults } from '../../Api/api-types';
-// import AudioButton from '../AudioFiles/audioFiles';
+import AudioButton from '../AudioFiles/audioFiles';
 import img from './8.jpg';
+import CardButton from './CardButton/cardButton';
+import CircularProgressWithLabel from './CircularProgress/сircularProgress';
 
 interface CardInput {
   data: PaginatedResults;
 }
 const useStyles = makeStyles({
   media: {
-    height: 290,
+    height: '100%',
     width: '40%',
   },
 });
@@ -24,21 +25,45 @@ const useStyles = makeStyles({
 function WordCard({ data }:CardInput) {
   const classes = useStyles();
 
+  const audioButtonHandler = {
+    play: true,
+    handler: (play: boolean) => {
+      console.log(play);
+    },
+  };
+  const buttonDifficultyHandler = {
+    text: 'non difficult',
+    color: 'primary',
+    action: true,
+    handler: (play: boolean) => {
+      console.log(play);
+    },
+  };
+  const buttonLearnedHandler = {
+    text: 'New word',
+    color: 'secondary',
+    action: false,
+    handler: (play: boolean) => {
+      console.log(play);
+    },
+  };
+  const progress = {
+    value: 25,
+  };
+
   return (
-    <Card>
-      <Box
-        className="card-word__container"
-        display="flex"
-        flexDirection="row"
-      >
-        <CardMedia
-          className={classes.media}
-          component="img"
-          image={img}
-          width="50%"
-          title={data.word}
-        />
-        <Box className="card__content">
+    <Card
+      className="card-word__container"
+    >
+      <CardMedia
+        className={classes.media}
+        component="img"
+        image={img}
+        width="50%"
+        title={data.word}
+      />
+      <Box className="card__content">
+        <Box className="card__text">
           <Box className="card__header">
             <Box className="card__title">
               <Typography gutterBottom variant="h4" component="h2">
@@ -54,7 +79,7 @@ function WordCard({ data }:CardInput) {
                 {data.transcription}
               </Typography>
             </Box>
-            {/* <AudioButton audio={true}/> */}
+            <AudioButton {...audioButtonHandler} />
           </Box>
           <Box>
             <Typography
@@ -83,6 +108,13 @@ function WordCard({ data }:CardInput) {
               {data.textExampleTranslate}
             </Typography>
           </CardContent>
+        </Box>
+        <Box className="card__authorized-section">
+          <div className="card__buttons-container">
+            <CardButton {...buttonDifficultyHandler} />
+            <CardButton {...buttonLearnedHandler} />
+          </div>
+          <CircularProgressWithLabel {...progress} />
         </Box>
       </Box>
     </Card>
