@@ -1,7 +1,6 @@
 import React from 'react';
 import './main.scss';
-import WordCard from '../WordCard/wordCard';
-import cardMockInput from '../WordCard/cardMockInput';
+import OurGoals from '../OurGoals/ourGoals';
 
 function Main() {
   return (
@@ -29,9 +28,7 @@ function Main() {
       <section className="our-team">
         <div>Our team</div>
       </section>
-      <section className="card">
-        <WordCard data={cardMockInput} />
-      </section>
+      <OurGoals />
     </main>
   );
 }

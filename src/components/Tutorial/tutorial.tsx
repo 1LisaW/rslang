@@ -5,6 +5,7 @@ import { AppDispatch } from '../store/store';
 import { fetchWordList } from '../store/wordListFetch';
 import { getWordList } from '../store/wordListSlice';
 import WordCard from '../WordCard/wordCard';
+import './tutorial.scss';
 
 function Tutorial() {
   const isAuthorized = useSelector(isAuth);
@@ -18,7 +19,9 @@ function Tutorial() {
     <>
       <h1>Tutorial</h1>
       {wordList.wordList.map(item => (
-        <WordCard data={item} />
+        <section className="card">
+          <WordCard data={item} />
+        </section>
       ))}
     </>
   );

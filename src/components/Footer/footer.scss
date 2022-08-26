@@ -1,0 +1,35 @@
+@import '../../global/library';
+$FOOTER-HEIGHT: 50px;
+$FOOTER-RS-LOGO-HEIGHT: 113px;
+
+.footer {
+  @include flex(space-between);
+  height: $FOOTER-HEIGHT;
+  padding: 15px;
+  @include font(2em, Teko);
+  background: linear-gradient(#eeeeee, #ffffff);
+  border-radius: 10px 10px 0;
+}
+.footer__rs-logo-link {
+  height: 100%;
+}
+.footer__rs-logo {
+  background-image: url(../../assets/icons/rs_school_img.svg);
+  height: 100%;
+  width: $FOOTER-RS-LOGO-HEIGHT;
+  background-repeat: no-repeat;
+}
+.footer__github-info {
+  width: 70%;
+  @include flex(space-between);
+  .footer__github-link {
+    text-decoration: none;
+    color: $MAIN-COLOR--PRIMARY-DARK;
+    &:hover {
+      color: $MAIN-COLOR--SECONDARY;
+    }
+    .footer__year {
+      font-size: 2.5em;
+    }
+  }
+}
