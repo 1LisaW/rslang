@@ -3,17 +3,16 @@ import Pagination from '@mui/material/Pagination';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import './groupPagination.scss';
-import { TutorialWordsGroups } from '../../store/types';
 
 const PAGES_IN_GROUP = 30;
 
 interface PaginationData {
+  isVisible: boolean;
   page: number;
 }
 
 export default function GroupPagination(props: PaginationData) {
-  const { page } = props;
-  const isVisible = page !== TutorialWordsGroups.GROUP_7_USER;
+  const { isVisible, page } = props;
 
   return (
     <div className="pagination__container">

@@ -26,7 +26,7 @@ function Tutorial() {
           </section>
         ))}
       </div>
-      <GroupPagination page={24} />
+      <GroupPagination isVisible page={24} />
     </div>
   );
 }
