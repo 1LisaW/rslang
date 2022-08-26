@@ -22,11 +22,11 @@ import {
   SettingsResponse,
   SettingsData,
   Auth,
+  StatusCodes,
 } from './api-types';
 import StorageWorker from '../localStorage';
 
 const { REACT_APP_PATH_TO_SERVER } = process.env;
-
 class Api {
   static getFetchOption = (method: Methods, data = {}) => {
     const hasBody = method === Methods.PUT || method === Methods.POST;
@@ -71,20 +71,33 @@ class Api {
         : this.getFetchOption(method, data);
 
     try {
-      const response = await fetch(`${REACT_APP_PATH_TO_SERVER}${path}`, fetchOptions);
-      const content = await response.json();
-      if (response.ok) {
-        return content;
-      }
-      const errorMessage = content.error.errors
-        .map((item: { message: string }) => item.message)
-        .join(',');
+      const response = await fetch(
+        `${REACT_APP_PATH_TO_SERVER}${path}`,
+        fetchOptions,
+      );
 
-      return {
-        error: errorMessage,
-      };
+      if (!response.ok) {
+        // console.log('response isnt ok ', response);
+        // if (response.status === StatusCodes.NotFound) {
+        return { error: response.statusText, code: response.status };
+        // }
+      }
+
+      const content = await response.json();
+
+      return content;
+
+      // const errorMessage = content.error.errors
+      //   .map((item: { message: string }) => item.message)
+      //   .join(',');
+
+      // return {
+      //   error: errorMessage,
+      // };
     } catch (error: unknown) {
-      return error instanceof Error ? error.message : '';
+      return error instanceof Error
+        ? { error: error.message, status: StatusCodes.ServerError }
+        : '';
     }
   };
 
@@ -148,9 +161,7 @@ class Api {
     if ('id' in user) {
       StorageWorker.userId = user.id;
       const { name, ...updatedUser } = userInfo;
-      this.signin(updatedUser);
-      // const tokenData = await this.getUserTokens(user.id);
-      // this.setTokens(tokenData);
+      await this.signin(updatedUser);
     }
     return user;
   };
@@ -164,6 +175,7 @@ class Api {
       path,
       Auth.Auth,
     );
+    console.log('getUser ', user);
     return user;
   };
 
@@ -333,6 +345,7 @@ class Api {
       StorageWorker.userId = tokens.userId;
       this.setTokens(tokens);
     }
+    console.log('signin resp ', tokens);
     return tokens;
   };
 }

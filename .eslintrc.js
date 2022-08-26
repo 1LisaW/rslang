@@ -40,10 +40,11 @@ module.exports = {
       "&&": "after", 
       "||": "after",
     }}],
-    'no-param-reassign': ['error', {
+    'no-param-reassign': ['warn', {
       props: true,
       ignorePropertyModificationsFor: [
         'state',
+        'acc',
       ]
     }],
   },
