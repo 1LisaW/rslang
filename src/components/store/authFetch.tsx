@@ -11,7 +11,6 @@ const unAuthorized: AuthState = {
 
 export const fetchAuth = createAsyncThunk('auth', async (id: string) => {
   const auth = { ...unAuthorized };
-  console.log('incoming id ', id);
   if (!id) return auth;
   const response = await Api.getUser(id);
   if ('status' in response && response.status !== StatusCodes.Unauthorized) {
@@ -19,7 +18,6 @@ export const fetchAuth = createAsyncThunk('auth', async (id: string) => {
   }
   if ('status' in response && response.status === StatusCodes.Unauthorized) {
     const refreshTokens = await Api.getUserTokens(id);
-    console.log('refresh token data', refreshTokens);
     return 'error' in refreshTokens
       ? auth
       : {
@@ -28,7 +26,6 @@ export const fetchAuth = createAsyncThunk('auth', async (id: string) => {
         authUserName: refreshTokens.name,
       };
   }
-  console.log('redux get all data ', response);
 
   const data: AuthState =
     'status' in response
@@ -38,7 +35,6 @@ export const fetchAuth = createAsyncThunk('auth', async (id: string) => {
         authUserId: response.id,
         authUserName: response.name,
       };
-  console.log('data in store: ', data);
   return data;
 });
 

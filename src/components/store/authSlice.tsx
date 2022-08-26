@@ -15,15 +15,6 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    // updateAuth: (state, action: PayloadAction<AuthState>) => {
-    //   const {
-    //     payload: { isAuth, authUserId, authUserName },
-    //   } = action;
-
-    //   state.isAuth = isAuth;
-    //   state.authUserId = authUserId;
-    //   state.authUserName = authUserName;
-    // },
     logOut: (state) => {
       StorageInstance.deleteDataFromStorage();
 
