@@ -26,6 +26,13 @@ export enum Auth {
   Refresh = 'refresh',
 }
 
+export enum StatusCodes {
+  NotFound = 404,
+  Unauthorized = 401,
+  Forbidden = 403,
+  ServerError = 500,
+}
+
 export type QueryParams = {
   group?: number;
   page?: number;
@@ -113,6 +120,7 @@ export type WordResponse = {
 
 export type ErrorResponse = {
   error: string;
+  status: StatusCodes;
 };
 
 // TODO: add attributes in Optional for words statistics

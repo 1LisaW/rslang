@@ -13,7 +13,8 @@ class StorageWorker {
   }
 
   get userId() {
-    return JSON.parse(localStorage.getItem(this.myStorageUserId) || '{}');
+    const data = localStorage.getItem(this.myStorageUserId);
+    return data ? JSON.parse(data) : '';
   }
 
   set userId(newValue) {
@@ -21,7 +22,7 @@ class StorageWorker {
   }
 
   get token() {
-    return JSON.parse(localStorage.getItem(this.myStorageToken) || '{}');
+    return JSON.parse(localStorage.getItem(this.myStorageToken) || '');
   }
 
   set token(newValue) {
@@ -29,7 +30,7 @@ class StorageWorker {
   }
 
   get refreshToken() {
-    return JSON.parse(localStorage.getItem(this.myStorageRefreshToken) || '{}');
+    return JSON.parse(localStorage.getItem(this.myStorageRefreshToken) || '');
   }
 
   set refreshToken(newValue) {
