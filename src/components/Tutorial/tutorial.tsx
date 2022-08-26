@@ -5,6 +5,7 @@ import { AppDispatch } from '../store/store';
 import { fetchWordList } from '../store/wordListFetch';
 import { getWordList } from '../store/wordListSlice';
 import WordCard from '../WordCard/wordCard';
+import GroupPagination from './GroupPagination/groupPagination';
 import './tutorial.scss';
 
 function Tutorial() {
@@ -16,14 +17,17 @@ function Tutorial() {
     dispatch(fetchWordList({ isAuthorized, id: currentUserId }));
   }, [dispatch, currentUserId]);
   return (
-    <>
+    <div>
       <h1>Tutorial</h1>
-      {wordList.wordList.map(item => (
-        <section className="card">
-          <WordCard data={item} />
-        </section>
-      ))}
-    </>
+      <div className="word-list__container">
+        {wordList.wordList.map(item => (
+          <section className="card">
+            <WordCard data={item} />
+          </section>
+        ))}
+      </div>
+      <GroupPagination page={24} />
+    </div>
   );
 }
 
