@@ -1,23 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from './store';
-import type { UsersAggregatedWordsResponse } from '../../Api/api-types';
+import { WordListState } from './types';
+import wordListFetch from './wordListFetch';
 
-export type WordList = {
-  wordList: UsersAggregatedWordsResponse;
-};
-
-const initialState: WordList = {
-  wordList: {
-    paginatedResults: [],
-    totalCount: [],
-  },
+const initialState: WordListState = {
+  wordList: [],
 };
 
 export const wordListSlice = createSlice({
   name: 'wordList',
   initialState,
   reducers: {
-    updateWordList: (state, action: PayloadAction<WordList>) => {
+    updateWordList: (state, action: PayloadAction<WordListState>) => {
       const {
         payload: { wordList },
       } = action;
@@ -25,6 +19,7 @@ export const wordListSlice = createSlice({
       state.wordList = wordList;
     },
   },
+  extraReducers: wordListFetch,
 });
 
 export const { updateWordList } = wordListSlice.actions;
