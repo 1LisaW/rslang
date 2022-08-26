@@ -28,9 +28,6 @@ function Main() {
       <section className="our-team">
         <div>Our team</div>
       </section>
-      {/* <section className="card">
-        <WordCard data={cardMockInput} />
-      </section> */}
       <OurGoals />
     </main>
   );
