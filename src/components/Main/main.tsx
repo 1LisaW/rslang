@@ -1,5 +1,6 @@
 import React from 'react';
 import './main.scss';
+import OurGoals from '../OurGoals/ourGoals';
 
 function Main() {
   return (
@@ -27,6 +28,7 @@ function Main() {
       <section className="our-team">
         <div>Our team</div>
       </section>
+      <OurGoals />
     </main>
   );
 }
