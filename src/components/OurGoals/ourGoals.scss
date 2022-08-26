@@ -4,8 +4,8 @@ $CONTAINER-PADDING:20px;
 $CUSTOM-HEIGHT: 283px;
 $CUSTOM-HEIGHT-1: 324px;
 $CUSTOM-HEIGHT-2: 269px;
-$GOAL-ITEM-HEIGHT: 236px;
-$GOAL-ITEM-TITLE-MARGINE: 55px;
+$GOAL-ITEM-HEIGHT: 174px;
+$GOAL-ITEM-TITLE-MARGINE: 30px;
 
 .our-goals {
   @include flex(space-between);
@@ -39,9 +39,27 @@ $GOAL-ITEM-TITLE-MARGINE: 55px;
   padding: $CONTAINER-PADDING;
   width: 33%;
   color: $MAIN-COLOR--PRIMARY-LIGHT;
+  h2 {
+    position: relative;
+    width: 70%;
+    height: 75px;
+    padding: 15px;
+    @include font(2em, OpenSans, 600);
+    box-sizing: border-box;
+  }
   .our-goals__title {
-    @include font(2.5em, OpenSans, 600);
-    margin-bottom: 30px;
+    text-align: left;
+    top: -45px;
+    left: -16px;
+    z-index: 1;
+    background-color: $MAIN-COLOR--PRIMARY;
+    color: $MAIN-COLOR--PRIMARY-LIGHT;
+  }
+  .our-goals__title-ing {
+    top: -56px;
+    right: -127px;
+    background-color: $MAIN-COLOR--SECONDARY;
+    text-align: right;
   }
 }
 .our-goals__list {
@@ -52,9 +70,12 @@ $GOAL-ITEM-TITLE-MARGINE: 55px;
     list-style-type: none;
     @include font(1.3em, OpenSans);
     letter-spacing: 2.8px;
-    margin-bottom: 34px;
+    margin-bottom: 30px;
     text-align: justify;
     width: 75%;
+    &:nth-child(2) {
+      margin: 60px 0 92px;
+    }
     .our-goals__item-title {
       margin-bottom: $GOAL-ITEM-TITLE-MARGINE;
     }

@@ -48,7 +48,8 @@ function OurGoals() {
         <img src={teamImg7} alt="our img" className="our-goals__img" />
       </div>
       <article className="our-goals__content">
-        <h2 className="our-goals__title">ПОЧЕМУ МЫ</h2>
+        <h2 className="our-goals__title">ПОЧЕМУ МЫ   ?</h2>
+        <h2 className="our-goals__title-ing">WHY CHOOSE US</h2>
         <ul className="our-goals__list">
           <li className="our-goals__item">
             <h3 className="our-goals__item-title">Быстрые результаты</h3>
