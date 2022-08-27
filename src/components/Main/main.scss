@@ -26,13 +26,16 @@ $REGISTRATION-BUTTON-HEIGHT: 4em;
 }
 .start-page__hero-img {
   height: $HERO-IMG-HEIGHT;
-  width: $HERO-IMG-WIDTH;
+  max-width: $HERO-IMG-WIDTH;
+  width: 70vw;
   background-image: url('../../assets/imgs/start-page__hero-img.jpg');
   background-size: cover;
 }
 .start-page__decoration-container {
-  height: $DECORATION-CONTAINER-HEIGHT;
-  width: $DECORATION-CONTAINER-WIDTH;
+  max-height: $DECORATION-CONTAINER-HEIGHT;
+  height: 50%;
+  max-width: $DECORATION-CONTAINER-WIDTH;
+  width: 50%;
   background-color: $MAIN-COLOR--SECONDARY;
   position: relative;
   bottom: $DECORATION-CONTAINER-BOTTOM-INDENT;
@@ -40,15 +43,16 @@ $REGISTRATION-BUTTON-HEIGHT: 4em;
   margin-left: auto;
 }
 .start-page__content {
-  height: $START-PAGE-TEXT-HEIGHT;
-  width: $START-PAGE-TEXT-WIDTH;
+  max-width: $START-PAGE-TEXT-WIDTH;
+  width: 50%;
+  min-height: 50%;
   background-color: $MAIN-COLOR--PRIMARY-LIGHT;
   position: relative;
   bottom: 50em;
   right: 6em;
   z-index: 1;
   margin-left: auto;
-  padding: 65px;
+  padding: 2vw;
   box-sizing: border-box;
   .start-page__subtitle {
     @include font(0.8em, OpenSans);
@@ -57,7 +61,7 @@ $REGISTRATION-BUTTON-HEIGHT: 4em;
     color: $MAIN-COLOR--PRIMARY;
   }
   .start-page__title {
-    @include font(3em, Teko);
+    @include font(3.4vw, Teko);
     width: 70%;
     margin-bottom: 0.5em;
   }
@@ -72,7 +76,7 @@ $REGISTRATION-BUTTON-HEIGHT: 4em;
       width: $REGISTRATION-BUTTON-WIDTH;
       height: $REGISTRATION-BUTTON-HEIGHT;
       color: $MAIN-COLOR--PRIMARY-LIGHT;
-      @include font(0.8em, OpenSans);
+      @include font(1vw, OpenSans);
       letter-spacing: 2.8px;
       transition: 1s all ease;
       cursor: pointer;
@@ -132,4 +136,19 @@ $REGISTRATION-BUTTON-HEIGHT: 4em;
 .our-team {/*в будущем страница о комманде*/
   height: 100px; 
   background-color: $MAIN-COLOR--PRIMARY-LIGHT;
+}
+/******************************************************/
+/*********************youtube*************************/
+.youtube-video {
+  background-color: $MAIN-COLOR--PRIMARY-LIGHT;
+  text-align: center;
+  .youtube-video__title {
+    text-align: center;
+    padding: 80px 0 40px;
+    @include font(3.5rem, OpenSans, 600);
+    color: $MAIN-COLOR--SECONDARY;
+  }
+  .youtube-video__video {
+    margin-bottom: 40px;
+  }
 }

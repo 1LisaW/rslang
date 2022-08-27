@@ -25,10 +25,23 @@ function Main() {
           </div>
         </div>
       </section>
+      <section className="youtube-video">
+        <h2 className="youtube-video__title">Давай начнем!</h2>
+        <iframe
+          className="youtube-video__video"
+          title="youtube"
+          width="800"
+          height="450"
+          src="https://www.youtube.com/embed/li_9PBrcOcQ"
+          frameBorder="1"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      </section>
+      <OurGoals />
       <section className="our-team">
         <div>Our team</div>
       </section>
-      <OurGoals />
     </main>
   );
 }

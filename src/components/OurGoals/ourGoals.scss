@@ -21,18 +21,19 @@ $GOAL-ITEM-TITLE-MARGINE: 30px;
   gap: 10px 14px;
   padding: $CONTAINER-PADDING;
   img {
-    height: $IMG-HEIGHT;
+    max-height: $IMG-HEIGHT;
+    height: 17vw;
     border-radius: 10px;
   }
   .our-goals__img--custom {
-    margin-left: 50px;
-    height: $CUSTOM-HEIGHT;
+    margin-left: 4vw;
+    max-height: $CUSTOM-HEIGHT;
   }
   .our-goals__img--custom1 {
-    height: $CUSTOM-HEIGHT-1;
+    max-height: $CUSTOM-HEIGHT-1;
   }
   .our-goals__img--custom2 {
-    height: $CUSTOM-HEIGHT-2;
+    max-height: $CUSTOM-HEIGHT-2;
   }
 }
 .our-goals__content {
@@ -44,7 +45,7 @@ $GOAL-ITEM-TITLE-MARGINE: 30px;
     width: 70%;
     height: 75px;
     padding: 15px;
-    @include font(2em, OpenSans, 600);
+    @include font(2.1vw, OpenSans, 600);
     box-sizing: border-box;
   }
   .our-goals__title {
