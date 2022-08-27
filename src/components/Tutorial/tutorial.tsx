@@ -6,6 +6,7 @@ import { fetchWordList } from '../store/wordListFetch';
 import { getWordList } from '../store/wordListSlice';
 import WordCard from '../WordCard/wordCard';
 import GroupPagination from './GroupPagination/groupPagination';
+import GroupSelector from './GroupSelector/groupSelector';
 import './tutorial.scss';
 
 function Tutorial() {
@@ -26,7 +27,10 @@ function Tutorial() {
           </section>
         ))}
       </div>
-      <GroupPagination isVisible page={24} />
+      <div className="controls__container">
+        <GroupSelector group={1} />
+        <GroupPagination isVisible page={24} />
+      </div>
     </div>
   );
 }
