@@ -10,7 +10,7 @@ import { PaginatedResults } from '../../Api/api-types';
 import AudioButton from '../AudioFiles/audioFiles';
 import img from './8.jpg';
 import CardButton from './CardButton/cardButton';
-import CircularProgressWithLabel from './CircularProgress/сircularProgress';
+import CircularProgressWithLabel from './CircularProgress/circularProgress';
 
 interface CardInput {
   data: PaginatedResults;

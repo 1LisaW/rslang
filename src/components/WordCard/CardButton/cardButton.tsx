@@ -5,9 +5,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 type Handler = (play: boolean) => void;
 
 interface IButtonCard {
-  text: string,
-  action: boolean,
-  handler: Handler
+  text: string;
+  action: boolean;
+  handler: Handler;
 }
 
 const theme = createTheme({
@@ -21,17 +21,17 @@ const theme = createTheme({
   },
 });
 
-function CardButtonActive({ text, action, handler }:IButtonCard) {
+function CardButtonActive({ text, action, handler }: IButtonCard) {
   return (
     <Button onClick={() => handler(action)}>
       <ThemeProvider theme={theme}>
         {action ? (
           <Button variant="text" className="button--active" color="primary">
-            { text }
+            {text}
           </Button>
         ) : (
           <Button variant="contained" color="secondary">
-            { text }
+            {text}
           </Button>
         )}
       </ThemeProvider>
