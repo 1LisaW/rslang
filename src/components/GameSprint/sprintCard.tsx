@@ -16,8 +16,6 @@ type CardData = {
   changeCard: (valid: boolean) => void;
 };
 
-// type Callback = () => void;
-
 function SprintCard(props: CardData) {
   const { icons, word, wordTranslate, isCorrect, changeCard } = props;
   const [answer, setAnswer] = useState('incorrect');
@@ -29,7 +27,6 @@ function SprintCard(props: CardData) {
   };
   const iconProps = { icons };
 
-  console.log(isCorrect);
   return (
     <Card className="sprint-card" sx={{ maxWidth: 345 }}>
       <CardContent>

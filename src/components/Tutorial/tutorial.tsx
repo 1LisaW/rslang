@@ -14,15 +14,12 @@ function Tutorial() {
   const wordList = useSelector(getWordList);
 
   const location = useLocation();
-  // console.log(location);
   const [searchParams, setSearchParams] = useSearchParams();
   const page = Number(searchParams.get('page'));
   const group = Number(searchParams.get('group'));
-  // console.log(page, group, setSearchParams);
   const paginationHandler = () => {
     setSearchParams(`page=${2}&group=${2}`);
   };
-  // const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     dispatch(
@@ -33,13 +30,14 @@ function Tutorial() {
         group,
       }),
     );
-  }, [dispatch, isAuthorized, wordList, location.search]);
+  }, [dispatch, isAuthorized, location.search]);
+
   return (
     <>
       <h1>Tutorial</h1>
       {wordList.wordList.map(item => (
         <section className="card">
-          <WordCard data={item} />
+          <WordCard data={item} key={item.id} />
         </section>
       ))}
       <button type="button" onClick={paginationHandler}>

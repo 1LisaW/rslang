@@ -1,3 +1,4 @@
+@import '../../global/library';
 sprint-container {
   height:100%;
 }
@@ -104,4 +105,16 @@ h1 {
   position: absolute;
   top: -80px;
   right: 20px;
+}
+
+.content .sprint-group-selector{
+  background-color: $MAIN-COLOR--SECONDARY;
+  color: $MAIN-COLOR--PRIMARY-DARK;
+  border-radius: 50%;
+  margin: 5px;
+  padding: 15px;
+  &:hover{
+    background-color: $MAIN-COLOR--PRIMARY-DARK;
+    color: $MAIN-COLOR--SECONDARY;
+  }
 }

@@ -124,7 +124,18 @@ export type ErrorResponse = {
 };
 
 // TODO: add attributes in Optional for words statistics
-export type Optional = {};
+export type GameWordStats = {
+  wins?: number;
+  fails?: number;
+};
+
+export type Optional = {
+  isLearned?: boolean;
+  wasInGame?: boolean;
+  sprintStats?: GameWordStats;
+  audioCallStats?: GameWordStats;
+  winsInARow?: number;
+};
 
 export type UsersWordResponse = {
   id: string;
