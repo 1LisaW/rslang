@@ -1,6 +1,7 @@
 import React from 'react';
-import './main.scss';
 import OurGoals from '../OurGoals/ourGoals';
+import OurTeam from '../OurTeam/ourTeam';
+import './main.scss';
 
 function Main() {
   return (
@@ -39,9 +40,7 @@ function Main() {
         />
       </section>
       <OurGoals />
-      <section className="our-team">
-        <div>Our team</div>
-      </section>
+      <OurTeam />
     </main>
   );
 }

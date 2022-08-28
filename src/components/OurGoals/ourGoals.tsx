@@ -9,33 +9,6 @@ import teamImg7 from '../../assets/imgs/6.jpg';
 import './ourGoals.scss';
 
 function OurGoals() {
-//   const itemData:Array<IImgs> = [
-//     {
-//       img: { teamImg1 },
-//       title: 'our img',
-//     },
-//     {
-//       img: { teamImg2 },
-//       title: 'our img1',
-//     },
-//     {
-//       img: { teamImg3 },
-//       title: 'our img',
-//     },
-//     {
-//       img: { teamImg4 },
-//       title: 'our img',
-//     },
-//     {
-//       img: { teamImg5 },
-//       title: 'our img',
-//     },
-//     {
-//       img: { teamImg6 },
-//       title: 'our img',
-//     },
-//   ];
-
   return (
     <section className="our-goals">
       <div className="our-goals__imgs-container">

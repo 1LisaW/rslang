@@ -1,0 +1,63 @@
+@import '../../global/library';
+
+$GITHUB-ICON-HEIGHT: 45px;
+$PERSON-IMG-HEIGHT: 250px;
+$CONTENT-PADDING: 30px;
+
+.our-team {
+  background-color: $MAIN-COLOR--SECONDARY;
+  padding: $CONTENT-PADDING 0;
+  .our-team__title {
+    text-align: center;
+    padding: $CONTENT-PADDING 0;
+    @include font(3.5rem, OpenSans, 600);
+    color: $MAIN-COLOR--PRIMARY-LIGHT;
+  }
+}
+.our-team__person {
+  width: 65vw;
+  @include flex(space-evenly);
+  margin: 20px auto;
+  .person__img {
+    height: $PERSON-IMG-HEIGHT;
+    width: $PERSON-IMG-HEIGHT;
+    border-radius: 100%;
+    border: 3px solid $MAIN-COLOR--PRIMARY-LIGHT;
+    box-shadow: 0 0 7px #666;
+    margin-right: 20px;
+  }
+  .person__title {
+    @include font(1.5em, OpenSans, 600);
+    color: $MAIN-COLOR--SECONDARY;
+    margin-bottom: 20px;
+  }
+  .person__subtitle {
+    @include font(1.1em, OpenSans);
+    color: $MAIN-COLOR--PRIMARY;
+    margin-bottom: 10px;
+  }
+}
+.person__content {
+  width: 35vw;
+  height: $PERSON-IMG-HEIGHT;
+  background-color: $MAIN-COLOR--PRIMARY-LIGHT;
+  color: $MAIN-COLOR--PRIMARY-DARK;
+  @include font(1em, OpenSans, 400);
+  letter-spacing: 1.8px;
+  text-align: justify;
+  padding: $CONTENT-PADDING;
+  border-radius: 28px;
+  box-shadow: 0 0 7px #666;
+  .person__info {
+    padding-bottom: 20px;
+    line-height: 1.3;
+  }
+  .person__title-container {
+    @include flex(space-between);
+    .person__github-link {
+      .person__github-link--icon{
+        height: $GITHUB-ICON-HEIGHT;
+      }
+    }
+  }
+}
