@@ -7,12 +7,12 @@ $CONTENT-PADDING: 30px;
 .our-team {
   background-color: $MAIN-COLOR--SECONDARY;
   padding: $CONTENT-PADDING 0;
-  .our-team__title {
-    text-align: center;
-    padding: $CONTENT-PADDING 0;
-    @include font(3.5rem, OpenSans, 600);
-    color: $MAIN-COLOR--PRIMARY-LIGHT;
-  }
+}
+.our-team__title {
+  text-align: center;
+  padding: $CONTENT-PADDING 0;
+  @include font(3.5rem, OpenSans, 600);
+  color: $MAIN-COLOR--PRIMARY-LIGHT;
 }
 .our-team__person {
   width: 65vw;
@@ -39,7 +39,6 @@ $CONTENT-PADDING: 30px;
 }
 .person__content {
   width: 35vw;
-  height: $PERSON-IMG-HEIGHT;
   background-color: $MAIN-COLOR--PRIMARY-LIGHT;
   color: $MAIN-COLOR--PRIMARY-DARK;
   @include font(1em, OpenSans, 400);
@@ -59,5 +58,67 @@ $CONTENT-PADDING: 30px;
         height: $GITHUB-ICON-HEIGHT;
       }
     }
+  }
+}
+/***************media********************/
+@media only screen and (min-width: 750px) and (max-width: 1100px) { 
+  .our-team__title {
+    font-size: 6vw;
+  }
+  .our-team__person {
+    width: auto;
+  }
+  .person__info {
+    @include font(1.6vw, OpenSans, 400);
+  }
+}
+
+@media only screen and (min-width: 450px) and (max-width: 749px) { 
+  .our-team__title {
+    font-size: 6vw;
+  }
+  .our-team__person {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .person__content {
+    margin: 5px auto $CONTENT-PADDING;
+    width: 50vw;
+  }
+  .our-team__person {
+    .person__img {
+      margin-right: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 449px) { 
+  .our-team__title {
+    font-size: 6vw;
+  }
+  .our-team__person {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .person__content {
+    margin: 5px auto $CONTENT-PADDING;
+    width: 50vw;
+  }
+  .our-team__person {
+    .person__img {
+      height: 40vw;
+      width: auto;
+      margin-right: 0;
+    }
+  }
+  .person__info {
+    display: none;
+  }
+  .our-team__person
+  .person__subtitle {
+    text-align: left;
+    width: 99%;
   }
 }
