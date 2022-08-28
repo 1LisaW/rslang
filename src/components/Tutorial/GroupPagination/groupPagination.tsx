@@ -2,24 +2,28 @@ import React from 'react';
 import Pagination from '@mui/material/Pagination';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
+import { TutorialWordsGroups } from '../../store/types';
+
 import './groupPagination.scss';
 
 const PAGES_IN_GROUP = 30;
+const PAGES_TITLE = 'Страница: ';
 
 interface PaginationData {
-  isVisible: boolean;
+  group: number;
   page: number;
 }
 
 export default function GroupPagination(props: PaginationData) {
-  const { isVisible, page } = props;
+  const { group, page } = props;
+  const isVisible = group !== TutorialWordsGroups.GROUP_7_USER;
 
   return (
     <div className="pagination__container">
       {isVisible ? (
         <Stack spacing={1}>
           <Typography className="pagination__header">
-            Page:
+            {PAGES_TITLE}
             {page}
           </Typography>
           <Pagination
