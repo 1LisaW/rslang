@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { isAuth, getCurrentUserId } from '../store/authSlice';
+import { getCurrentGroup, getGroupAndPage } from '../store/group-pageSlice';
 import { AppDispatch } from '../store/store';
 import { fetchWordList } from '../store/wordListFetch';
 import { getWordList } from '../store/wordListSlice';
@@ -14,6 +15,10 @@ function Tutorial() {
   const currentUserId = useSelector(getCurrentUserId);
   const wordList = useSelector(getWordList);
   const dispatch = useDispatch<AppDispatch>();
+
+  const group = useSelector(getCurrentGroup);
+  const page = useSelector(getGroupAndPage).pageInGroup[group];
+
   useEffect(() => {
     dispatch(fetchWordList({ isAuthorized, id: currentUserId }));
   }, [dispatch, currentUserId]);
@@ -28,8 +33,8 @@ function Tutorial() {
         ))}
       </div>
       <div className="controls__container">
-        <GroupSelector group={1} />
-        <GroupPagination isVisible page={24} />
+        <GroupSelector />
+        <GroupPagination group={group} page={page} />
       </div>
     </div>
   );
