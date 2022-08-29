@@ -15,13 +15,13 @@ function Main() {
           <p className="start-page__text">Присоединяйся уже сегодня и начни весело изучать английский вместе с нами!</p>
           <div className="start-page__registration-form">
             <button className="login__button registration-button" type="button">
-              SIGN IN
+              LOG IN
             </button>
             <button
               className="registration__button registration-button"
               type="button"
             >
-              REGISTRATION
+              SIGN UP
             </button>
           </div>
         </div>
