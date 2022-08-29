@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { isAuth, getCurrentUserId } from '../store/authSlice';
 import { getCurrentGroup, getGroupAndPage } from '../store/userSettingsSlice';
@@ -14,14 +15,23 @@ function Tutorial() {
   const isAuthorized = useSelector(isAuth);
   const currentUserId = useSelector(getCurrentUserId);
   const wordList = useSelector(getWordList);
+
+  const location = useLocation();
   const dispatch = useDispatch<AppDispatch>();
 
   const group = useSelector(getCurrentGroup);
   const page = useSelector(getGroupAndPage).pageInGroup[group];
 
   useEffect(() => {
-    dispatch(fetchWordList({ isAuthorized, id: currentUserId }));
-  }, [dispatch, currentUserId]);
+    dispatch(
+      fetchWordList({
+        isAuthorized,
+        id: currentUserId,
+        page,
+        group,
+      }),
+    );
+  }, [dispatch, isAuthorized, wordList, location.search]);
   return (
     <div>
       <h1>Tutorial</h1>

@@ -271,7 +271,7 @@ class Api {
     const convertedParams = this.convertNumberAttrToStr(options);
     const params = new URLSearchParams(convertedParams).toString();
     const searchParams = params ? `?${params}` : params;
-    const path = `${Endpoints.Words}/${userId}/${Endpoints.AggregatedWords}${searchParams}`;
+    const path = `${Endpoints.Users}/${userId}/${Endpoints.AggregatedWords}${searchParams}`;
     const usersAggregatedWords: UsersAggregatedWordsResponse | ErrorResponse =
       await this.requestMethod(Methods.GET, path, Auth.Auth);
 
@@ -282,7 +282,7 @@ class Api {
     userId: string,
     wordId: string,
   ): Promise<PaginatedResults[] | ErrorResponse> => {
-    const path = `${Endpoints.Words}/${userId}/${Endpoints.AggregatedWords}/${wordId}`;
+    const path = `${Endpoints.Users}/${userId}/${Endpoints.AggregatedWords}/${wordId}`;
     const usersAggregatedWord: PaginatedResults[] | ErrorResponse =
       await this.requestMethod(Methods.GET, path, Auth.Auth);
 
