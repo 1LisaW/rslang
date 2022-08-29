@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { StyledEngineProvider } from '@mui/material/styles';
-import { Container, Grid, Typography, Paper } from '@mui/material';
+import { Container, Grid, Typography } from '@mui/material';
 import { AppDispatch } from '../store/store';
 import { fetchWordList } from '../store/wordListFetch';
 import { getWordList } from '../store/wordListSlice';
@@ -10,6 +10,7 @@ import CircularStatic from './CircularStatic/circularStatic';
 import SprintCard from './sprintCard';
 import AlertDialogSlideOnClose from './dialogSlideOnClose';
 import { getWordsForGame } from './gameServices';
+import GameStatistic from './gameStatistic';
 
 type ContainerProps = {
   group: number | undefined;
@@ -27,6 +28,7 @@ export default function SprintCardContainer(props: ContainerProps) {
   const currentUserId = useSelector(getCurrentUserId);
   const gameWordList = useSelector(getWordList);
   const [isGameOver, setGameOver] = useState(false);
+  const { wordList } = gameWordList;
 
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
@@ -49,6 +51,7 @@ export default function SprintCardContainer(props: ContainerProps) {
   };
 
   const cardProps = { icons, ...dataForCards[CardIdx], changeCard };
+  const statisticProps = { icons, wordList };
 
   return (
     <>
@@ -75,13 +78,7 @@ export default function SprintCardContainer(props: ContainerProps) {
           <AlertDialogSlideOnClose />
         </Container>
       )}
-      {isGameOver && (
-        <Paper className="statistic-content">
-          <Typography position="absolute" top="5%">
-            Game over!
-          </Typography>
-        </Paper>
-      )}
+      {isGameOver && <GameStatistic {...statisticProps} />}
     </>
   );
 }
