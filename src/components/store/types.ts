@@ -9,6 +9,23 @@ export type AuthState = {
   authUserName: string;
 };
 
+export type UserSettings = {
+  currentGroup: TutorialWordsGroups;
+  pageInGroup: {
+    [group: number]: number;
+  };
+};
+
+export enum TutorialWordsGroups {
+  GROUP_1 = 1,
+  GROUP_2,
+  GROUP_3,
+  GROUP_4,
+  GROUP_5,
+  GROUP_6,
+  GROUP_7_USER,
+}
+
 export type AuthReducer<T> = ReducerAction<AuthState, T>;
 
 export type WordListState = { wordList: PaginatedResults[] | [] };

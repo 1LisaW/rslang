@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import NoAccountsIcon from '@mui/icons-material/NoAccounts';
-import { IconButton } from '@mui/material';
+import { Avatar } from '@mui/material';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAuth } from '../store/authFetch';
@@ -42,11 +42,11 @@ function Authorization() {
   return (
     <div>
       {isAuthorized ? (
-        <IconButton onClick={openModal}>{icon}</IconButton>
+        <Avatar sx={{ m: '10px' }} onClick={openModal}>{icon}</Avatar>
       ) : (
-        <IconButton component={Link} to="#logIn" onClick={openModal}>
+        <Avatar component={Link} to="#logIn" onClick={openModal}>
           {icon}
-        </IconButton>
+        </Avatar>
       )}
 
       {!isAuthorized &&

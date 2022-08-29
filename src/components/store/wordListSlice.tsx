@@ -12,9 +12,7 @@ export const wordListSlice = createSlice({
   initialState,
   reducers: {
     updateWordList: (state, action: PayloadAction<WordListState>) => {
-      const {
-        payload: { wordList },
-      } = action;
+      const { payload: { wordList } } = action;
 
       state.wordList = wordList;
     },

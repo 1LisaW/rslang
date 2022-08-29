@@ -1,8 +1,9 @@
 import React from 'react';
 import './navBar.scss';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 function Navbar() {
+  const location = useLocation();
   return (
     <nav className="navbar">
       <ul className="navbar__list">
@@ -16,7 +17,9 @@ function Navbar() {
           <Link to="audiocall">AUDIOCALL</Link>
         </li>
         <li className="navbar__item" key="sprint">
-          <Link to="sprint">SPRINT</Link>
+          <Link to="sprint" state={{ prevPath: location.pathname }}>
+            SPRINT
+          </Link>
         </li>
         <li className="navbar__item" key="statistic">
           <Link to="statistic">STATISTIC</Link>

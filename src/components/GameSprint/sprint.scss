@@ -1,0 +1,135 @@
+@import '../../global/library';
+sprint-container {
+  height:100%;
+}
+
+.bg {
+  animation:slide 3s ease-in-out infinite alternate;
+  background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
+  bottom:0;
+  left:-50%;
+  opacity:.5;
+  position:fixed;
+  right:-50%;
+  top:0;
+  z-index:-1;
+}
+
+.bg2 {
+  animation-direction:alternate-reverse;
+  animation-duration:4s;
+}
+
+.bg3 {
+  animation-duration:5s;
+}
+
+.content {
+  // position: relative;
+  background-color:rgba(255,255,255,.8);
+  border-radius:.25em;
+  box-shadow:0 0 .25em rgba(0,0,0,.25);
+  box-sizing:border-box;
+  left:50%;
+  padding:10vmin;
+  position:fixed;
+  text-align:center;
+  top:50%;
+  transform:translate(-50%, -50%);
+}
+
+.statistic-content {
+  position: fixed;
+  background-color:rgba(255,255,255,.8);
+  box-shadow:0 0 .25em rgba(0,0,0,.25);
+  transform:translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  width: 60%;
+  min-height: 30vw;
+  min-width: 320px;
+  text-align:left;
+  padding-left: 10px;
+}
+
+
+h1 {
+  font-family:monospace;
+}
+
+@keyframes slide {
+  0% {
+    transform:translateX(-25%);
+  }
+  100% {
+    transform:translateX(25%);
+  }
+}
+
+.sprint-card {
+  margin: auto;
+  &__actions{
+    justify-content: center;
+    min-width: 80%;
+  }
+}
+
+.sprint-card__actions {
+
+}
+.sprint-card__actions button {
+  margin: 10px;
+  min-width: 45%;
+    &:hover{
+      color: black;
+    }
+}
+
+.sprint-container .sprint__grid-wrapper{
+  flex-direction: row;
+  @media (max-width:630px) {
+    flex-direction: column;
+  }
+}
+
+
+.sprint-card__actions .sprint-card__actions--correct{
+  background-color: #6c3;
+  border: 1px solid green;
+  color: white;
+  &:active{
+    border: 2px solid black;
+  }
+  &:focus{
+    border: 2px solid white;
+  }
+}
+
+.sprint-card__actions .sprint-card__actions--incorrect{
+  background-color: rgb(212, 80, 36);
+  border: 1px solid rgb(128, 41, 0);
+  color: white;
+}
+
+.sprint-card__actions--group{
+  display: flex;
+  width: 80%;
+}
+
+.content .sprint__close-button {
+  position: absolute;
+  top: -80px;
+  right: 20px;
+}
+
+.content .sprint-group-selector{
+  background-color: $MAIN-COLOR--SECONDARY;
+  color: $MAIN-COLOR--PRIMARY-DARK;
+  border-radius: 50%;
+  margin: 5px;
+  padding: 15px;
+  &:hover{
+    background-color: $MAIN-COLOR--PRIMARY-DARK;
+    color: $MAIN-COLOR--SECONDARY;
+  }
+}

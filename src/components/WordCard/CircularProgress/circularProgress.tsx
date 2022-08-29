@@ -15,14 +15,18 @@ const theme = createTheme({
   },
 });
 interface IValue {
-  value: number
+  value: number;
 }
 
-export default function CircularProgressWithLabel({ value }:IValue) {
+export default function CircularProgressWithLabel({ value }: IValue) {
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ position: 'relative', display: 'inline-flex' }}>
-        <CircularProgress variant="determinate" value={value} color="secondary" />
+        <CircularProgress
+          variant="determinate"
+          value={value}
+          color="secondary"
+        />
         <Box
           sx={{
             top: 0,
@@ -35,11 +39,7 @@ export default function CircularProgressWithLabel({ value }:IValue) {
             justifyContent: 'center',
           }}
         >
-          <Typography
-            variant="caption"
-            component="div"
-            color="text.secondary"
-          >
+          <Typography variant="caption" component="div" color="text.secondary">
             {`${Math.round(value)}%`}
           </Typography>
         </Box>

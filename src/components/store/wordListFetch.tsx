@@ -1,11 +1,9 @@
-// import { useSelector } from 'react-redux';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { WordListReducer, WordListState } from './types';
 import Api from '../../Api/api';
-// import { isAuth } from './authSlice';
+import { PaginatedResults } from '../../Api/api-types';
 
 const emptyWordList: WordListState = { wordList: [] };
-// const isAuthorized = useSelector(isAuth);
 type Params = {
   isAuthorized: boolean;
   id?: string;
@@ -13,31 +11,31 @@ type Params = {
   page?: number;
 };
 
-export const fetchWordList = createAsyncThunk('wordList/fetchWordList', async (data: Params) => {
-  const { isAuthorized, id, group, page } = data;
-  if (!id) {
+export const fetchWordList = createAsyncThunk(
+  'wordList/fetchWordList',
+  async (data: Params) => {
+    const { isAuthorized, id, group, page } = data;
+    if (isAuthorized && id) {
+      const response = await Api.getUserAggregatedWords(id, { group, page });
+
+      return 'error' in response
+        ? {
+          ...emptyWordList,
+        }
+        : {
+          wordList: [...response[0].paginatedResults] as PaginatedResults[],
+        };
+    }
     const response = await Api.getWords({ group, page });
-    return 'status' in response ? {
-      ...emptyWordList,
-    } : {
-      wordList: response,
-    };
-  }
-  if (isAuthorized) {
-    const response = await Api.getUserAggregatedWords(id, { group, page });
-    return 'status' in response ? {
-      ...emptyWordList,
-    } : {
-      wordList: response.paginatedResults,
-    };
-  }
-  const response = await Api.getWords({ group, page });
-  return 'status' in response ? {
-    ...emptyWordList,
-  } : {
-    wordList: response,
-  };
-});
+    return 'error' in response
+      ? {
+        ...emptyWordList,
+      }
+      : {
+        wordList: response,
+      };
+  },
+);
 
 const fetchWordListFullfilled: WordListReducer<WordListState> = (
   state,
