@@ -2,7 +2,7 @@ import React from 'react';
 import githubIcon from '../../assets/icons/Github_logo.png';
 import lisaw from '../../assets/imgs/team/1LisaW.jpg';
 import weranika from '../../assets/imgs/team/Weranika.jpg';
-import madKorney from '../../assets/imgs/team/madKorney.png';
+import madKorney from '../../assets/imgs/team/madKorney.jpg';
 import './ourTeam.scss';
 
 function OurTeam() {
