@@ -3,7 +3,7 @@ import authSlicer from './authSlice';
 import soundPlaySlicer from './soundPlaySlice';
 import wordListSlicer from './wordListSlice';
 import gameWordListSlicer from './gameWordListSlice';
-import groupAndPageSlicer from './group-pageSlice';
+import userSettingsSlicer from './userSettingsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +11,7 @@ export const store = configureStore({
     wordList: wordListSlicer,
     gameWordList: gameWordListSlicer,
     soundPlay: soundPlaySlicer,
-    groupAndPage: groupAndPageSlicer,
+    userSettingsPage: userSettingsSlicer,
   },
 });
 

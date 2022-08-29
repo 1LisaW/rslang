@@ -9,7 +9,7 @@ export type AuthState = {
   authUserName: string;
 };
 
-export type GroupAndPage = {
+export type userSettings = {
   currentGroup: TutorialWordsGroups;
   pageInGroup: {
     [group: number]: number;

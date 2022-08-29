@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from './store';
-import { GroupAndPage, TutorialWordsGroups } from './types';
+import { userSettings, TutorialWordsGroups } from './types';
 
 const DEFAULT_GROUP = TutorialWordsGroups.GROUP_1;
 const DEFAULT_PAGE_IN_GROUP = 1;
@@ -18,7 +18,7 @@ function getPagePerGroupFromSetings(group: TutorialWordsGroups): number {
   return pageInGroup;
 }
 
-const initialState: GroupAndPage = {
+const initialState: userSettings = {
   currentGroup: getGroupFromSettings(),
   pageInGroup: {
     1: getPagePerGroupFromSetings(TutorialWordsGroups.GROUP_1),
@@ -31,26 +31,26 @@ const initialState: GroupAndPage = {
   },
 };
 
-export const groupAndPageSlice = createSlice({
-  name: 'groupAndPage',
+export const userSettingsSlice = createSlice({
+  name: 'userSettings',
   initialState,
   reducers: {
-    setCurrentGroup: (state, action: PayloadAction<GroupAndPage>) => {
+    setCurrentGroup: (state, action: PayloadAction<userSettings>) => {
       const { currentGroup } = action.payload;
       state.currentGroup = currentGroup;
     },
-    setPageInCurrentGroup: (state, action: PayloadAction<GroupAndPage>) => {
+    setPageInCurrentGroup: (state, action: PayloadAction<userSettings>) => {
       const { currentGroup, pageInGroup } = action.payload;
       state.pageInGroup[currentGroup] = pageInGroup[currentGroup];
     },
   },
 });
 
-export const { setCurrentGroup, setPageInCurrentGroup } = groupAndPageSlice.actions;
+export const { setCurrentGroup, setPageInCurrentGroup } = userSettingsSlice.actions;
 
-export const getCurrentGroup = (state: RootState) => state.groupAndPage.currentGroup;
-export const getGroupAndPage = (state: RootState) => state.groupAndPage;
+export const getCurrentGroup = (state: RootState) => state.userSettingsPage.currentGroup;
+export const getGroupAndPage = (state: RootState) => state.userSettingsPage;
 export const getPageInCurrentGropup =
- (state: RootState) => state.groupAndPage.pageInGroup[state.groupAndPage.currentGroup];
+ (state: RootState) => state.userSettingsPage.pageInGroup[state.userSettingsPage.currentGroup];
 
-export default groupAndPageSlice.reducer;
+export default userSettingsSlice.reducer;
