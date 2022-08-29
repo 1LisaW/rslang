@@ -9,8 +9,8 @@ import { getWordList } from '../store/wordListSlice';
 import WordCard from '../WordCard/wordCard';
 import GroupPagination from './GroupPagination/groupPagination';
 import GroupSelector from './GroupSelector/groupSelector';
-import './tutorial.scss';
 import { WordListState } from '../store/types';
+import './tutorial.scss';
 
 function Tutorial() {
   const isAuthorized: boolean = useSelector(isAuth);
@@ -18,12 +18,6 @@ function Tutorial() {
   const wordList: WordListState = useSelector(getWordList);
 
   const location = useLocation();
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // const page = Number(searchParams.get('page'));
-  // const group = Number(searchParams.get('group'));
-  // const paginationHandler = () => {
-  //   setSearchParams(`page=${2}&group=${2}`);
-  // };
   const dispatch = useDispatch<AppDispatch>();
 
   const group = useSelector(getCurrentGroup);
