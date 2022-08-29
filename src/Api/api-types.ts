@@ -16,7 +16,7 @@ export enum Endpoints {
 }
 
 export enum Difficulty {
-  Weak = 'weak',
+  Weak = 'easy',
   Hard = 'hard',
 }
 
