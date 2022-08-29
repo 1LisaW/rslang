@@ -7,12 +7,27 @@ type Props = { icons: boolean[] };
 
 function IconStatusList(props: Props) {
   const { icons } = props;
-  console.log('icons ', icons);
-  const success = <InsertEmoticonIcon fontSize="small" color="success" />;
-  const fail = (
-    <SentimentVeryDissatisfiedIcon fontSize="small" sx={{ color: pink[500] }} />
+  return (
+    <>
+      {icons.slice(-5).map((item: boolean, idx: number) => {
+        const success = (
+          <InsertEmoticonIcon
+            fontSize="small"
+            color="success"
+            key={`success${idx + 1}`}
+          />
+        );
+        const fail = (
+          <SentimentVeryDissatisfiedIcon
+            fontSize="small"
+            sx={{ color: pink[500] }}
+            key={`fail${idx + 1}`}
+          />
+        );
+        return item ? success : fail;
+      })}
+    </>
   );
-  return <>{icons.slice(-5).map((item: boolean) => (item ? success : fail))}</>;
 }
 
 export default IconStatusList;
