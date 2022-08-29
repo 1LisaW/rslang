@@ -12,7 +12,7 @@ function IconStatusList(props: Props) {
   const fail = (
     <SentimentVeryDissatisfiedIcon fontSize="small" sx={{ color: pink[500] }} />
   );
-  return <>{icons.map((item: boolean) => (item ? success : fail))}</>;
+  return <>{icons.slice(-5).map((item: boolean) => (item ? success : fail))}</>;
 }
 
 export default IconStatusList;

@@ -1,3 +1,4 @@
+@import '../../global/library';
 sprint-container {
   height:100%;
 }
@@ -24,7 +25,7 @@ sprint-container {
 }
 
 .content {
-  position: relative;
+  // position: relative;
   background-color:rgba(255,255,255,.8);
   border-radius:.25em;
   box-shadow:0 0 .25em rgba(0,0,0,.25);
@@ -36,6 +37,21 @@ sprint-container {
   top:50%;
   transform:translate(-50%, -50%);
 }
+
+.statistic-content {
+  position: fixed;
+  background-color:rgba(255,255,255,.8);
+  box-shadow:0 0 .25em rgba(0,0,0,.25);
+  transform:translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  width: 60%;
+  min-height: 30vw;
+  min-width: 320px;
+  text-align:left;
+  padding-left: 10px;
+}
+
 
 h1 {
   font-family:monospace;
@@ -104,4 +120,16 @@ h1 {
   position: absolute;
   top: -80px;
   right: 20px;
+}
+
+.content .sprint-group-selector{
+  background-color: $MAIN-COLOR--SECONDARY;
+  color: $MAIN-COLOR--PRIMARY-DARK;
+  border-radius: 50%;
+  margin: 5px;
+  padding: 15px;
+  &:hover{
+    background-color: $MAIN-COLOR--PRIMARY-DARK;
+    color: $MAIN-COLOR--SECONDARY;
+  }
 }

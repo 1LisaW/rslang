@@ -43,9 +43,12 @@ class Api {
   };
 
   static setTokens = (tokenData: TokenResponse | ErrorResponse) => {
-    StorageWorker.token = 'token' in tokenData ? tokenData.token : '';
-    StorageWorker.refreshToken =
-      'refreshToken' in tokenData ? tokenData.refreshToken : '';
+    if ('token' in tokenData) {
+      StorageWorker.token = tokenData.token;
+      StorageWorker.refreshToken = tokenData.refreshToken;
+    } else {
+      StorageWorker.deleteDataFromStorage();
+    }
   };
 
   static getFetchOptionAuth = (method: Methods, auth: Auth, data = {}) => {
@@ -77,10 +80,7 @@ class Api {
       );
 
       if (!response.ok) {
-        // console.log('response isnt ok ', response);
-        // if (response.status === StatusCodes.NotFound) {
-        return { error: response.statusText, code: response.status };
-        // }
+        return { error: response.statusText, status: response.status };
       }
 
       const content = await response.json();
@@ -175,7 +175,6 @@ class Api {
       path,
       Auth.Auth,
     );
-    console.log('getUser ', user);
     return user;
   };
 
@@ -267,12 +266,12 @@ class Api {
   static getUserAggregatedWords = async (
     userId: string,
     options: QueryParamsAggregated,
-  ): Promise<UsersAggregatedWordsResponse | ErrorResponse> => {
+  ): Promise<UsersAggregatedWordsResponse[] | ErrorResponse> => {
     const convertedParams = this.convertNumberAttrToStr(options);
     const params = new URLSearchParams(convertedParams).toString();
     const searchParams = params ? `?${params}` : params;
     const path = `${Endpoints.Users}/${userId}/${Endpoints.AggregatedWords}${searchParams}`;
-    const usersAggregatedWords: UsersAggregatedWordsResponse | ErrorResponse =
+    const usersAggregatedWords: UsersAggregatedWordsResponse[] | ErrorResponse =
       await this.requestMethod(Methods.GET, path, Auth.Auth);
 
     return usersAggregatedWords;
@@ -345,7 +344,6 @@ class Api {
       StorageWorker.userId = tokens.userId;
       this.setTokens(tokens);
     }
-    console.log('signin resp ', tokens);
     return tokens;
   };
 }

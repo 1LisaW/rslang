@@ -9,42 +9,45 @@ import { getWordList } from '../store/wordListSlice';
 import WordCard from '../WordCard/wordCard';
 import GroupPagination from './GroupPagination/groupPagination';
 import GroupSelector from './GroupSelector/groupSelector';
+import { WordListState } from '../store/types';
 import './tutorial.scss';
 
 function Tutorial() {
-  const isAuthorized = useSelector(isAuth);
-  const currentUserId = useSelector(getCurrentUserId);
-  const wordList = useSelector(getWordList);
+  const isAuthorized: boolean = useSelector(isAuth);
+  const currentUserId: string = useSelector(getCurrentUserId);
+  const wordList: WordListState = useSelector(getWordList);
 
   const location = useLocation();
   const dispatch = useDispatch<AppDispatch>();
 
   const group = useSelector(getCurrentGroup);
-  const page = useSelector(getGroupAndPage).pageInGroup[group];
+  const page = useSelector(getGroupAndPage);
+  const currentPage = page.pageInGroup[group] || 0;
 
   useEffect(() => {
     dispatch(
       fetchWordList({
         isAuthorized,
         id: currentUserId,
-        page,
+        page: currentPage,
         group,
       }),
     );
-  }, [dispatch, isAuthorized, wordList, location.search]);
+  }, [dispatch, isAuthorized, location.search]);
+
   return (
     <div>
       <h1>Tutorial</h1>
       <div className="word-list__container">
         {wordList.wordList.map(item => (
           <section className="card">
-            <WordCard data={item} />
+            <WordCard data={item} key={item.id} />
           </section>
         ))}
       </div>
       <div className="controls__container">
         <GroupSelector />
-        <GroupPagination group={group} page={page} />
+        <GroupPagination group={group} page={currentPage} />
       </div>
     </div>
   );

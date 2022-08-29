@@ -45,7 +45,7 @@ export default function SprintCardContainer(props: ContainerProps) {
   const changeCard = (valid: boolean) => {
     if (CardIdx === dataForCards.length - 1) setGameOver(true);
     setCardData(CardIdx + 1 < dataForCards.length ? CardIdx + 1 : 0);
-    setIcons([...icons.slice(-5), valid]);
+    setIcons([...icons, valid]);
   };
 
   const cardProps = { icons, ...dataForCards[CardIdx], changeCard };

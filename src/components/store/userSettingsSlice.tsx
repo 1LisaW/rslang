@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from './store';
-import { userSettings, TutorialWordsGroups } from './types';
+import { UserSettings, TutorialWordsGroups } from './types';
 
 const DEFAULT_GROUP = TutorialWordsGroups.GROUP_1;
 const DEFAULT_PAGE_IN_GROUP = 1;
@@ -18,7 +18,7 @@ function getPagePerGroupFromSetings(group: TutorialWordsGroups): number {
   return pageInGroup;
 }
 
-const initialState: userSettings = {
+const initialState: UserSettings = {
   currentGroup: getGroupFromSettings(),
   pageInGroup: {
     1: getPagePerGroupFromSetings(TutorialWordsGroups.GROUP_1),
@@ -35,11 +35,11 @@ export const userSettingsSlice = createSlice({
   name: 'userSettings',
   initialState,
   reducers: {
-    setCurrentGroup: (state, action: PayloadAction<userSettings>) => {
+    setCurrentGroup: (state, action: PayloadAction<UserSettings>) => {
       const { currentGroup } = action.payload;
       state.currentGroup = currentGroup;
     },
-    setPageInCurrentGroup: (state, action: PayloadAction<userSettings>) => {
+    setPageInCurrentGroup: (state, action: PayloadAction<UserSettings>) => {
       const { currentGroup, pageInGroup } = action.payload;
       state.pageInGroup[currentGroup] = pageInGroup[currentGroup];
     },
