@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { isAuth, getCurrentUserId } from '../store/authSlice';
-import { getCurrentGroup, getGroupAndPage } from '../store/group-pageSlice';
+import { getCurrentGroup, getGroupAndPage } from '../store/userSettingsSlice';
 import { AppDispatch } from '../store/store';
 import { fetchWordList } from '../store/wordListFetch';
 import { getWordList } from '../store/wordListSlice';
