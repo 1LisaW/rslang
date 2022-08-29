@@ -6,7 +6,8 @@
 }
 .header__container {
   @include flex(space-between);
-  width:$BODY-CONTAINER-WIDTH;
+  max-width:$BODY-CONTAINER-WIDTH;
+  width: 90vw;
   margin: 0 auto;
   height: $HEADER--HEIGHT;
   background-color: $MAIN-COLOR--PRIMARY-DARK;

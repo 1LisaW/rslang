@@ -1,7 +1,8 @@
 @import './library';
 
 .body__container {
-  width: $BODY-CONTAINER-WIDTH;
+  max-width: $BODY-CONTAINER-WIDTH;
+  width: 90vw;
   margin: 0 auto;
 }
 @font-face {
