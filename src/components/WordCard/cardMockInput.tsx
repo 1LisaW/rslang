@@ -18,8 +18,10 @@ const cardMockInput:PaginatedResults = {
   userWord: {
     difficulty: Difficulty.Weak,
     optional: {
-      wins: 1,
-      fails: 2,
+      sprintStats: {
+        wins: 1,
+        fails: 2,
+      },
     },
   },
 };

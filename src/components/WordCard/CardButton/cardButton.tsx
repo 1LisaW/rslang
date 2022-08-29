@@ -23,19 +23,26 @@ const theme = createTheme({
 
 function CardButtonActive({ text, action, handler }: IButtonCard) {
   return (
-    <Button onClick={() => handler(action)}>
-      <ThemeProvider theme={theme}>
-        {action ? (
-          <Button variant="text" className="button--active" color="primary">
-            {text}
-          </Button>
-        ) : (
-          <Button variant="contained" color="secondary">
-            {text}
-          </Button>
-        )}
-      </ThemeProvider>
-    </Button>
+    <ThemeProvider theme={theme}>
+      {action ? (
+        <Button
+          onClick={() => handler(action)}
+          variant="text"
+          className="button--active"
+          color="primary"
+        >
+          {text}
+        </Button>
+      ) : (
+        <Button
+          onClick={() => handler(action)}
+          variant="contained"
+          color="secondary"
+        >
+          {text}
+        </Button>
+      )}
+    </ThemeProvider>
   );
 }
 
