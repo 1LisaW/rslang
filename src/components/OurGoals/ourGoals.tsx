@@ -16,9 +16,9 @@ function OurGoals() {
         <img src={teamImg2} alt="our img" className="our-goals__img our-goals__img--custom1" />
         <img src={teamImg3} alt="our img" className="our-goals__img our-goals__img--custom2" />
         <img src={teamImg4} alt="our img" className="our-goals__img" />
-        <img src={teamImg6} alt="our img" className="our-goals__img" />
+        <img src={teamImg6} alt="our img" className="our-goals__img our-goals__img--custom3" />
         <img src={teamImg5} alt="our img" className="our-goals__img" />
-        <img src={teamImg7} alt="our img" className="our-goals__img" />
+        <img src={teamImg7} alt="our img" className="our-goals__img our-goals__img--custom4" />
       </div>
       <article className="our-goals__content">
         <h2 className="our-goals__title">ПОЧЕМУ МЫ   ?</h2>

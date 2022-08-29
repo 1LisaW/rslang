@@ -13,6 +13,8 @@ $START-PAGE-TEXT-HEIGHT: 400px;
 $REGISTRATION-BUTTON-WIDTH: 45%;
 $REGISTRATION-BUTTON-HEIGHT: 4em;
 
+$YOUTUBE-MAX-WIDTH: 900px;
+
 .main {
   position: relative;
   background-color: $MAIN-COLOR--PRIMARY-DARK; 
@@ -44,15 +46,14 @@ $REGISTRATION-BUTTON-HEIGHT: 4em;
 }
 .start-page__content {
   max-width: $START-PAGE-TEXT-WIDTH;
-  width: 50%;
-  min-height: 50%;
+  width: 55%;
   background-color: $MAIN-COLOR--PRIMARY-LIGHT;
   position: relative;
   bottom: 50em;
   right: 6em;
   z-index: 1;
   margin-left: auto;
-  padding: 2vw;
+  padding: 2.5em;
   box-sizing: border-box;
   .start-page__subtitle {
     @include font(0.8em, OpenSans);
@@ -61,12 +62,12 @@ $REGISTRATION-BUTTON-HEIGHT: 4em;
     color: $MAIN-COLOR--PRIMARY;
   }
   .start-page__title {
-    @include font(3.4vw, Teko);
+    @include font(3.2em, Teko);
     width: 70%;
-    margin-bottom: 0.5em;
+    margin-bottom: 15px;
   }
   .start-page__text {
-    @include font(1em, OpenSans);
+    @include font(1.5em, OpenSans);
     color: $MAIN-COLOR--PRIMARY-DARK;
     margin-bottom: 1em;
   }
@@ -76,7 +77,7 @@ $REGISTRATION-BUTTON-HEIGHT: 4em;
       width: $REGISTRATION-BUTTON-WIDTH;
       height: $REGISTRATION-BUTTON-HEIGHT;
       color: $MAIN-COLOR--PRIMARY-LIGHT;
-      @include font(1vw, OpenSans);
+      @include font(1em, OpenSans);
       letter-spacing: 2.8px;
       transition: 1s all ease;
       cursor: pointer;
@@ -136,13 +137,97 @@ $REGISTRATION-BUTTON-HEIGHT: 4em;
 .youtube-video {
   background-color: $MAIN-COLOR--PRIMARY-LIGHT;
   text-align: center;
-  .youtube-video__title {
-    text-align: center;
-    padding: 80px 0 40px;
-    @include font(3.5rem, OpenSans, 600);
-    color: $MAIN-COLOR--SECONDARY;
-  }
   .youtube-video__video {
     margin-bottom: 40px;
+    max-width: $YOUTUBE-MAX-WIDTH;
+    width: 70vw;
+    height: 40vw;
+  }
+}
+.youtube-video__title {
+  text-align: center;
+  padding: 80px 0 40px;
+  @include font(3.5rem, OpenSans, 600);
+  color: $MAIN-COLOR--SECONDARY;
+}
+
+/***************media********************/
+@media only screen and (min-width: 750px) and (max-width: 1000px) {
+  .start-page__content {
+    width: 75%;
+  }
+  .start-page__hero-img {
+    width: 80vw;
+  }
+  .start-page__decoration-container {
+    height: 40vw;
+    width: 45vw;
+    bottom: 13em;
+  }
+}
+
+@media only screen and (min-width: 500px) and (max-width: 749px) {
+  .youtube-video__title{
+    font-size: 9vw;
+  }
+  .start-page__decoration-container {
+    display: none;
+  }
+  .start-page__hero-img {
+    width: auto;
+  }
+  .start-page__content
+  .start-page__title {
+    font-size: 2.6em;
+    width: 95%;
+  }
+  .start-page__content
+  .start-page__text {
+    font-size: 3vw;
+    margin-bottom: 2em;
+  }
+  .start-page__content {
+    width: 60vw;
+    bottom: 25em;
+    right: 5em;
+    padding: 6vw;
+  }
+  .start-page__content
+  .start-page__registration-form
+  .registration-button {
+    font-size: 2vw;
+  }
+}
+
+@media only screen and (max-width: 499px) {
+  .youtube-video__title{
+    font-size: 9vw;
+  }
+  .start-page__decoration-container {
+    display: none;
+  }
+  .start-page__hero-img {
+    width: auto;
+  }
+  .start-page__content
+  .start-page__title {
+    font-size: 2.2em;
+    width: 95%;
+  }
+  .start-page__content
+  .start-page__text {
+    font-size: 3vw;
+    margin-bottom: 2em;
+  }
+  .start-page__content {
+    width: 60vw;
+    bottom: 25em;
+    right: 3em;
+    padding: 6vw;
+  }
+  .start-page__content
+  .start-page__registration-form
+  .registration-button {
+    font-size: 2vw;
   }
 }

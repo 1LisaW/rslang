@@ -15,13 +15,13 @@ function Main() {
           <p className="start-page__text">Присоединяйся уже сегодня и начни весело изучать английский вместе с нами!</p>
           <div className="start-page__registration-form">
             <button className="login__button registration-button" type="button">
-              SIGN IN
+              LOG IN
             </button>
             <button
               className="registration__button registration-button"
               type="button"
             >
-              REGISTRATION
+              SIGN UP
             </button>
           </div>
         </div>
@@ -31,8 +31,6 @@ function Main() {
         <iframe
           className="youtube-video__video"
           title="youtube"
-          width="800"
-          height="450"
           src="https://www.youtube.com/embed/li_9PBrcOcQ"
           frameBorder="1"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
