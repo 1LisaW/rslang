@@ -269,7 +269,9 @@ class Api {
   ): Promise<UsersAggregatedWordsResponse[] | ErrorResponse> => {
     const convertedParams = this.convertNumberAttrToStr(options);
     const params = new URLSearchParams(convertedParams).toString();
-    const searchParams = params ? `?${params}` : params;
+    const searchParams = params
+      ? `?${params}&wordsPerPage=20`
+      : '?wordsPerPage=30';
     const path = `${Endpoints.Users}/${userId}/${Endpoints.AggregatedWords}${searchParams}`;
     const usersAggregatedWords: UsersAggregatedWordsResponse[] | ErrorResponse =
       await this.requestMethod(Methods.GET, path, Auth.Auth);
