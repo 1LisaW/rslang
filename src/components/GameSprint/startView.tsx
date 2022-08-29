@@ -33,6 +33,7 @@ export default function StartView(props: Props) {
         {actions.map((action) => (
           <IconButton
             className="sprint-group-selector"
+            key={action.value}
             onClick={() => {
               chooseGroupHandler(action.value);
             }}
@@ -40,7 +41,6 @@ export default function StartView(props: Props) {
             {action.icon}
           </IconButton>
         ))}
-        {/* </SpeedDial> */}
       </Box>
     </Container>
   );

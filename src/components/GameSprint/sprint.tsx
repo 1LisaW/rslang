@@ -1,47 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import StartView from './startView';
 import SprintCardContainer from './sprintCardContainer';
+import { getRandomNumber } from './gameServices';
 import './sprint.scss';
 
 function Sprint() {
-  const defaultIcon: boolean[] = [];
+  const PAGES_PER_GROUP = 30;
+  const GROUPS_COUNT = 6;
 
-  const [CardIdx, setCardData] = useState(0);
-  const [icons, setIcons] = useState(defaultIcon);
-  const [group, setGroup] = useState<number | null>(null);
-
-  console.log(group);
+  const [group, setGroup] = useState<number | undefined>(undefined);
+  const [page, setPage] = useState<number | undefined>(undefined);
+  const [isGroupChosen, setGroupIsChosen] = useState(false);
 
   const { state }: { state: any } = useLocation();
 
-  const redirectedFromTutorial =
+  const redirectedFromTutorial: boolean =
     state &&
     'prevPath' in state &&
     state.prevPath.toString().startsWith('/tutorial');
 
-  const questions = [
-    { word: 'disadvantage', wordTranslate: 'недостаток', isCorrect: true },
-    { word: 'disadvantage', wordTranslate: 'кошка', isCorrect: false },
-  ];
+  useEffect(() => {
+    // if (!redirectedFromTutorial) {
+    setPage(getRandomNumber(PAGES_PER_GROUP));
+    setGroup(getRandomNumber(GROUPS_COUNT));
+    // }
+  }, []);
 
-  const changeCard = (valid: boolean) => {
-    setCardData(CardIdx + 1 < questions.length ? CardIdx + 1 : 0);
-    setIcons([...icons.slice(-5), valid]);
-  };
+  console.log(page, group, 'page and group');
 
   const chooseGroupHandler = (groupIdx: number) => {
     setGroup(groupIdx);
+    setGroupIsChosen(true);
   };
 
-  const containerProps = { icons, ...questions[CardIdx], changeCard };
+  const containerProps = { group, page };
   const startViewProps = { chooseGroupHandler };
   return (
     <main className="sprint-container">
       <div className="bg" />
       <div className="bg bg2" />
       <div className="bg bg3" />
-      {redirectedFromTutorial ? (
+      {(redirectedFromTutorial || isGroupChosen) ? (
         <SprintCardContainer {...containerProps} />
       ) : (
         <StartView {...startViewProps} />

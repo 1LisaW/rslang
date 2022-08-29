@@ -6,12 +6,14 @@ import { AppDispatch } from '../store/store';
 import { fetchWordList } from '../store/wordListFetch';
 import { getWordList } from '../store/wordListSlice';
 import WordCard from '../WordCard/wordCard';
+import GroupPagination from './GroupPagination/groupPagination';
 import './tutorial.scss';
+import { WordListState } from '../store/types';
 
 function Tutorial() {
-  const isAuthorized = useSelector(isAuth);
-  const currentUserId = useSelector(getCurrentUserId);
-  const wordList = useSelector(getWordList);
+  const isAuthorized: boolean = useSelector(isAuth);
+  const currentUserId: string = useSelector(getCurrentUserId);
+  const wordList: WordListState = useSelector(getWordList);
 
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -33,17 +35,20 @@ function Tutorial() {
   }, [dispatch, isAuthorized, location.search]);
 
   return (
-    <>
+    <div>
       <h1>Tutorial</h1>
-      {wordList.wordList.map(item => (
-        <section className="card">
-          <WordCard data={item} key={item.id} />
-        </section>
-      ))}
+      <div className="word-list__container">
+        {wordList.wordList.map(item => (
+          <section className="card">
+            <WordCard data={item} key={item.id} />
+          </section>
+        ))}
+      </div>
+      <GroupPagination isVisible page={24} />
       <button type="button" onClick={paginationHandler}>
         Click
       </button>
-    </>
+    </div>
   );
 }
 

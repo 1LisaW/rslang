@@ -1,0 +1,38 @@
+@import '../../global/library';
+
+.game-card__actions button {
+  margin: 10px;
+  min-width: 45%;
+    &:hover{
+      color: black;
+    }
+}
+.game-card__actions .game-card__actions--correct{
+  background-color: #6c3;
+  border: 1px solid green;
+  color: white;
+  &:active{
+    border: 2px solid black;
+  }
+  &:focus{
+    border: 2px solid white;
+  }
+}
+
+.game-card__actions .game-card__actions--incorrect{
+  background-color: rgb(212, 80, 36);
+  border: 1px solid rgb(128, 41, 0);
+  color: white;
+}
+
+.game-card__actions--group{
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.game-card__actions .game-card__actions--group .active{
+  background-color: white;
+  color: black;
+}
