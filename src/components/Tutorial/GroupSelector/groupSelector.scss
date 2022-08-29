@@ -1,0 +1,16 @@
+@import '../../../global/library';
+
+.group-selector {
+  width: 100px;
+  height: 60px;
+  position: sticky;
+  bottom: 90px;
+}
+
+.group-selector__dial {
+  transform: translateZ(0px);
+  flex-grow: 1;
+  justify-self: flex-start;
+  position: absolute;
+  left: 30px;
+}
