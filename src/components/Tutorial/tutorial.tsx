@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { isAuth, getCurrentUserId } from '../store/authSlice';
+import { getCurrentGroup, getGroupAndPage } from '../store/userSettingsSlice';
 import { AppDispatch } from '../store/store';
 import { fetchWordList } from '../store/wordListFetch';
 import { getWordList } from '../store/wordListSlice';
 import WordCard from '../WordCard/wordCard';
+import GroupPagination from './GroupPagination/groupPagination';
+import GroupSelector from './GroupSelector/groupSelector';
 import './tutorial.scss';
 
 function Tutorial() {
@@ -14,16 +17,11 @@ function Tutorial() {
   const wordList = useSelector(getWordList);
 
   const location = useLocation();
-  // console.log(location);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const page = Number(searchParams.get('page'));
-  const group = Number(searchParams.get('group'));
-  // console.log(page, group, setSearchParams);
-  const paginationHandler = () => {
-    setSearchParams(`page=${2}&group=${2}`);
-  };
-  // const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
+
+  const group = useSelector(getCurrentGroup);
+  const page = useSelector(getGroupAndPage).pageInGroup[group];
+
   useEffect(() => {
     dispatch(
       fetchWordList({
@@ -35,17 +33,20 @@ function Tutorial() {
     );
   }, [dispatch, isAuthorized, wordList, location.search]);
   return (
-    <>
+    <div>
       <h1>Tutorial</h1>
-      {wordList.wordList.map(item => (
-        <section className="card">
-          <WordCard data={item} />
-        </section>
-      ))}
-      <button type="button" onClick={paginationHandler}>
-        Click
-      </button>
-    </>
+      <div className="word-list__container">
+        {wordList.wordList.map(item => (
+          <section className="card">
+            <WordCard data={item} />
+          </section>
+        ))}
+      </div>
+      <div className="controls__container">
+        <GroupSelector />
+        <GroupPagination group={group} page={page} />
+      </div>
+    </div>
   );
 }
 
