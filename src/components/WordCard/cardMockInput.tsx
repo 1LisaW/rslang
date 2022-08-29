@@ -16,7 +16,7 @@ const cardMockInput:PaginatedResults = {
   textMeaningTranslate: 'Популярная вещь нравится многим людям',
   wordTranslate: 'популярный',
   userWord: {
-    difficulty: Difficulty.Weak,
+    difficulty: Difficulty.Easy,
     optional: {
       sprintStats: {
         wins: 1,

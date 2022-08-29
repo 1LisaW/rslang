@@ -19,13 +19,14 @@ type StatisticProps = {
   icons: boolean[];
 };
 
-export default function GameStatistic(staticticProps: StatisticProps) {
-  const { wordList, icons } = staticticProps;
+export default function GameStatistic(statisticProps: StatisticProps) {
+  const { wordList, icons } = statisticProps;
   const initialWordList = [...wordList];
   const gameResults = [...icons];
   const results: Results = { wins: [], fails: [] };
 
-  results.ratio = gameResults.filter(item => item).length / initialWordList.length;
+  results.ratio =
+    gameResults.filter(item => item).length / initialWordList.length;
 
   if (results.ratio < 0.3) {
     results.title = 'Похоже, сегодня вы не в духе, попробуйте ещею';
@@ -57,7 +58,7 @@ export default function GameStatistic(staticticProps: StatisticProps) {
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         sx={{ p: '20px' }}
       >
-        <Grid item xs={8}>
+        <Grid item xs={8} key="correct-words">
           <Typography
             variant="subtitle1"
             sx={{ color: 'green', fontWeight: 600 }}
@@ -66,16 +67,21 @@ export default function GameStatistic(staticticProps: StatisticProps) {
           </Typography>
         </Grid>
         {results.wins.map(item => (
-          <>
-            <Grid item xs={5} key={item.word}>
-              <Typography sx={{ color: 'green', fontWeight: 600 }}>
+          <React.Fragment key={`frag${item.word}`}>
+            <Grid item xs={5} key={`grid-corr-word${item.word}`}>
+              <Typography
+                sx={{ color: 'green', fontWeight: 600 }}
+                key={`tpg-corr-word${item.word}`}
+              >
                 {item.word}
               </Typography>
             </Grid>
-            <Grid item xs={5} key={item.wordTranslate}>
-              <Typography>{item.wordTranslate}</Typography>
+            <Grid item xs={5} key={`grid${item.wordTranslate}`}>
+              <Typography key={`tpg${item.wordTranslate}`}>
+                {item.wordTranslate}
+              </Typography>
             </Grid>
-          </>
+          </React.Fragment>
         ))}
         <Grid item xs={8}>
           <Typography
@@ -87,16 +93,21 @@ export default function GameStatistic(staticticProps: StatisticProps) {
           </Typography>
         </Grid>
         {results.fails.map(item => (
-          <>
-            <Grid item xs={5} key={item.word}>
-              <Typography sx={{ color: 'red', fontWeight: 600 }}>
+          <React.Fragment key={`frag${item.word}`}>
+            <Grid item xs={5} key={`grid-inc-word${item.word}`}>
+              <Typography
+                sx={{ color: 'red', fontWeight: 600 }}
+                key={`tpg-inc-word${item.word}`}
+              >
                 {item.word}
               </Typography>
             </Grid>
-            <Grid item xs={5} key={item.wordTranslate}>
-              <Typography>{item.wordTranslate}</Typography>
+            <Grid item xs={5} key={`grid${item.wordTranslate}`}>
+              <Typography key={`tpg${item.wordTranslate}`}>
+                {item.wordTranslate}
+              </Typography>
             </Grid>
-          </>
+          </React.Fragment>
         ))}
       </Grid>
     </Paper>
