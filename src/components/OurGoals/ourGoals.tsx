@@ -9,33 +9,6 @@ import teamImg7 from '../../assets/imgs/6.jpg';
 import './ourGoals.scss';
 
 function OurGoals() {
-//   const itemData:Array<IImgs> = [
-//     {
-//       img: { teamImg1 },
-//       title: 'our img',
-//     },
-//     {
-//       img: { teamImg2 },
-//       title: 'our img1',
-//     },
-//     {
-//       img: { teamImg3 },
-//       title: 'our img',
-//     },
-//     {
-//       img: { teamImg4 },
-//       title: 'our img',
-//     },
-//     {
-//       img: { teamImg5 },
-//       title: 'our img',
-//     },
-//     {
-//       img: { teamImg6 },
-//       title: 'our img',
-//     },
-//   ];
-
   return (
     <section className="our-goals">
       <div className="our-goals__imgs-container">
@@ -43,9 +16,9 @@ function OurGoals() {
         <img src={teamImg2} alt="our img" className="our-goals__img our-goals__img--custom1" />
         <img src={teamImg3} alt="our img" className="our-goals__img our-goals__img--custom2" />
         <img src={teamImg4} alt="our img" className="our-goals__img" />
-        <img src={teamImg6} alt="our img" className="our-goals__img" />
+        <img src={teamImg6} alt="our img" className="our-goals__img our-goals__img--custom3" />
         <img src={teamImg5} alt="our img" className="our-goals__img" />
-        <img src={teamImg7} alt="our img" className="our-goals__img" />
+        <img src={teamImg7} alt="our img" className="our-goals__img our-goals__img--custom4" />
       </div>
       <article className="our-goals__content">
         <h2 className="our-goals__title">ПОЧЕМУ МЫ   ?</h2>
