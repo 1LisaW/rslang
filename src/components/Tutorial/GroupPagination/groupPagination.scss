@@ -1,0 +1,14 @@
+@import '../../../global/library';
+
+.pagination__container {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.pagination__header {
+  align-self: center;
+
+}
