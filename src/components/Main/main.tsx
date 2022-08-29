@@ -30,8 +30,6 @@ function Main() {
         <iframe
           className="youtube-video__video"
           title="youtube"
-          width="800"
-          height="450"
           src="https://www.youtube.com/embed/li_9PBrcOcQ"
           frameBorder="1"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
