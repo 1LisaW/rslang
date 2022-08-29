@@ -16,7 +16,7 @@ export enum Endpoints {
 }
 
 export enum Difficulty {
-  Weak = 'easy',
+  Easy = 'easy',
   Hard = 'hard',
 }
 
@@ -102,7 +102,8 @@ export type TokenResponse = {
 };
 
 export type WordResponse = {
-  id: string;
+  id?: string;
+  _id?: string;
   group: number;
   page: number;
   word: string;
