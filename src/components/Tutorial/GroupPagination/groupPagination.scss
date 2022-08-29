@@ -1,8 +1,7 @@
 @import '../../../global/library';
 
 .pagination__container {
-  position: sticky;
-  bottom :10px;
+  width: 100%;
   padding: 10px;
   display: flex;
   flex-direction: row;

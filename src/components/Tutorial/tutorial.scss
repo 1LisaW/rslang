@@ -3,3 +3,11 @@
 .card {
   margin-top: $HEADER-LOGO-CONTAINER--HEIGHT;
 }
+
+.controls__container {
+  display: flex;
+  flex-direction: row;
+  position: sticky;
+  bottom :10px;
+  padding-right: 100px;
+}
