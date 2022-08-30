@@ -40,7 +40,7 @@ function Tutorial() {
       <h1>Tutorial</h1>
       <div className="word-list__container">
         {wordList.wordList.map(item => (
-          <section className="card">
+          <section className="card" key={`section${item.id || item._id}`}>
             <WordCard data={item} key={item.id} />
           </section>
         ))}

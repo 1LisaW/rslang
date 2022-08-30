@@ -13,7 +13,7 @@ import {
   WordResponse,
   ErrorResponse,
   UsersWordResponse,
-  UsersWordData,
+  // UsersWordData,
   UpdateUsersWordData,
   PaginatedResults,
   UsersAggregatedWordsResponse,
@@ -223,7 +223,7 @@ class Api {
   static createUsersWord = async (
     userId: string,
     wordId: string,
-    data: UsersWordData,
+    data: UpdateUsersWordData,
   ): Promise<UsersWordResponse | ErrorResponse> => {
     const path = `${Endpoints.Users}/${userId}/${Endpoints.Words}/${wordId}`;
     const usersWord: UsersWordResponse | ErrorResponse =
@@ -271,7 +271,7 @@ class Api {
     const params = new URLSearchParams(convertedParams).toString();
     const searchParams = params
       ? `?${params}&wordsPerPage=20`
-      : '?wordsPerPage=30';
+      : '?wordsPerPage=20';
     const path = `${Endpoints.Users}/${userId}/${Endpoints.AggregatedWords}${searchParams}`;
     const usersAggregatedWords: UsersAggregatedWordsResponse[] | ErrorResponse =
       await this.requestMethod(Methods.GET, path, Auth.Auth);
