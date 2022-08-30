@@ -1,6 +1,6 @@
 import React from 'react';
 import './wordCard.scss';
-import { makeStyles, StylesProvider } from '@material-ui/core/styles';
+import { StylesProvider } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -15,16 +15,8 @@ import CircularProgressWithLabel from './CircularProgress/circularProgress';
 interface CardInput {
   data: PaginatedResults;
 }
-const useStyles = makeStyles({
-  media: {
-    height: '100%',
-    width: '40%',
-  },
-});
 
 function WordCard({ data }:CardInput) {
-  const classes = useStyles();
-
   const audioButtonHandler = {
     play: true,
     handler: (play: boolean) => {
@@ -57,7 +49,7 @@ function WordCard({ data }:CardInput) {
         className="card-word__container"
       >
         <CardMedia
-          className={classes.media}
+          className="card-word__img"
           component="img"
           image={img}
           width="50%"
