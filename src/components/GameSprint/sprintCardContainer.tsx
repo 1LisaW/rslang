@@ -9,7 +9,7 @@ import { isAuth, getCurrentUserId } from '../store/authSlice';
 import CircularStatic from './CircularStatic/circularStatic';
 import SprintCard from './sprintCard';
 import AlertDialogSlideOnClose from './dialogSlideOnClose';
-import { getWordsForGame } from './gameServices';
+import { getWordsForGame, sendDataToServer } from './gameServices';
 import GameStatistic from './gameStatistic';
 
 type ContainerProps = {
@@ -43,15 +43,18 @@ export default function SprintCardContainer(props: ContainerProps) {
   }, [dispatch]);
 
   const dataForCards = getWordsForGame(gameWordList);
+  const statisticProps = { icons, wordList };
 
   const changeCard = (valid: boolean) => {
-    if (CardIdx === dataForCards.length - 1) setGameOver(true);
+    if (CardIdx === dataForCards.length - 1) {
+      setGameOver(true);
+      sendDataToServer(currentUserId, statisticProps);
+    }
     setCardData(CardIdx + 1 < dataForCards.length ? CardIdx + 1 : 0);
     setIcons([...icons, valid]);
   };
 
   const cardProps = { icons, ...dataForCards[CardIdx], changeCard };
-  const statisticProps = { icons, wordList };
 
   return (
     <>

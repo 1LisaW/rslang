@@ -6,12 +6,14 @@ import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
 import IconStatusList from './iconStatusList';
 import GameButtons from './gameButtons';
+import './newWordAnimation.scss';
 
 type CardData = {
   icons: boolean[];
   word: string;
   wordTranslate: string;
   correctButtonIdx: number;
+  wasInGame: boolean | undefined;
   changeCard: (valid: boolean) => void;
 };
 
@@ -31,7 +33,14 @@ const buttonsDataSprint = [
 ];
 
 function SprintCard(props: CardData) {
-  const { icons, word, wordTranslate, correctButtonIdx, changeCard } = props;
+  const {
+    icons,
+    word,
+    wordTranslate,
+    correctButtonIdx,
+    wasInGame,
+    changeCard,
+  } = props;
   const iconProps = { icons };
   const dataForButtons = buttonsDataSprint.map((item, idx) => {
     const isCorrect = idx === correctButtonIdx;
@@ -43,9 +52,20 @@ function SprintCard(props: CardData) {
         <Box>
           <IconStatusList {...iconProps} />
         </Box>
-        <Typography gutterBottom variant="h5" component="div">
-          {word}
-        </Typography>
+        {wasInGame ? (
+          <Typography gutterBottom variant="h5" component="div">
+            {word}
+          </Typography>
+        ) : (
+          <Typography
+            className="new-word"
+            gutterBottom
+            variant="h5"
+            component="div"
+          >
+            {word}
+          </Typography>
+        )}
         <Typography variant="body2" color="text.secondary">
           {wordTranslate}
         </Typography>
