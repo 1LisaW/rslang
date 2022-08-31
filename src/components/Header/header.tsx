@@ -13,7 +13,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { StylesProvider } from '@material-ui/core/styles';
 
 import Button from '@mui/material/Button';
-// import Navbar from '../NavBar/navBar';
 import Authorization from '../Authorization/authorization';
 import './header.scss';
 import './navBar.scss';
@@ -35,7 +34,7 @@ const pages = [
     title: 'АУДИОВЫЗОВ',
     key: 'audiocall',
     link: 'audiocall',
-    state: false,
+    state: true,
   },
   {
     title: 'СПРИНТ',
@@ -74,6 +73,7 @@ function ResponsiveAppBar() {
   });
 
   const location = useLocation();
+  console.log('location.pathname', location.pathname);
 
   return (
     <ThemeProvider theme={theme}>
@@ -130,15 +130,22 @@ function ResponsiveAppBar() {
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem key={page.key} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center" className="navbar__item">
-                      {page.state
-                        ? (
-                          <Link to={page.link} state={{ prevPath: location.pathname }}>
-                            {page.title}
-                          </Link>
-                        )
-                        : <Link to={page.link}>{page.title}</Link>}
+                  <MenuItem
+                    key={`menuItem ${page.key}`}
+                    onClick={handleCloseNavMenu}
+                  >
+                    <Typography
+                      key={`menuItem typo ${page.key}`}
+                      textAlign="center"
+                      className="navbar__item"
+                    >
+                      <Link
+                        key={`menuItem link ${page.key}`}
+                        to={page.link}
+                        state={{ prevPath: location.pathname }}
+                      >
+                        {page.title}
+                      </Link>
                     </Typography>
                   </MenuItem>
                 ))}
@@ -164,15 +171,21 @@ function ResponsiveAppBar() {
               IngLang
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              {pages.map((page) => (
-                <StylesProvider injectFirst>
+              {pages.map(page => (
+                <StylesProvider key={`StylesProvider${page.key}`} injectFirst>
                   <Button
-                    key={page.key}
+                    key={`button ${page.key}`}
                     className="navbar__item"
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
-                    <Link to={page.link}>{page.title}</Link>
+                    <Link
+                      key={`button link ${page.key}`}
+                      to={page.link}
+                      state={{ prevPath: location.pathname }}
+                    >
+                      {page.title}
+                    </Link>
                   </Button>
                 </StylesProvider>
               ))}

@@ -46,7 +46,7 @@ export type QueryParamsToStr = {
 export type QueryParamsAggregated = {
   group?: number;
   page?: number;
-  wordsPerPage?: string;
+  wordsPerPage?: number;
   filter?: string;
 };
 

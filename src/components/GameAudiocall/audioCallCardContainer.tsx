@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { StyledEngineProvider } from '@mui/material/styles';
 import { Container, Grid, Typography } from '@mui/material';
 import { AppDispatch } from '../store/store';
 import { fetchWordList } from '../store/gameWordListFetch';
 import { getGamesWordList } from '../store/gameWordListSlice';
 import { isAuth, getCurrentUserId } from '../store/authSlice';
-import CircularStatic from './CircularStatic/circularStatic';
-import SprintCard from './sprintCard';
+import AudioCallCard from './audioCallCard';
 import AlertDialogSlideOnClose from '../GameCommonComponents/CloseButton/dialogSlideOnClose';
 import {
-  getWordsForGame,
+  getWordsAudioCallGame,
   sendDataToServer,
 } from '../GameCommonComponents/GameServices/gameServices';
 import GameStatistic from '../GameCommonComponents/GameStatistics/gameStatistic';
@@ -22,7 +20,7 @@ type ContainerProps = {
   wordsPerPage: number;
 };
 
-export default function SprintCardContainer(props: ContainerProps) {
+export default function AudioCallCardContainer(props: ContainerProps) {
   const { redirectedFromTutorial, group, page, wordsPerPage } = props;
   const defaultIcon: boolean[] = [];
 
@@ -49,52 +47,57 @@ export default function SprintCardContainer(props: ContainerProps) {
     );
   }, [dispatch, group]);
 
-  const dataForCards = getWordsForGame(gameWordListState);
+  const dataForCards = getWordsAudioCallGame(gameWordListState);
   const statisticProps = { icons, gameWordList };
 
   const changeCard = (valid: boolean) => {
     if (CardIdx === dataForCards.length - 1) {
       setGameOver(true);
-      sendDataToServer('sprintStats', currentUserId, statisticProps);
+      sendDataToServer('audioCallStats', currentUserId, statisticProps);
     }
 
     setCardData(CardIdx + 1 < dataForCards.length ? CardIdx + 1 : 0);
     setIcons([...icons, valid]);
   };
 
-  const handleGameOver: () => void = () => {
-    setGameOver(true);
-    sendDataToServer('sprintStats', currentUserId, statisticProps);
-  };
-
   const cardProps = { icons, ...dataForCards[CardIdx], changeCard };
-
   return (
     <>
-      {!isGameOver && (
-        <Container className="content" maxWidth="md">
+      {!isGameOver && (dataForCards.length >= 20) && (
+        <Container
+          className="audio-call__content content"
+          maxWidth="md"
+          sx={{ maxHeight: '80%' }}
+        >
           <Typography position="absolute" top="5%">
-            SPRINT
+            AUDIOCALL
           </Typography>
           <Grid
-            className="sprint__grid-wrapper"
+            className="audio-call__grid-wrapper"
             container
             spacing={2}
             direction="column"
           >
-            <Grid item xs={3}>
-              <StyledEngineProvider injectFirst>
-                <CircularStatic onFinish={handleGameOver} />
-              </StyledEngineProvider>
-            </Grid>
             <Grid item xs={8}>
-              <SprintCard {...cardProps} />
+              <AudioCallCard {...cardProps} />
             </Grid>
           </Grid>
           <AlertDialogSlideOnClose />
         </Container>
       )}
       {isGameOver && <GameStatistic {...statisticProps} />}
+      {dataForCards.length < 20 && (
+        <Container
+          className="audio-call__content content"
+          maxWidth="md"
+          sx={{ maxHeight: '80%' }}
+        >
+          <Typography position="absolute" top="50%" left="25%" width="50%">
+            Недостаточно слов для игры. Попробуйте вызвать игру на следующей
+            странице учебника.
+          </Typography>
+        </Container>
+      )}
     </>
   );
 }

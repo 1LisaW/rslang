@@ -16,6 +16,8 @@ import WordCard from '../WordCard/wordCard';
 import GroupPagination from './GroupPagination/groupPagination';
 import GroupSelector from './GroupSelector/groupSelector';
 import { WordListState } from '../store/types';
+import { fetchAuth } from '../store/authFetch';
+import StorageWorker from '../../localStorage';
 import './tutorial.scss';
 
 function Tutorial() {
@@ -29,6 +31,10 @@ function Tutorial() {
   const group = useSelector(getCurrentGroup);
   const groupAndPage = useSelector(getGroupAndPage);
   const pageIndex = useSelector(getPageInCurrentGroup);
+
+  useEffect(() => {
+    dispatch(fetchAuth(StorageWorker.userId));
+  }, [dispatch, currentUserId]);
 
   useEffect(() => {
     dispatch(
