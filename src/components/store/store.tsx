@@ -11,7 +11,7 @@ export const store = configureStore({
     wordList: wordListSlicer,
     gameWordList: gameWordListSlicer,
     soundPlay: soundPlaySlicer,
-    userSettings: userSettingsSlicer,
+    userSettingsPage: userSettingsSlicer,
   },
 });
 

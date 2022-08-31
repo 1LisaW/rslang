@@ -11,12 +11,13 @@ export type AuthState = {
 
 export type UserSettings = {
   currentGroup: TutorialWordsGroups;
-  currentPage: number;
-  pageInGroup: number[];
+  pageInGroup: {
+    [group: number]: number;
+  };
 };
 
 export enum TutorialWordsGroups {
-  GROUP_1 = 0,
+  GROUP_1 = 1,
   GROUP_2,
   GROUP_3,
   GROUP_4,
