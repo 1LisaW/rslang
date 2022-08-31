@@ -13,4 +13,10 @@
   justify-self: flex-start;
   position: absolute;
   left: 30px;
+  button {
+    background-color: $MAIN-COLOR--SECONDARY;
+    &:hover {
+      background-color: $MAIN-COLOR--SECONDARY;
+    }
+  }
 }

@@ -55,7 +55,6 @@ export default function SprintCardContainer(props: ContainerProps) {
   };
 
   const cardProps = { icons, ...dataForCards[CardIdx], changeCard };
-  const statisticProps = { icons, wordList };
 
   return (
     <>

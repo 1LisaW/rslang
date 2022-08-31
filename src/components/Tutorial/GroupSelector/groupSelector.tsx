@@ -15,6 +15,7 @@ import Filter3OutlinedIcon from '@mui/icons-material/Filter3Outlined';
 import Filter4OutlinedIcon from '@mui/icons-material/Filter4Outlined';
 import Filter5OutlinedIcon from '@mui/icons-material/Filter5Outlined';
 import Filter6OutlinedIcon from '@mui/icons-material/Filter6Outlined';
+import { StylesProvider } from '@material-ui/core/styles';
 
 import { isAuth } from '../../store/authSlice';
 import './groupSelector.scss';
@@ -46,34 +47,36 @@ function GroupSelector(props: GroupSelectorProps) {
   const handleClose = () => setOpen(false);
 
   return (
-    <Box className="group-selector">
-      <Backdrop open={open} />
-      <Tooltip title={TOOLTIP_TITLE}>
-        <SpeedDial
-          className="group-selector__dial"
-          sx={{ top: isAuthorized ? -380 : -324 }}
-          ariaLabel="Gategory Selector"
-          icon={<SpeedDialIcon icon={<MenuBookTwoToneIcon />} />}
-          direction="up"
-          onClose={handleClose}
-          onOpen={handleOpen}
-        >
-          {actions.map((action, index) => (
-            action.name !== USER_WORDS || isAuthorized ? (
-              <SpeedDialAction
-                className="speeddial-action"
-                sx={{ bgcolor: index === group ? '#cd7c43' : '#fff' }}
-                key={action.name}
-                icon={action.icon}
-                tooltipTitle={action.name}
-                tooltipPlacement="right"
-                onClick={() => changeHandler(index)}
-              />
-            ) : null
-          ))}
-        </SpeedDial>
-      </Tooltip>
-    </Box>
+    <StylesProvider injectFirst>
+      <Box className="group-selector">
+        <Backdrop open={open} />
+        <Tooltip title={TOOLTIP_TITLE}>
+          <SpeedDial
+            className="group-selector__dial"
+            sx={{ top: isAuthorized ? -380 : -324 }}
+            ariaLabel="Gategory Selector"
+            icon={<SpeedDialIcon icon={<MenuBookTwoToneIcon />} />}
+            direction="up"
+            onClose={handleClose}
+            onOpen={handleOpen}
+          >
+            {actions.map((action, index) => (
+              action.name !== USER_WORDS || isAuthorized ? (
+                <SpeedDialAction
+                  className="speeddial-action"
+                  sx={{ bgcolor: index === group ? '#cd7c43' : '#fff' }}
+                  key={action.name}
+                  icon={action.icon}
+                  tooltipTitle={action.name}
+                  tooltipPlacement="right"
+                  onClick={() => changeHandler(index)}
+                />
+              ) : null
+            ))}
+          </SpeedDial>
+        </Tooltip>
+      </Box>
+    </StylesProvider>
   );
 }
 
