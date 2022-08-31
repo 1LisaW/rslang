@@ -33,11 +33,12 @@ const actions = [
 ];
 
 interface GroupSelectorProps {
+  group: number;
   changeHandler: (newGroup: number) => void;
 }
 
 function GroupSelector(props: GroupSelectorProps) {
-  const { changeHandler } = props;
+  const { group, changeHandler } = props;
   const isAuthorized = useSelector(isAuth);
   const [open, setOpen] = useState(false);
 
@@ -61,6 +62,7 @@ function GroupSelector(props: GroupSelectorProps) {
             action.name !== USER_WORDS || isAuthorized ? (
               <SpeedDialAction
                 className="speeddial-action"
+                sx={{ bgcolor: index === group ? '#cd7c43' : '#fff' }}
                 key={action.name}
                 icon={action.icon}
                 tooltipTitle={action.name}

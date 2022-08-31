@@ -71,7 +71,10 @@ function Tutorial() {
         ))}
       </div>
       <div className="controls__container">
-        <GroupSelector changeHandler={handleGroupChange} />
+        <GroupSelector
+          group={group}
+          changeHandler={handleGroupChange}
+        />
 
         <GroupPagination
           group={group}
