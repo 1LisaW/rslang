@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
 import IconStatusList from './iconStatusList';
-import GameButtons from './gameButtons';
+import GameButtons from '../GameCommonComponents/GameButtons/gameButtons';
 import './newWordAnimation.scss';
 
 type CardData = {
@@ -41,6 +41,7 @@ function SprintCard(props: CardData) {
     wasInGame,
     changeCard,
   } = props;
+
   const iconProps = { icons };
   const dataForButtons = buttonsDataSprint.map((item, idx) => {
     const isCorrect = idx === correctButtonIdx;

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import StartView from './startView';
+import StartView from '../GameCommonComponents/StartView/startView';
 import SprintCardContainer from './sprintCardContainer';
-import { getRandomNumber } from './gameServices';
+import { getRandomNumber } from '../GameCommonComponents/GameServices/gameServices';
 import './sprint.scss';
 
 function Sprint() {
   const PAGES_PER_GROUP = 30;
   const GROUPS_COUNT = 6;
+  const wordsPerPage = 20;
 
   const [group, setGroup] = useState<number | undefined>(undefined);
   const [page, setPage] = useState<number | undefined>(undefined);
@@ -22,26 +23,29 @@ function Sprint() {
 
   useEffect(() => {
     // if (!redirectedFromTutorial) {
-    setPage(getRandomNumber(PAGES_PER_GROUP));
-    setGroup(getRandomNumber(GROUPS_COUNT));
+    setPage(getRandomNumber(PAGES_PER_GROUP - 1));
+    setGroup(getRandomNumber(GROUPS_COUNT - 1));
     // }
   }, []);
-
-  console.log(page, group, 'page and group');
 
   const chooseGroupHandler = (groupIdx: number) => {
     setGroup(groupIdx);
     setGroupIsChosen(true);
   };
 
-  const containerProps = { group, page };
+  const containerProps = {
+    redirectedFromTutorial,
+    group,
+    page,
+    wordsPerPage,
+  };
   const startViewProps = { chooseGroupHandler };
   return (
     <main className="sprint-container">
       <div className="bg" />
       <div className="bg bg2" />
       <div className="bg bg3" />
-      {(redirectedFromTutorial || isGroupChosen) ? (
+      {redirectedFromTutorial || isGroupChosen ? (
         <SprintCardContainer {...containerProps} />
       ) : (
         <StartView {...startViewProps} />
