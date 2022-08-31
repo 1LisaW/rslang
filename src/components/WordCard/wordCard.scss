@@ -28,6 +28,7 @@ $CARD-MARGINE-TOP: 35px;
 }
 .card__content {
   width: 60%;
+  background-color: #fff;
 }
 .card__text {
   padding: $CARD-CONTENT-PADDING;
@@ -38,15 +39,13 @@ $CARD-MARGINE-TOP: 35px;
   padding-left: 10px;
 }
 .card__authorized-section {
-  background-color: $MAIN-COLOR--PRIMARY-LIGHT;
-  height: 20%;
   border-top: 1px solid beige;
   @include flex(space-between);
   padding: $CARD-CONTENT-PADDING;
 }
 .card__buttons-container {
   width: 45%;
-  @include flex(space-between);
+  @include flex(space-evenly);
   height: 50px;
 }
 .MuiPaper-root {
@@ -58,4 +57,63 @@ $CARD-MARGINE-TOP: 35px;
 .card-word__img {
   height: auto;
   width: 40%;
+}
+.group0 {
+  background-color: $GROUP_0_COLOR;
+}
+.group1 {
+  background-color: $GROUP_1_COLOR;
+}
+.group2 {
+  background-color: $GROUP_2_COLOR;
+}
+.group3 {
+  background-color: $GROUP_3_COLOR;
+}
+.group4 {
+  background-color: $GROUP_4_COLOR;
+}
+.group5 {
+  background-color: $GROUP_5_COLOR;
+}
+.group6 {
+  background-color: $GROUP_6_COLOR;
+}
+/******************************************************/
+/*****************************media********************/
+@media only screen and (min-width: 700px) and (max-width: 850px) {
+  .card__title {
+    display: block;
+  }
+  .card__transcription {
+    padding-left: 0;
+  }
+}
+@media only screen and (max-width: 699px) {
+  .card {
+    width: 80%;
+    margin: 20px auto;
+  }
+  .card__title {
+    display: block;
+  }
+  .card__transcription {
+    padding-left: 0;
+  }
+  .card-word__container {
+    display: block;
+  }
+  .card-word__img {
+    height: auto;
+    width: 100%;
+  }
+  .card__content {
+    width: 100%;
+  }
+  .MuiCardContent-root {
+    padding: 16px 10px;
+  }
+  .card__buttons-container {
+    width: 80%;
+  }
 }

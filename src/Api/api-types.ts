@@ -16,7 +16,7 @@ export enum Endpoints {
 }
 
 export enum Difficulty {
-  Easy = 'easy',
+  Easy = 'Easy',
   Hard = 'hard',
 }
 
