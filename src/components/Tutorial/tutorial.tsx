@@ -2,13 +2,7 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { isAuth, getCurrentUserId } from '../store/authSlice';
-import {
-  getCurrentGroup,
-  getGroupAndPage,
-  setCurrentGroup,
-  setCurrentPage,
-  getPageInCurrentGroup,
-} from '../store/userSettingsSlice';
+import { getCurrentGroup, getGroupAndPage } from '../store/userSettingsSlice';
 import { AppDispatch } from '../store/store';
 import { fetchWordList } from '../store/wordListFetch';
 import { getWordList } from '../store/wordListSlice';
@@ -27,39 +21,19 @@ function Tutorial() {
   const dispatch = useDispatch<AppDispatch>();
 
   const group = useSelector(getCurrentGroup);
-  const groupAndPage = useSelector(getGroupAndPage);
-  const pageIndex = useSelector(getPageInCurrentGroup);
+  const page = useSelector(getGroupAndPage);
+  const currentPage = page.pageInGroup[group] || 0;
 
   useEffect(() => {
     dispatch(
       fetchWordList({
         isAuthorized,
         id: currentUserId,
-        page: pageIndex,
+        page: currentPage,
         group,
       }),
     );
-    console.log('getdata g:', group, ', p:', pageIndex);
-  }, [dispatch, isAuthorized, location.search, group, pageIndex]);
-
-  const handleGroupChange = (newValue: number) => {
-    const newGroup = newValue;
-    const newGroupAndPage = {
-      ...groupAndPage,
-      currentGroup: newGroup,
-      currentPage: groupAndPage.pageInGroup[newGroup],
-    };
-    dispatch(setCurrentGroup(newGroupAndPage));
-  };
-
-  const handlePageChange = (pageNum: number) => {
-    const newGroupAndPage = {
-      ...groupAndPage,
-      [group]: pageNum - 1,
-      currentPage: pageNum - 1,
-    };
-    dispatch(setCurrentPage(newGroupAndPage));
-  };
+  }, [dispatch, isAuthorized, location.search]);
 
   return (
     <div>
@@ -72,13 +46,8 @@ function Tutorial() {
         ))}
       </div>
       <div className="controls__container">
-        <GroupSelector changeHandler={handleGroupChange} />
-
-        <GroupPagination
-          group={group}
-          page={pageIndex + 1}
-          changeHandler={handlePageChange}
-        />
+        <GroupSelector />
+        <GroupPagination group={group} page={currentPage} />
       </div>
     </div>
   );
