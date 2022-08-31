@@ -30,4 +30,8 @@ export type AuthReducer<T> = ReducerAction<AuthState, T>;
 
 export type WordListState = { wordList: PaginatedResults[] | [] };
 
+export type GameWordListState = { gameWordList: PaginatedResults[] | [] };
+
 export type WordListReducer<T> = ReducerAction<WordListState, T>;
+
+export type GameWordListReducer<T> = ReducerAction<GameWordListState, T>;
