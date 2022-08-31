@@ -7,3 +7,9 @@
   bottom :10px;
   padding-right: 100px;
 }
+.tutorial__title {
+  @include font(3rem, OpenSans, 600);
+  color: $MAIN-COLOR--SECONDARY;
+  text-align: center;
+  margin-top: 20px;
+}

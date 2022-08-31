@@ -37,11 +37,11 @@ function Tutorial() {
 
   return (
     <div>
-      <h1>Tutorial</h1>
+      <h1 className="tutorial__title">УЧЕБНИК</h1>
       <div className="word-list__container">
         {wordList.wordList.map(item => (
           <section className="card" key={`section${item.id || item._id}`}>
-            <WordCard data={item} key={item.id} />
+            <WordCard data={item} key={item.id} isAuth={isAuthorized} group={group} />
           </section>
         ))}
       </div>
