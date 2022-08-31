@@ -130,9 +130,17 @@ function ResponsiveAppBar() {
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem key={page.key} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center" className="navbar__item">
+                  <MenuItem
+                    key={`menuItem ${page.key}`}
+                    onClick={handleCloseNavMenu}
+                  >
+                    <Typography
+                      key={`menuItem typo ${page.key}`}
+                      textAlign="center"
+                      className="navbar__item"
+                    >
                       <Link
+                        key={`menuItem link ${page.key}`}
                         to={page.link}
                         state={{ prevPath: location.pathname }}
                       >
@@ -163,15 +171,16 @@ function ResponsiveAppBar() {
               IngLang
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              {pages.map((page) => (
-                <StylesProvider injectFirst>
+              {pages.map(page => (
+                <StylesProvider key={`StylesProvider${page.key}`} injectFirst>
                   <Button
-                    key={page.key}
+                    key={`button ${page.key}`}
                     className="navbar__item"
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
                     <Link
+                      key={`button link ${page.key}`}
                       to={page.link}
                       state={{ prevPath: location.pathname }}
                     >
