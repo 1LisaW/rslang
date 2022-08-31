@@ -93,7 +93,7 @@ export default function AudioCallCardContainer(props: ContainerProps) {
           sx={{ maxHeight: '80%' }}
         >
           <Typography position="absolute" top="50%" left="25%" width="50%">
-            Не достаточно слов для игры. Попробуйте вызвать игру на следующей
+            Недостаточно слов для игры. Попробуйте вызвать игру на следующей
             странице учебника.
           </Typography>
         </Container>
