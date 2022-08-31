@@ -39,7 +39,6 @@ function Tutorial() {
         group,
       }),
     );
-    console.log('getdata g:', group, ', p:', pageIndex);
   }, [dispatch, isAuthorized, location.search, group, pageIndex]);
 
   const handleGroupChange = (newValue: number) => {
