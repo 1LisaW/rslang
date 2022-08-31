@@ -14,7 +14,7 @@ function Navbar() {
           <Link to="tutorial">TUTORIAL</Link>
         </li>
         <li className="navbar__item" key="audiocall">
-          <Link to="audiocall">AUDIOCALL</Link>
+          <Link to="audiocall" state={{ prevPath: location.pathname }}>AUDIOCALL</Link>
         </li>
         <li className="navbar__item" key="sprint">
           <Link to="sprint" state={{ prevPath: location.pathname }}>
