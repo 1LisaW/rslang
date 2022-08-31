@@ -132,7 +132,6 @@ $YOUTUBE-MAX-WIDTH: 900px;
     background-color: rgba(114, 114, 114, 0.3);
   }
 }
-/******************************************************/
 /*********************youtube*************************/
 .youtube-video {
   background-color: $MAIN-COLOR--PRIMARY-LIGHT;
@@ -150,8 +149,8 @@ $YOUTUBE-MAX-WIDTH: 900px;
   @include font(3.5rem, OpenSans, 600);
   color: $MAIN-COLOR--SECONDARY;
 }
-
-/***************media********************/
+/******************************************************/
+/*****************************media********************/
 @media only screen and (min-width: 750px) and (max-width: 1000px) {
   .start-page__content {
     width: 75%;

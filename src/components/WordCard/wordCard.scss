@@ -79,3 +79,41 @@ $CARD-MARGINE-TOP: 35px;
 .group6 {
   background-color: $GROUP_6_COLOR;
 }
+/******************************************************/
+/*****************************media********************/
+@media only screen and (min-width: 700px) and (max-width: 850px) {
+  .card__title {
+    display: block;
+  }
+  .card__transcription {
+    padding-left: 0;
+  }
+}
+@media only screen and (max-width: 699px) {
+  .card {
+    width: 80%;
+    margin: 20px auto;
+  }
+  .card__title {
+    display: block;
+  }
+  .card__transcription {
+    padding-left: 0;
+  }
+  .card-word__container {
+    display: block;
+  }
+  .card-word__img {
+    height: auto;
+    width: 100%;
+  }
+  .card__content {
+    width: 100%;
+  }
+  .MuiCardContent-root {
+    padding: 16px 10px;
+  }
+  .card__buttons-container {
+    width: 80%;
+  }
+}
