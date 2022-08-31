@@ -32,12 +32,7 @@ const actions = [
   { icon: <StarBorderPurple500OutlinedIcon />, name: USER_WORDS },
 ];
 
-interface GroupSelectorProps {
-  changeHandler: (newGroup: number) => void;
-}
-
-function GroupSelector(props: GroupSelectorProps) {
-  const { changeHandler } = props;
+function GroupSelector() {
   const isAuthorized = useSelector(isAuth);
   const [open, setOpen] = useState(false);
 
@@ -57,7 +52,7 @@ function GroupSelector(props: GroupSelectorProps) {
           onClose={handleClose}
           onOpen={handleOpen}
         >
-          {actions.map((action, index) => (
+          {actions.map(action => (
             action.name !== USER_WORDS || isAuthorized ? (
               <SpeedDialAction
                 className="speeddial-action"
@@ -65,7 +60,7 @@ function GroupSelector(props: GroupSelectorProps) {
                 icon={action.icon}
                 tooltipTitle={action.name}
                 tooltipPlacement="right"
-                onClick={() => changeHandler(index)}
+                onClick={handleClose}
               />
             ) : null
           ))}
