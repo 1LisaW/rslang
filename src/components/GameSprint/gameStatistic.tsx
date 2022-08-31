@@ -19,6 +19,7 @@ type StatisticProps = {
   icons: boolean[];
 };
 
+
 export default function GameStatistic(statisticProps: StatisticProps) {
   const { wordList, icons } = statisticProps;
   const initialWordList = [...wordList];
@@ -27,7 +28,7 @@ export default function GameStatistic(statisticProps: StatisticProps) {
 
   results.ratio =
     gameResults.filter(item => item).length / initialWordList.length;
-
+    
   if (results.ratio < 0.3) {
     results.title = 'Похоже, сегодня вы не в духе, попробуйте ещею';
   } else if (results.ratio < 0.6) {
@@ -58,6 +59,7 @@ export default function GameStatistic(statisticProps: StatisticProps) {
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         sx={{ p: '20px' }}
       >
+
         <Grid item xs={8} key="correct-words">
           <Typography
             variant="subtitle1"

@@ -3,6 +3,7 @@
 .header {
   background-color: $MAIN-COLOR--PRIMARY-DARK;
   width:100%;
+  display: none;
 }
 .header__container {
   @include flex(space-between);
@@ -26,6 +27,7 @@
     color: $MAIN-COLOR--PRIMARY-LIGHT;
     letter-spacing: 5px;
     padding-top: 10%;
+    text-decoration: none;
     font-size: 3.5em;
   }
 }

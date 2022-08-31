@@ -1,6 +1,6 @@
 import React from 'react';
 import './wordCard.scss';
-import { makeStyles } from '@material-ui/core/styles';
+import { StylesProvider } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -15,16 +15,8 @@ import CircularProgressWithLabel from './CircularProgress/circularProgress';
 interface CardInput {
   data: PaginatedResults;
 }
-const useStyles = makeStyles({
-  media: {
-    height: '100%',
-    width: '40%',
-  },
-});
 
 function WordCard({ data }:CardInput) {
-  const classes = useStyles();
-
   const audioButtonHandler = {
     play: true,
     handler: (play: boolean) => {
@@ -52,72 +44,74 @@ function WordCard({ data }:CardInput) {
   };
 
   return (
-    <Card
-      className="card-word__container"
-    >
-      <CardMedia
-        className={classes.media}
-        component="img"
-        image={img}
-        width="50%"
-        title={data.word}
-      />
-      <Box className="card__content">
-        <Box className="card__text">
-          <Box className="card__header">
-            <Box className="card__title">
-              <Typography gutterBottom variant="h4" component="h2">
-                {data.word}
-              </Typography>
+    <StylesProvider injectFirst>
+      <Card
+        className="card-word__container"
+      >
+        <CardMedia
+          className="card-word__img"
+          component="img"
+          image={img}
+          width="50%"
+          title={data.word}
+        />
+        <Box className="card__content">
+          <Box className="card__text">
+            <Box className="card__header">
+              <Box className="card__title">
+                <Typography gutterBottom variant="h4" component="h2">
+                  {data.word}
+                </Typography>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="h2"
+                  className="card__transcription"
+                  color="textSecondary"
+                >
+                  {data.transcription}
+                </Typography>
+              </Box>
+              <AudioButton {...audioButtonHandler} />
+            </Box>
+            <Box>
               <Typography
                 gutterBottom
                 variant="h5"
-                component="h2"
-                className="card__transcription"
+                component="h5"
                 color="textSecondary"
+                className="card__translate"
               >
-                {data.transcription}
+                {data.wordTranslate}
               </Typography>
             </Box>
-            <AudioButton {...audioButtonHandler} />
+            <CardContent>
+              <Typography variant="body1">
+                {data.textMeaning}
+              </Typography>
+              <Typography variant="body1" color="textSecondary">
+                {data.textMeaningTranslate}
+              </Typography>
+            </CardContent>
+            <CardContent>
+              <Typography variant="body1">
+                {data.textExample}
+              </Typography>
+              <Typography variant="body1" color="textSecondary">
+                {data.textExampleTranslate}
+              </Typography>
+            </CardContent>
           </Box>
-          <Box>
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="h5"
-              color="textSecondary"
-              className="card__translate"
-            >
-              {data.wordTranslate}
-            </Typography>
+          <Box className="card__authorized-section">
+            <div className="card__buttons-container">
+              <CardButton {...buttonDifficultyHandler} />
+              <CardButton {...buttonLearnedHandler} />
+            </div>
+            <CircularProgressWithLabel {...progress} />
           </Box>
-          <CardContent>
-            <Typography variant="body1">
-              {data.textMeaning}
-            </Typography>
-            <Typography variant="body1" color="textSecondary">
-              {data.textMeaningTranslate}
-            </Typography>
-          </CardContent>
-          <CardContent>
-            <Typography variant="body1">
-              {data.textExample}
-            </Typography>
-            <Typography variant="body1" color="textSecondary">
-              {data.textExampleTranslate}
-            </Typography>
-          </CardContent>
         </Box>
-        <Box className="card__authorized-section">
-          <div className="card__buttons-container">
-            <CardButton {...buttonDifficultyHandler} />
-            <CardButton {...buttonLearnedHandler} />
-          </div>
-          <CircularProgressWithLabel {...progress} />
-        </Box>
-      </Box>
-    </Card>
+      </Card>
+    </StylesProvider>
   );
 }
 

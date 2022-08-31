@@ -1,11 +1,12 @@
 @import '../../global/library';
 
 $CARD-CONTENT-PADDING: 10px 20px;
+$CARD-MARGINE-TOP: 35px;
 
 .card {
+  margin-top: $CARD-MARGINE-TOP;
   box-shadow: rgb(0 0 0 / 15%) 0px 0px 10px;
   border-radius: 10px;
-  background-color: $MAIN-COLOR--PRIMARY;
   overflow: hidden;
 }
 .card-word__container {
@@ -30,6 +31,7 @@ $CARD-CONTENT-PADDING: 10px 20px;
 }
 .card__text {
   padding: $CARD-CONTENT-PADDING;
+  background-color: #fff;
 }
 .card__transcription, .card__translate {
   padding-top: 0;
@@ -46,4 +48,14 @@ $CARD-CONTENT-PADDING: 10px 20px;
   width: 45%;
   @include flex(space-between);
   height: 50px;
+}
+.MuiPaper-root {
+  background-color: $MAIN-COLOR--PRIMARY-DARK;
+}
+.MuiPaper-elevation4 {
+  box-shadow: none;
+}
+.card-word__img {
+  height: auto;
+  width: 40%;
 }
