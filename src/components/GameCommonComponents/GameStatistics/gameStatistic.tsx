@@ -58,6 +58,7 @@ export default function GameStatistic(statisticProps: StatisticProps) {
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         sx={{ p: '20px' }}
       >
+
         <Grid item xs={8} key="correct-words">
           <Typography
             variant="subtitle1"

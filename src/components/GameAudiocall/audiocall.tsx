@@ -20,6 +20,7 @@ function Audiocall() {
     state &&
     'prevPath' in state &&
     state.prevPath.toString().startsWith('/tutorial');
+  console.log('state.prevPath.toString().startsWith(/tutorial)!!!!!', state);
 
   useEffect(() => {
     // if (!redirectedFromTutorial) {
