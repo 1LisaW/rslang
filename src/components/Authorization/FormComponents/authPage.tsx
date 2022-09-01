@@ -80,18 +80,12 @@ function AuthPage({ authFields, formRole, action }: PropTypes) {
   const {
     // reset,
     handleSubmit,
-    formState: { isSubmitSuccessful, errors },
+    formState: { isSubmitSuccessful },
   } = methods;
 
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      // reset();
-      // if (isAuthorized) navigate(location.pathname);
-      // console.log('location.pathname ', location);
-    }
-  }, [isSubmitSuccessful, isAuthorized]);
+  useEffect(() => {}, [isSubmitSuccessful, isAuthorized]);
 
-  const onSubmitHandler: SubmitHandler<RegisterInput> = (formValues) => {
+  const onSubmitHandler: SubmitHandler<RegisterInput> = formValues => {
     setSubmitError('');
     const authData: AuthData = {
       name: 'name' in formValues ? formValues.name : '',
@@ -110,7 +104,6 @@ function AuthPage({ authFields, formRole, action }: PropTypes) {
       })
       .finally(() => setLoading(false));
   };
-  console.log('errors', errors);
 
   const passwordProps = {
     endAdornment: (
