@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { isAuth, getCurrentUserId } from '../store/authSlice';
 import {
@@ -25,7 +24,6 @@ function Tutorial() {
   const currentUserId: string = useSelector(getCurrentUserId);
   const wordList: WordListState = useSelector(getWordList);
 
-  const location = useLocation();
   const dispatch = useDispatch<AppDispatch>();
 
   const group = useSelector(getCurrentGroup);
@@ -43,9 +41,10 @@ function Tutorial() {
         id: currentUserId,
         page: pageIndex,
         group,
+        wordsPerPage: 20,
       }),
     );
-  }, [dispatch, isAuthorized, location.search, group, pageIndex]);
+  }, [dispatch, isAuthorized, group, pageIndex]);
 
   const handleGroupChange = (newValue: number) => {
     const newGroup = newValue;
@@ -66,21 +65,29 @@ function Tutorial() {
     dispatch(setCurrentPage(newGroupAndPage));
   };
 
+  const wordListData =
+    group === 6
+      ? wordList.wordList.filter(word => word.userWord?.difficulty === 'hard')
+      : wordList.wordList;
+
   return (
     <div>
       <h1 className="tutorial__title">УЧЕБНИК</h1>
       <div className="word-list__container">
-        {wordList.wordList.map(item => (
+        {wordListData.map(item => (
           <section className="card" key={`section${item.id || item._id}`}>
-            <WordCard data={item} key={item.id} isAuth={isAuthorized} group={group} />
+            <WordCard
+              data={item}
+              key={item.id}
+              isAuth={isAuthorized}
+              group={group}
+              userId={currentUserId}
+            />
           </section>
         ))}
       </div>
       <div className="controls__container">
-        <GroupSelector
-          group={group}
-          changeHandler={handleGroupChange}
-        />
+        <GroupSelector group={group} changeHandler={handleGroupChange} />
 
         <GroupPagination
           group={group}

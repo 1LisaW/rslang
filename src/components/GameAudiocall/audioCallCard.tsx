@@ -18,9 +18,6 @@ type CardData = {
 
 function AudioCallCard(props: CardData) {
   const { audio, word, words, correctButtonIdx, wasInGame, changeCard } = props;
-  // const iconProps = { icons };
-  // console.log(iconProps);
-  // console.log('words', words);
 
   const dataForButtons = (words || []).map((item, idx) => {
     const isCorrect = idx === correctButtonIdx;

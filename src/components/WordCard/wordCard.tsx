@@ -1,5 +1,5 @@
-import React from 'react';
-import './wordCard.scss';
+import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import { StylesProvider } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
@@ -7,21 +7,32 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import DOMPurify from 'dompurify';
-import { PaginatedResults } from '../../Api/api-types';
+import { Difficulty, PaginatedResults } from '../../Api/api-types';
 import AudioButton from '../AudioFiles/audioFiles';
 import CardButton from './CardButton/cardButton';
 import CircularProgressWithLabel from './CircularProgress/circularProgress';
+import { updateWordList } from '../store/wordListSlice';
+import {
+  getDifficultyButtonData,
+  getIsLearnedButtonData,
+  updateUserWord,
+  createUserWord,
+} from '../Tutorial/tutorialServices';
+import './wordCard.scss';
 
 interface CardInput {
   data: PaginatedResults;
-  isAuth :boolean;
-  group:number;
+  isAuth: boolean;
+  group: number;
+  userId: string;
 }
 
 const { REACT_APP_PATH_TO_SERVER } = process.env;
 
-function WordCard({ data, isAuth, group }:CardInput) {
-  console.log(isAuth, 'isAuth');
+function WordCard({ data, isAuth, group, userId }: CardInput) {
+  const dispatch = useDispatch();
+  const difficultyData = getDifficultyButtonData(data);
+  const isLearnedData = getIsLearnedButtonData(data);
 
   const audioButtonHandler = {
     play: true,
@@ -32,24 +43,77 @@ function WordCard({ data, isAuth, group }:CardInput) {
       console.log(play);
     },
   };
+
+  const handlerDifficultySwitch = useCallback(() => {
+    const difficulty =
+      difficultyData.isDifficult === Difficulty.Hard
+        ? Difficulty.Easy
+        : Difficulty.Hard;
+    const newWordData = {
+      id: data._id || '',
+      ...data.userWord,
+      difficulty,
+    };
+    dispatch(updateWordList(newWordData));
+    if (data.userWord) {
+      updateUserWord(userId, newWordData);
+    } else {
+      createUserWord(userId, newWordData);
+    }
+  }, [difficultyData]);
+
   const buttonDifficultyHandler = {
-    text: 'легкое',
-    color: 'primary',
-    action: true,
-    handler: (play: boolean) => {
-      console.log(play);
-    },
+    ...difficultyData,
+    handler: handlerDifficultySwitch,
   };
+
+  const handlerIsLearnedSwitch = useCallback(() => {
+    const isLearned = !isLearnedData.isLearned;
+    const currentOptional =
+      data.userWord && data.userWord.optional ? data.userWord.optional : {};
+    const optional = {
+      ...currentOptional,
+      isLearned,
+    };
+    const newWordData = {
+      id: data._id || '',
+      difficulty: data.userWord?.difficulty,
+      optional,
+    };
+    dispatch(updateWordList(newWordData));
+    if (data.userWord) {
+      updateUserWord(userId, newWordData);
+    } else {
+      createUserWord(userId, newWordData);
+    }
+  }, [isLearnedData]);
   const buttonLearnedHandler = {
-    text: 'знаю',
-    color: 'secondary',
-    action: false,
-    handler: (play: boolean) => {
-      console.log(play);
-    },
+    ...isLearnedData,
+    handler: handlerIsLearnedSwitch,
   };
+
+  const gameResults = { wins: 0, fails: 0 };
+  if (
+    data.userWord &&
+    data.userWord.optional &&
+    data.userWord.optional.sprintStats
+  ) {
+    gameResults.wins += data.userWord.optional.sprintStats.wins || 0;
+    gameResults.fails += data.userWord.optional.sprintStats.fails || 0;
+  }
+  if (
+    data.userWord &&
+    data.userWord.optional &&
+    data.userWord.optional.audioCallStats
+  ) {
+    gameResults.wins += data.userWord.optional.audioCallStats.wins || 0;
+    gameResults.fails += data.userWord.optional.audioCallStats.fails || 0;
+  }
+
   const progress = {
-    value: 25,
+    value: gameResults.wins
+      ? (gameResults.wins * 100) / (gameResults.wins + gameResults.fails)
+      : 0,
   };
 
   const IMG_PATH = REACT_APP_PATH_TO_SERVER?.concat(data.image);
@@ -58,9 +122,7 @@ function WordCard({ data, isAuth, group }:CardInput) {
 
   return (
     <StylesProvider injectFirst>
-      <Card
-        className="card-word__container"
-      >
+      <Card className="card-word__container">
         <CardMedia
           className="card-word__img"
           component="img"
@@ -85,7 +147,9 @@ function WordCard({ data, isAuth, group }:CardInput) {
                   {data.transcription}
                 </Typography>
               </Box>
-              <AudioButton {...{ ...audioButtonHandler, file: (AUDIO_PATH as string) }} />
+              <AudioButton
+                {...{ ...audioButtonHandler, file: AUDIO_PATH as string }}
+              />
             </Box>
             <Box>
               <Typography
@@ -101,7 +165,9 @@ function WordCard({ data, isAuth, group }:CardInput) {
             <CardContent>
               <Typography
                 variant="body1"
-                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data.textMeaning) }}
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(data.textMeaning),
+                }}
               />
               <Typography variant="body1" color="textSecondary">
                 {data.textMeaningTranslate}
@@ -110,7 +176,9 @@ function WordCard({ data, isAuth, group }:CardInput) {
             <CardContent>
               <Typography
                 variant="body1"
-                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data.textExample) }}
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(data.textExample),
+                }}
               />
               <Typography variant="body1" color="textSecondary">
                 {data.textExampleTranslate}
@@ -127,7 +195,9 @@ function WordCard({ data, isAuth, group }:CardInput) {
                 <CircularProgressWithLabel {...progress} />
               </Box>
             </Box>
-          ) : ('')}
+          ) : (
+            ''
+          )}
         </Box>
       </Card>
     </StylesProvider>

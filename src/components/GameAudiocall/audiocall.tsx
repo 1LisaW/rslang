@@ -20,7 +20,6 @@ function Audiocall() {
     state &&
     'prevPath' in state &&
     state.prevPath.toString().startsWith('/tutorial');
-  console.log('state.prevPath.toString().startsWith(/tutorial)!!!!!', state);
 
   useEffect(() => {
     // if (!redirectedFromTutorial) {
@@ -29,15 +28,12 @@ function Audiocall() {
     // }
   }, []);
 
-  console.log(page, group, 'page and group');
-
   const chooseGroupHandler = (groupIdx: number) => {
     setGroup(groupIdx);
     setGroupIsChosen(true);
   };
 
   const containerProps = { redirectedFromTutorial, group, page, wordsPerPage };
-  console.log('containerProps', containerProps);
   const startViewProps = { chooseGroupHandler };
   return (
     <main className="audioCall-container">
