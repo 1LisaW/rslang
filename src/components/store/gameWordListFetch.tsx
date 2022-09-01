@@ -28,14 +28,8 @@ export const fetchWordList = createAsyncThunk(
       { length: (page || 0) + 1 },
       (_, i) => `{"page":${i}}`,
     )}]`;
-    console.log('page group in fetch ', page, group, pageFilterParams);
 
     if (isAuthorized && id) {
-      console.log('GAME FETCH redirectedFromTutorial ', redirectedFromTutorial);
-      console.log(
-        'wordsPerPage * (page || 0 + 1)',
-        wordsPerPage * ((page || 0) + 1),
-      );
       const response = redirectedFromTutorial
         ? await Api.getUserAggregatedWords(id, {
           group,
@@ -48,15 +42,14 @@ export const fetchWordList = createAsyncThunk(
           page,
           wordsPerPage,
         });
-      console.log('!!!!!!!!!!!!!!!!!!!!');
       return 'error' in response
         ? {
           ...emptyWordList,
         }
         : {
-          gameWordList:
-           response[0].paginatedResults
-             .sort((a, b) => b.page - a.page).slice(0, 20) as PaginatedResults[],
+          gameWordList: response[0].paginatedResults
+            .sort((a, b) => b.page - a.page)
+            .slice(0, 20) as PaginatedResults[],
         };
     }
     const response = await Api.getWords({ group, page });

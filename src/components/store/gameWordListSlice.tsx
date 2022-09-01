@@ -11,7 +11,10 @@ export const gameWordListSlice = createSlice({
   name: 'gameWordList',
   initialState,
   reducers: {
-    updateGameWordList: (state, action: PayloadAction<GameWordListState>) => {
+    updateWordInGameWordList: (
+      state,
+      action: PayloadAction<GameWordListState>,
+    ) => {
       const {
         payload: { gameWordList },
       } = action;
@@ -22,7 +25,7 @@ export const gameWordListSlice = createSlice({
   extraReducers: wordListFetch,
 });
 
-export const { updateGameWordList } = gameWordListSlice.actions;
+export const { updateWordInGameWordList } = gameWordListSlice.actions;
 
 export const getGamesWordList = (state: RootState) => state.gameWordList;
 
