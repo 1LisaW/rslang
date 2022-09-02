@@ -40,6 +40,7 @@ function WordCard({ data, isAuth, group }:CardInput) {
     handlerPlay: (fileList: Array<string>) => {
       console.log('handler start called');
       dispatch(start());
+      decorator.setCallback(() => dispatch(stop()));
       decorator.play(fileList);
     },
     handlerPause: () => {

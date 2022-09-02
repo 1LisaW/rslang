@@ -3,8 +3,15 @@
 class AudioDecorator {
   private audioArr: Array<HTMLAudioElement>;
 
-  constructor() {
+  private callback: () => void;
+
+  constructor(callback = () => {}) {
     this.audioArr = [];
+    this.callback = callback;
+  }
+
+  setCallback(callback: () => void) {
+    this.callback = callback;
   }
 
   play(fileList: Array<string>) {
@@ -15,6 +22,7 @@ class AudioDecorator {
     for (let i = 0; i < this.audioArr.length - 1; i += 1) {
       this.audioArr[i].addEventListener('ended', () => this.audioArr[i + 1].play());
     }
+    this.audioArr[this.audioArr.length - 1].addEventListener('ended', () => this.callback());
     this.audioArr[0].play();
   }
 
