@@ -24,6 +24,7 @@ interface CardInput {
 }
 
 const { REACT_APP_PATH_TO_SERVER } = process.env;
+const decorator = new AudioDecorator();
 
 function WordCard({ data, isAuth, group }:CardInput) {
   const IMG_PATH = REACT_APP_PATH_TO_SERVER?.concat(data.image);
@@ -34,7 +35,6 @@ function WordCard({ data, isAuth, group }:CardInput) {
   ];
   const dispatch = useDispatch<AppDispatch>();
 
-  const decorator = new AudioDecorator();
   const audioButtonHandler = {
     play: true,
     handlerPlay: (fileList: Array<string>) => {
