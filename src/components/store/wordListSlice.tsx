@@ -5,6 +5,7 @@ import { WordListState } from './types';
 import wordListFetch from './wordListFetch';
 
 const initialState: WordListState = {
+  isGameAvailable: true,
   wordList: [],
 };
 
@@ -27,7 +28,18 @@ export const wordListSlice = createSlice({
       };
       newWordsList[changedWordId].userWord = updatedWord;
       state.wordList = newWordsList;
+      const notLearned = newWordsList.filter(
+        word => !word.userWord?.optional?.isLearned,
+      );
+      state.isGameAvailable = !!notLearned.length;
     },
+    // updateGameAvailable: state => {
+    //   console.log('state.wordList', state);
+    //   const notLearned = state.wordList.filter(
+    //     word => !word.userWord?.optional?.isLearned,
+    //   );
+    //   state.isGameAvailable = !!notLearned.length;
+    // },
   },
   extraReducers: wordListFetch,
 });
@@ -35,5 +47,6 @@ export const wordListSlice = createSlice({
 export const { updateWordList } = wordListSlice.actions;
 
 export const getWordList = (state: RootState) => state.wordList;
+export const getIsGameAvailable = (state: RootState) => state.wordList.isGameAvailable;
 
 export default wordListSlice.reducer;

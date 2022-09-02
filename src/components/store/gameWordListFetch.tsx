@@ -3,7 +3,9 @@ import { GameWordListReducer, GameWordListState } from './types';
 import Api from '../../Api/api';
 import { PaginatedResults } from '../../Api/api-types';
 
-const emptyWordList: GameWordListState = { gameWordList: [] };
+const emptyWordList: GameWordListState = {
+  gameWordList: [],
+};
 type Params = {
   redirectedFromTutorial: boolean;
   isAuthorized: boolean;

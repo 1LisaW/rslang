@@ -78,7 +78,6 @@ function AuthPage({ authFields, formRole, action }: PropTypes) {
   });
 
   const {
-    // reset,
     handleSubmit,
     formState: { isSubmitSuccessful },
   } = methods;

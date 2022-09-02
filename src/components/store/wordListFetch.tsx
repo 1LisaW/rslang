@@ -3,7 +3,10 @@ import { WordListReducer, WordListState } from './types';
 import Api from '../../Api/api';
 import { PaginatedResults } from '../../Api/api-types';
 
-const emptyWordList: WordListState = { wordList: [] };
+const emptyWordList: WordListState = {
+  isGameAvailable: true,
+  wordList: [],
+};
 type Params = {
   isAuthorized: boolean;
   id?: string;
@@ -28,6 +31,9 @@ export const fetchWordList = createAsyncThunk(
           ...emptyWordList,
         }
         : {
+          isGameAvailable: !![...response[0].paginatedResults].filter(
+            word => !word.userWord?.optional?.isLearned,
+          ).length,
           wordList: [...response[0].paginatedResults] as PaginatedResults[],
         };
     }
@@ -43,6 +49,9 @@ export const fetchWordList = createAsyncThunk(
           ...emptyWordList,
         }
         : {
+          isGameAvailable: !![...response[0].paginatedResults].filter(
+            word => !word.userWord?.optional?.isLearned,
+          ).length,
           wordList: [...response[0].paginatedResults] as PaginatedResults[],
         };
     }
@@ -52,6 +61,7 @@ export const fetchWordList = createAsyncThunk(
         ...emptyWordList,
       }
       : {
+        isGameAvailable: true,
         wordList: response,
       };
   },

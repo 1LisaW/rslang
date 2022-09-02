@@ -196,7 +196,9 @@ function WordCard({ data, isAuth, group, userId }: CardInput) {
               </Box>
             </Box>
           ) : (
-            ''
+            <Box className={groupColorClassName}>
+              <Box className="card__authorized-section" />
+            </Box>
           )}
         </Box>
       </Card>

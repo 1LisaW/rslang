@@ -27,7 +27,10 @@ export enum TutorialWordsGroups {
 
 export type AuthReducer<T> = ReducerAction<AuthState, T>;
 
-export type WordListState = { wordList: PaginatedResults[] | [] };
+export type WordListState = {
+  isGameAvailable: boolean;
+  wordList: PaginatedResults[] | [];
+};
 
 export type GameWordListState = { gameWordList: PaginatedResults[] | [] };
 

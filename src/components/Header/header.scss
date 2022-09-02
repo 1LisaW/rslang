@@ -31,3 +31,8 @@
     font-size: 3.5em;
   }
 }
+
+.navbar__item a.disabled-link{
+  pointer-events: none;
+  color: lightgrey;
+}
