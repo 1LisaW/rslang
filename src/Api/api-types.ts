@@ -140,9 +140,9 @@ export type Optional = {
 
 export type UsersWordResponse = {
   id: string;
-  difficulty: Difficulty;
+  difficulty?: Difficulty;
   wordId: string;
-  optional: Optional;
+  optional?: Optional;
 };
 
 export type UsersWordData = Omit<UsersWordResponse, 'wordId'>;

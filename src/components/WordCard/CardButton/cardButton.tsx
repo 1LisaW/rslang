@@ -2,11 +2,11 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-type Handler = (play: boolean) => void;
+type Handler = () => void;
 
 interface IButtonCard {
   text: string;
-  action: boolean;
+  colorBtn: 'primary' | 'secondary';
   handler: Handler;
 }
 
@@ -21,27 +21,17 @@ const theme = createTheme({
   },
 });
 
-function CardButtonActive({ text, action, handler }: IButtonCard) {
+function CardButtonActive({ text, colorBtn, handler }: IButtonCard) {
   return (
     <ThemeProvider theme={theme}>
-      {action ? (
-        <Button
-          onClick={() => handler(action)}
-          variant="text"
-          className="button--active"
-          color="primary"
-        >
-          {text}
-        </Button>
-      ) : (
-        <Button
-          onClick={() => handler(action)}
-          variant="contained"
-          color="secondary"
-        >
-          {text}
-        </Button>
-      )}
+      <Button
+        onClick={handler}
+        variant="text"
+        className="button--active"
+        color={colorBtn}
+      >
+        {text}
+      </Button>
     </ThemeProvider>
   );
 }

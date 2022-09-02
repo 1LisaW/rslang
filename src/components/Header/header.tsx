@@ -51,7 +51,9 @@ const pages = [
 ];
 
 function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+    null,
+  );
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -73,7 +75,6 @@ function ResponsiveAppBar() {
   });
 
   const location = useLocation();
-  console.log('location.pathname', location.pathname);
 
   return (
     <ThemeProvider theme={theme}>
@@ -129,7 +130,7 @@ function ResponsiveAppBar() {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                {pages.map((page) => (
+                {pages.map(page => (
                   <MenuItem
                     key={`menuItem ${page.key}`}
                     onClick={handleCloseNavMenu}

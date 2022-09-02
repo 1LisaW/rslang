@@ -34,7 +34,7 @@ module.exports = {
     "linebreak-style": 'off',
     "react/jsx-props-no-spreading": 'off',
     "class-methods-use-this": 'off',
-    'no-underscore-dangle': ['warn', { 'enforceInClassFields': false }],
+    'no-underscore-dangle': 'off',
     'operator-linebreak': ["warn", "before", {"overrides": { 
       "=": "after",  
       "&&": "after", 
