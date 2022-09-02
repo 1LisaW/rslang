@@ -7,10 +7,15 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import DOMPurify from 'dompurify';
+// import { type } from '@testing-library/user-event/dist/type';
+import { useDispatch } from 'react-redux';
 import { PaginatedResults } from '../../Api/api-types';
-import AudioButton from '../AudioFiles/audioFiles';
 import CardButton from './CardButton/cardButton';
 import CircularProgressWithLabel from './CircularProgress/circularProgress';
+import AudioButton from '../AudioFiles/audioFiles';
+import AudioDecorator from '../AudioFiles/audioDecorator';
+import { start, stop } from '../store/soundPlaySlice';
+import { AppDispatch } from '../store/store';
 
 interface CardInput {
   data: PaginatedResults;
@@ -21,15 +26,25 @@ interface CardInput {
 const { REACT_APP_PATH_TO_SERVER } = process.env;
 
 function WordCard({ data, isAuth, group }:CardInput) {
-  console.log(isAuth, 'isAuth');
+  const IMG_PATH = REACT_APP_PATH_TO_SERVER?.concat(data.image);
+  const AUDIO_ARR: Array<string> = [
+    REACT_APP_PATH_TO_SERVER?.concat(data.audio) as string,
+    REACT_APP_PATH_TO_SERVER?.concat(data.audioMeaning) as string,
+    REACT_APP_PATH_TO_SERVER?.concat(data.audioExample) as string,
+  ];
+  const dispatch = useDispatch<AppDispatch>();
 
+  const decorator = new AudioDecorator();
   const audioButtonHandler = {
     play: true,
-    handler: (play: boolean, file: string) => {
-      console.log(file);
-      const audio = new Audio(file);
-      audio.play();
-      console.log(play);
+    handlerPlay: (fileList: Array<string>) => {
+      console.log('handler start called');
+      dispatch(start());
+      decorator.play(fileList);
+    },
+    handlerPause: () => {
+      dispatch(stop());
+      decorator.pause();
     },
   };
   const buttonDifficultyHandler = {
@@ -52,8 +67,6 @@ function WordCard({ data, isAuth, group }:CardInput) {
     value: 25,
   };
 
-  const IMG_PATH = REACT_APP_PATH_TO_SERVER?.concat(data.image);
-  const AUDIO_PATH = REACT_APP_PATH_TO_SERVER?.concat(data.audio);
   const groupColorClassName = `group${group}`;
 
   return (
@@ -85,7 +98,7 @@ function WordCard({ data, isAuth, group }:CardInput) {
                   {data.transcription}
                 </Typography>
               </Box>
-              <AudioButton {...{ ...audioButtonHandler, file: (AUDIO_PATH as string) }} />
+              <AudioButton {...{ ...audioButtonHandler, file: AUDIO_ARR }} />
             </Box>
             <Box>
               <Typography

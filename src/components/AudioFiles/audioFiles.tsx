@@ -2,21 +2,40 @@ import React from 'react';
 import { IconButton } from '@mui/material';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
+import { useSelector } from 'react-redux';
+import { isSoundPlaying } from '../store/soundPlaySlice';
 
-type Handler = (play: boolean, file: string) => void;
-interface IAudio {
+type Handler = (file: Array<string>) => void;
+export interface IAudio {
   play: boolean;
-  handler: Handler;
-  file: string;
+  handlerPlay: Handler;
+  handlerPause: Handler;
+  file: Array<string>;
 }
 
-function AudioButton({ play, handler, file }: IAudio) {
+function AudioButton({ play, handlerPlay, handlerPause, file }: IAudio) {
+  if (play) {
+    play = false;
+    // console.log(play);
+  }
+  const isPlaying = useSelector(isSoundPlaying);
   return (
-    <IconButton onClick={() => handler(play, file)}>
-      {play ?
+    <IconButton onClick={() => {
+      if (!isPlaying) {
+        handlerPlay(file);
+        // play = false;
+      } else {
+        console.log('handler pause called');
+        handlerPause(file);
+        // play = true;
+      }
+    }}
+    >
+      {isPlaying ? (
+        <VolumeOffIcon />
+      ) : (
         <VolumeUpIcon />
-        :
-        <VolumeOffIcon />}
+      )}
     </IconButton>
   );
 }
