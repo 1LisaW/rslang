@@ -1,38 +1,28 @@
 import React from 'react';
 import { IconButton } from '@mui/material';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
-import VolumeOffIcon from '@mui/icons-material/VolumeOff';
-import { useSelector } from 'react-redux';
-import { isSoundPlaying } from '../store/soundPlaySlice';
+import PauseIcon from '@mui/icons-material/Pause';
 
 type Handler = (file: Array<string>) => void;
 export interface IAudio {
-  play: boolean;
   handlerPlay: Handler;
   handlerPause: Handler;
   file: Array<string>;
+  playCard: boolean
 }
 
-function AudioButton({ play, handlerPlay, handlerPause, file }: IAudio) {
-  if (play) {
-    play = false;
-    // console.log(play);
-  }
-  const isPlaying = useSelector(isSoundPlaying);
+function AudioButton({ handlerPlay, handlerPause, file, playCard }: IAudio) {
   return (
     <IconButton onClick={() => {
-      if (!isPlaying) {
+      if (!playCard) {
         handlerPlay(file);
-        // play = false;
       } else {
-        console.log('handler pause called');
         handlerPause(file);
-        // play = true;
       }
     }}
     >
-      {isPlaying ? (
-        <VolumeOffIcon />
+      {playCard ? (
+        <PauseIcon />
       ) : (
         <VolumeUpIcon />
       )}

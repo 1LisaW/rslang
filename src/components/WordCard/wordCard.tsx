@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './wordCard.scss';
 import { StylesProvider } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
@@ -7,14 +7,13 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import DOMPurify from 'dompurify';
-// import { type } from '@testing-library/user-event/dist/type';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { PaginatedResults } from '../../Api/api-types';
 import CardButton from './CardButton/cardButton';
 import CircularProgressWithLabel from './CircularProgress/circularProgress';
 import AudioButton from '../AudioFiles/audioFiles';
 import AudioDecorator from '../AudioFiles/audioDecorator';
-import { start, stop } from '../store/soundPlaySlice';
+import { start, stop, isSoundPlaying } from '../store/soundPlaySlice';
 import { AppDispatch } from '../store/store';
 
 interface CardInput {
@@ -34,20 +33,33 @@ function WordCard({ data, isAuth, group }:CardInput) {
     REACT_APP_PATH_TO_SERVER?.concat(data.audioExample) as string,
   ];
   const dispatch = useDispatch<AppDispatch>();
+  const isPlaying = useSelector(isSoundPlaying);
+  const [playCard, setPlayCard] = useState(false);
+  const setterPlayCard = (value: boolean) => {
+    setPlayCard(value);
+  };
 
   const audioButtonHandler = {
-    play: true,
     handlerPlay: (fileList: Array<string>) => {
-      console.log('handler start called');
+      if (isPlaying) {
+        decorator.runExecuteAfterStop();
+      }
+
       dispatch(start());
-      decorator.setCallback(() => dispatch(stop()));
+      decorator.setExecuteAfterStop(() => {
+        setterPlayCard(false);
+        dispatch(stop());
+      });
+      setPlayCard(true);
       decorator.play(fileList);
     },
     handlerPause: () => {
+      setPlayCard(false);
       dispatch(stop());
       decorator.pause();
     },
   };
+
   const buttonDifficultyHandler = {
     text: 'легкое',
     color: 'primary',
@@ -99,7 +111,7 @@ function WordCard({ data, isAuth, group }:CardInput) {
                   {data.transcription}
                 </Typography>
               </Box>
-              <AudioButton {...{ ...audioButtonHandler, file: AUDIO_ARR }} />
+              <AudioButton {...{ ...audioButtonHandler, file: AUDIO_ARR, playCard }} />
             </Box>
             <Box>
               <Typography

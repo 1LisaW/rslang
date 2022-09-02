@@ -1,34 +1,33 @@
-// import React from 'react';
-
 class AudioDecorator {
   private audioArr: Array<HTMLAudioElement>;
 
-  private callback: () => void;
+  private executeAfterStop: () => void;
 
-  constructor(callback = () => {}) {
+  constructor(executeAfterStop = () => {}) {
     this.audioArr = [];
-    this.callback = callback;
+    this.executeAfterStop = executeAfterStop;
   }
 
-  setCallback(callback: () => void) {
-    this.callback = callback;
+  setExecuteAfterStop(executeAfterStop: () => void) {
+    this.executeAfterStop = executeAfterStop;
+  }
+
+  runExecuteAfterStop() {
+    this.executeAfterStop();
   }
 
   play(fileList: Array<string>) {
-    console.log('this ', this);
     this.pause();
     this.audioArr = fileList
       .map((file) => new Audio(file));
     for (let i = 0; i < this.audioArr.length - 1; i += 1) {
       this.audioArr[i].addEventListener('ended', () => this.audioArr[i + 1].play());
     }
-    this.audioArr[this.audioArr.length - 1].addEventListener('ended', () => this.callback());
+    this.audioArr[this.audioArr.length - 1].addEventListener('ended', () => this.executeAfterStop());
     this.audioArr[0].play();
   }
 
   pause() {
-    console.log('this ', this);
-    console.log('decorator pause clicked ', this.audioArr.length);
     for (let i = 0; i < this.audioArr.length; i += 1) {
       this.audioArr[i].pause();
     }

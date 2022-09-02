@@ -24,7 +24,6 @@ export const soundPlaySlice = createSlice({
     },
 
     start: state => {
-      console.log('dispatch start called');
       state.isPlaying = true;
     },
 
@@ -39,9 +38,6 @@ export const soundPlaySlice = createSlice({
 
 export const { start, stop, updateInterruptBehavior } = soundPlaySlice.actions;
 
-export const isSoundPlaying = (state: RootState) => {
-  console.log('selector called');
-  return state.soundPlay.isPlaying;
-};
+export const isSoundPlaying = (state: RootState) => state.soundPlay.isPlaying;
 
 export default soundPlaySlice.reducer;
