@@ -13,10 +13,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { StylesProvider } from '@material-ui/core/styles';
 
 import Button from '@mui/material/Button';
-// import Navbar from '../NavBar/navBar';
 import Authorization from '../Authorization/authorization';
 import './header.scss';
-import './navBar.scss';
 
 const pages = [
   {
@@ -77,7 +75,7 @@ function ResponsiveAppBar() {
 
   return (
     <ThemeProvider theme={theme}>
-      <AppBar position="static" color="primary">
+      <AppBar position="sticky" color="primary">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Typography
