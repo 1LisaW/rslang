@@ -78,7 +78,6 @@ export type RequestOptions = {
   body?: string;
 };
 
-// TODO: add attributes to statistics object
 export type SingleGameResult = {
   wordsCorrect: string[]; // array of word ids
   wordsIncorrect: string[];
@@ -107,8 +106,8 @@ export type StatisticsOptional = {
       lastDateGameSprintStats: CumulativeGameStats;
       lastDateGameAudiocallStats: CumulativeGameStats;
       lastDateCumulativeGameStats: CumulativeGameStats;
-    }
-  }
+    };
+  };
 };
 
 export type StatisticResponse = {
