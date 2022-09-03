@@ -2,9 +2,11 @@ import React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
+// import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
 import GameButtons from '../GameCommonComponents/GameButtons/gameButtons';
+import AudioButton from '../AudioFiles/audioFiles';
+import AudioDecorator from '../AudioFiles/audioDecorator';
 
 type CardData = {
   icons: boolean[];
@@ -16,8 +18,31 @@ type CardData = {
   changeCard: (valid: boolean) => void;
 };
 
+const { REACT_APP_PATH_TO_SERVER } = process.env;
+const decorator = new AudioDecorator();
+
 function AudioCallCard(props: CardData) {
   const { audio, word, words, correctButtonIdx, wasInGame, changeCard } = props;
+  const AUDIO_PATH: Array<string> = [REACT_APP_PATH_TO_SERVER?.concat(audio) as string];
+  console.log(word);
+  const audioButtonHandler = {
+    handlerPlay: () => {
+      // if (isPlaying) {
+      //   decorator.runExecuteAfterStop();
+      // }
+
+      // dispatch(start());
+      // decorator.setExecuteAfterStop(() => {
+      //   setterPlayCard(false);
+      //   dispatch(stop());
+      // });
+      // setPlayCard(true);
+      decorator.play(AUDIO_PATH);
+    },
+    handlerPause: () => {
+      decorator.play(AUDIO_PATH);
+    },
+  };
 
   const dataForButtons = (words || []).map((item, idx) => {
     const isCorrect = idx === correctButtonIdx;
@@ -41,20 +66,22 @@ function AudioCallCard(props: CardData) {
       <CardContent>
         {wasInGame ? (
           <Box className="audio-container">
-            <Typography gutterBottom variant="h5" component="div">
+            {/* <Typography gutterBottom variant="h5" component="div">
               {`${word} ${audio}`}
-            </Typography>
+            </Typography> */}
+            <AudioButton {...{ ...audioButtonHandler, file: AUDIO_PATH, playCard: false }} />
           </Box>
         ) : (
           <Box className="audio-container">
-            <Typography
+            {/* <Typography
               className="new-word"
               gutterBottom
               variant="h5"
               component="div"
             >
               {`${word} ${audio}`}
-            </Typography>
+            </Typography> */}
+            <AudioButton {...{ ...audioButtonHandler, file: AUDIO_PATH, playCard: false }} />
           </Box>
         )}
       </CardContent>

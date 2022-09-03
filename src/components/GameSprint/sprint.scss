@@ -1,4 +1,5 @@
 @import '../../global/library';
+
 sprint-container {
   height:100%;
 }
@@ -38,7 +39,9 @@ sprint-container {
   top:50%;
   transform:translate(-50%, -50%);
 }
-
+.content__title {
+  padding: 50px 0;
+}
 .statistic-content {
   position: fixed;
   background-color:rgba(255,255,255,.8);
@@ -50,7 +53,7 @@ sprint-container {
   min-height: 30vw;
   min-width: 320px;
   text-align:left;
-  padding-left: 10px;
+  padding: 20px;
 }
 
 
@@ -124,4 +127,26 @@ h1 {
     background-color: $MAIN-COLOR--PRIMARY-DARK;
     color: $MAIN-COLOR--SECONDARY;
   }
+}
+
+.sprint-group-selector:nth-child(2) {
+  background-color: $BUTTON_GROUP_0_COLOR;
+}
+.sprint-group-selector:nth-child(3) {
+  background-color: $BUTTON_GROUP_1_COLOR;
+}
+.sprint-group-selector:nth-child(4) {
+  background-color: $BUTTON_GROUP_2_COLOR;
+}
+.sprint-group-selector:nth-child(5) {
+  background-color: $BUTTON_GROUP_3_COLOR;
+}
+.sprint-group-selector:nth-child(6) {
+  background-color: $BUTTON_GROUP_4_COLOR;
+}
+.sprint-group-selector:nth-child(7) {
+  background-color: $BUTTON_GROUP_5_COLOR;
+}
+.sprint-group-selector:nth-child(8) {
+  background-color: $BUTTON_GROUP_6_COLOR;
 }
