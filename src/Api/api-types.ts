@@ -188,10 +188,14 @@ export type UsersAggregatedWordsResponse = {
 };
 
 // TODO: add attributes to users settings object;
-export type SettingsOptional = {};
+export type SettingsOptional = {
+  currentGroup: number;
+  currentPage: number;
+  pageInGroup: { [key: number]: number };
+};
 export type SettingsResponse = {
   id: string;
   optional?: SettingsOptional;
-  wordsPerDay: string;
+  wordsPerDay?: string;
 };
 export type SettingsData = Omit<SettingsResponse, 'id'>;

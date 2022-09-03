@@ -77,7 +77,8 @@ function WordCard({ data, isAuth, group, userId }:CardInput) {
         : Difficulty.Hard;
     const newWordData = {
       id: data._id || '',
-      ...data.userWord,
+      optional:
+        data.userWord && data.userWord.optional ? data.userWord.optional : {},
       difficulty,
     };
     dispatch(updateWordList(newWordData));
@@ -218,7 +219,9 @@ function WordCard({ data, isAuth, group, userId }:CardInput) {
               </Box>
             </Box>
           ) : (
-            ''
+            <Box className={groupColorClassName}>
+              <Box className="card__authorized-section" />
+            </Box>
           )}
         </Box>
       </Card>

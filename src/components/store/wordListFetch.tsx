@@ -3,7 +3,10 @@ import { WordListReducer, WordListState } from './types';
 import Api from '../../Api/api';
 import { PaginatedResults } from '../../Api/api-types';
 
-const emptyWordList: WordListState = { wordList: [] };
+const emptyWordList: WordListState = {
+  isGameAvailable: true,
+  wordList: [],
+};
 type Params = {
   isAuthorized: boolean;
   id?: string;
@@ -17,25 +20,27 @@ export const fetchWordList = createAsyncThunk(
   async (data: Params) => {
     const { isAuthorized, id, group, page, wordsPerPage } = data;
     if (isAuthorized && id && typeof group === 'number' && group === 6) {
-      const response = await Api.getUserAggregatedWords(id, {
+      const responseDifficult = await Api.getUserAggregatedWords(id, {
         wordsPerPage: 4000,
         // eslint-disable-next-line @typescript-eslint/quotes
         filter: `{"$or":[{"userWord.difficulty":"hard"}]}`,
       });
 
-      return 'error' in response
+      return 'error' in responseDifficult
         ? {
           ...emptyWordList,
         }
         : {
-          wordList: [...response[0].paginatedResults] as PaginatedResults[],
+          isGameAvailable: !![...responseDifficult[0].paginatedResults].filter(
+            word => !word.userWord?.optional?.isLearned,
+          ).length,
+          wordList: [...responseDifficult[0].paginatedResults] as PaginatedResults[],
         };
     }
     if (isAuthorized && id) {
       const response = await Api.getUserAggregatedWords(id, {
-        group,
-        page,
         wordsPerPage,
+        filter: `{"$and":[{"page":${page || 0}},{"group":${group}}]}`,
       });
 
       return 'error' in response
@@ -43,6 +48,9 @@ export const fetchWordList = createAsyncThunk(
           ...emptyWordList,
         }
         : {
+          isGameAvailable: !![...response[0].paginatedResults].filter(
+            word => !word.userWord?.optional?.isLearned,
+          ).length,
           wordList: [...response[0].paginatedResults] as PaginatedResults[],
         };
     }
@@ -52,6 +60,7 @@ export const fetchWordList = createAsyncThunk(
         ...emptyWordList,
       }
       : {
+        isGameAvailable: true,
         wordList: response,
       };
   },

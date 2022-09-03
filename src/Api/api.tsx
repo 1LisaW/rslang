@@ -319,7 +319,7 @@ class Api {
   ): Promise<SettingsResponse | ErrorResponse> => {
     const path = `${Endpoints.Users}/${userId}/${Endpoints.Settings}`;
     const usersAggregatedWord: SettingsResponse | ErrorResponse =
-      await this.requestMethod(Methods.GET, path, Auth.Auth, settingsData);
+      await this.requestMethod(Methods.PUT, path, Auth.Auth, settingsData);
 
     return usersAggregatedWord;
   };
