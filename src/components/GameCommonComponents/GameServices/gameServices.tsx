@@ -1,21 +1,43 @@
-import { PaginatedResults, Difficulty } from '../../Api/api-types';
-import { WordListState } from '../store/types';
-import Api from '../../Api/api';
+import { PaginatedResults, Difficulty, Optional } from '../../../Api/api-types';
+import { GameWordListState } from '../../store/types';
+import Api from '../../../Api/api';
 
-const NUMBER_WORDS_PER_PAGE = 20;
+const VARIANTS_IN_AUDIO_CALL = 5;
 
 type StatisticProps = {
-  wordList: PaginatedResults[] | [];
+  gameWordList: PaginatedResults[] | [];
   icons: boolean[];
 };
 
-export const getRandomNumber = (limit: number) => Math.floor(Math.random() * limit + 0.5);
+export const getRandomNumber = (limit: number) => Math.floor(Math.random() * limit);
 
-export const getWordsForGame = (wordList: WordListState) => {
-  if (wordList.wordList.length === 0) return [];
-  const wordData = wordList.wordList;
+const getRandomWordsIdx = (wordIdx: number, limit: number) => {
+  const idxArray: number[] = [];
+  while (idxArray.length < limit && idxArray.length < VARIANTS_IN_AUDIO_CALL) {
+    const randomIdx = Math.floor(Math.random() * VARIANTS_IN_AUDIO_CALL);
+    if (!idxArray.includes(randomIdx)) {
+      idxArray.push(randomIdx);
+    }
+  }
+  if (!idxArray.includes(wordIdx)) {
+    const replaceIdx = Math.floor(Math.random() * VARIANTS_IN_AUDIO_CALL);
+    idxArray[replaceIdx] = wordIdx;
+  }
+
+  return idxArray;
+};
+
+export const getWordsForGame = (wordList: GameWordListState) => {
+  if (
+    wordList.gameWordList.length === 0 ||
+    wordList.gameWordList.length < VARIANTS_IN_AUDIO_CALL
+  ) {
+    return [];
+  }
+  const wordData = wordList.gameWordList;
+
   return wordData.map((wordItem, idx) => {
-    const randomIdx = getRandomNumber(NUMBER_WORDS_PER_PAGE - 1);
+    const randomIdx = getRandomNumber(wordData.length - 1);
     const optimizedRndIdx = Math.random() > 0.5 ? idx : randomIdx;
     const randomTranslate = wordData[optimizedRndIdx]?.wordTranslate;
     const correctIdx = randomTranslate === wordItem?.wordTranslate ? 0 : 1;
@@ -28,6 +50,32 @@ export const getWordsForGame = (wordList: WordListState) => {
         wordItem.userWord.optional &&
         wordItem.userWord.optional.wasInGame,
     };
+
+    return dataItem;
+  });
+};
+
+export const getWordsAudioCallGame = (wordList: GameWordListState) => {
+  if (wordList.gameWordList.length === 0) return [];
+  const wordData = wordList.gameWordList;
+
+  return wordData.map((wordItem, idx) => {
+    const randomWordsIdx = getRandomWordsIdx(idx, wordData.length - 1);
+    const randomWordsTranslate = randomWordsIdx.map(
+      index => wordData[index].wordTranslate,
+    );
+    const correctIdx = randomWordsIdx.indexOf(idx);
+    const dataItem = {
+      audio: wordItem.audio,
+      word: wordItem.word,
+      words: randomWordsTranslate,
+      correctButtonIdx: correctIdx,
+      wasInGame:
+        wordItem.userWord &&
+        wordItem.userWord.optional &&
+        wordItem.userWord.optional.wasInGame,
+    };
+
     return dataItem;
   });
 };
@@ -39,13 +87,13 @@ const generateUpdateUserWord = (
 ) => {
   const resultOptions = initialWordList.map((word, idx) => {
     const userWord = { ...word.userWord };
-    const optional =
+    const optional: Optional =
       word.userWord && word.userWord.optional
         ? { ...word.userWord.optional }
         : { [gameStatsName]: {} };
 
     optional[gameStatsName] = { ...optional[gameStatsName] };
-    const gameStats = word.userWord
+    const gameStats = word.userWord && word.userWord.optional
       ? { ...word.userWord.optional[gameStatsName] }
       : {};
     if (word.userWord) {
@@ -85,19 +133,20 @@ const generateUpdateUserWord = (
 };
 
 export const sendDataToServer = (
+  gameID: 'sprintStats' | 'audioCallStats',
   currentUserId: string,
   statisticProps: StatisticProps,
 ) => {
-  const { wordList, icons } = statisticProps;
-  const initialWordList = [...wordList];
+  const { gameWordList, icons } = statisticProps;
+  const initialGameWordList = [...gameWordList].slice(0, icons.length);
   const gameResults = [...icons];
   const userData = generateUpdateUserWord(
-    'sprintStats',
-    initialWordList,
+    gameID,
+    initialGameWordList,
     gameResults,
   );
 
-  initialWordList.forEach((word, idx) => {
+  initialGameWordList.forEach((word, idx) => {
     if (word.userWord) {
       Api.updateUsersWord(currentUserId, word.id! || word._id!, {
         ...userData[idx],

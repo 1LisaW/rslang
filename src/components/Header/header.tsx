@@ -33,7 +33,7 @@ const pages = [
     title: 'АУДИОВЫЗОВ',
     key: 'audiocall',
     link: 'audiocall',
-    state: false,
+    state: true,
   },
   {
     title: 'СПРИНТ',
@@ -50,7 +50,9 @@ const pages = [
 ];
 
 function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+    null,
+  );
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -127,16 +129,23 @@ function ResponsiveAppBar() {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                {pages.map((page) => (
-                  <MenuItem key={page.key} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center" className="navbar__item">
-                      {page.state
-                        ? (
-                          <Link to={page.link} state={{ prevPath: location.pathname }}>
-                            {page.title}
-                          </Link>
-                        )
-                        : <Link to={page.link}>{page.title}</Link>}
+                {pages.map(page => (
+                  <MenuItem
+                    key={`menuItem ${page.key}`}
+                    onClick={handleCloseNavMenu}
+                  >
+                    <Typography
+                      key={`menuItem typo ${page.key}`}
+                      textAlign="center"
+                      className="navbar__item"
+                    >
+                      <Link
+                        key={`menuItem link ${page.key}`}
+                        to={page.link}
+                        state={{ prevPath: location.pathname }}
+                      >
+                        {page.title}
+                      </Link>
                     </Typography>
                   </MenuItem>
                 ))}
@@ -162,17 +171,21 @@ function ResponsiveAppBar() {
               IngLang
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              {pages.map((page) => (
-                <StylesProvider
-                  injectFirst
-                  key={page.key}
-                >
+              {pages.map(page => (
+                <StylesProvider key={`StylesProvider${page.key}`} injectFirst>
                   <Button
+                    key={`button ${page.key}`}
                     className="navbar__item"
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
-                    <Link to={page.link}>{page.title}</Link>
+                    <Link
+                      key={`button link ${page.key}`}
+                      to={page.link}
+                      state={{ prevPath: location.pathname }}
+                    >
+                      {page.title}
+                    </Link>
                   </Button>
                 </StylesProvider>
               ))}

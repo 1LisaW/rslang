@@ -22,7 +22,9 @@ class StorageWorker {
   }
 
   get token() {
-    return JSON.parse(localStorage.getItem(this.myStorageToken) || '');
+    const tkn = localStorage.getItem(this.myStorageToken);
+    const res = tkn ? JSON.parse(tkn) : '';
+    return res;
   }
 
   set token(newValue) {
@@ -30,7 +32,9 @@ class StorageWorker {
   }
 
   get refreshToken() {
-    return JSON.parse(localStorage.getItem(this.myStorageRefreshToken) || '');
+    const refreshTkn = localStorage.getItem(this.myStorageRefreshToken);
+    const res = refreshTkn ? JSON.parse(refreshTkn) : '';
+    return res;
   }
 
   set refreshToken(newValue) {

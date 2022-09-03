@@ -1,0 +1,73 @@
+.audioCall-container {
+  .bg {
+    animation:slide 3s ease-in-out infinite alternate;
+    background-image: linear-gradient(-60deg, rgb(198, 198, 81) 50%, rgb(207, 81, 53) 50%);
+    border-radius: 50%;
+    bottom:0;
+    left:-50%;
+    opacity:.5;
+    position:fixed;
+    right:-50%;
+    top:0;
+    z-index:-1;
+  }
+  
+  .bg2 {
+    animation-direction:alternate-reverse;
+    animation-duration:4s;
+  }
+  
+  .bg3 {
+    animation-duration:5s;
+  }
+}
+
+button.audio-call-button {
+  background-color: rgb(196, 181, 181);
+  margin: 10px 10px;
+  min-width: 50px;
+  &:hover {
+    background-color: rgb(196, 181, 181);
+    -moz-box-shadow:0 0 25px rgb(199, 190, 72); 
+    -webkit-box-shadow:0 0 25px rgb(199, 190, 72); 
+    box-shadow:0 0 25px rgb(199, 190, 72);
+  }
+}
+.audio-call-button.active {
+  -moz-box-shadow:0 0 25px rgb(199, 190, 72); 
+  -webkit-box-shadow:0 0 25px rgb(199, 190, 72); 
+  box-shadow:0 0 25px rgb(199, 190, 72);
+}
+.audio-call-button.correct {
+  -moz-box-shadow:0 0 25px rgb(142, 152, 194); 
+  -webkit-box-shadow:0 0 25px rgb(142, 152, 194); 
+  box-shadow:0 0 25px rgb(142, 152, 194);
+}
+
+.audio-call-button.incorrect {
+  -moz-box-shadow:0 0 25px rgb(229, 123, 90); 
+  -webkit-box-shadow:0 0 25px rgb(229, 123, 90); ; 
+  box-shadow:0 0 25px  rgb(229, 123, 90); ;
+}
+
+div.audio-call__content{
+  min-height: 50vh;
+  max-height: 65vh;
+  .audio-call-card{
+    min-width: 80%;
+    min-height: 50vh;
+    margin: auto auto;
+  }
+  .game-card__actions--group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+.audio-container {
+  min-height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

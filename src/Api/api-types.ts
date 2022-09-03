@@ -46,7 +46,7 @@ export type QueryParamsToStr = {
 export type QueryParamsAggregated = {
   group?: number;
   page?: number;
-  wordsPerPage?: string;
+  wordsPerPage?: number;
   filter?: string;
 };
 
@@ -78,8 +78,38 @@ export type RequestOptions = {
   body?: string;
 };
 
-// TODO: add attributes to statistics object
-export type StatisticsOptional = {};
+export type SingleGameResult = {
+  wordsCorrect: string[]; // array of word ids
+  wordsIncorrect: string[];
+  newWords: string[];
+  learnedWords: string[];
+  longestWinsInARow: number;
+};
+
+export type CumulativeGameStats = {
+  newWordsQty: number;
+  learnedWords: string[];
+  longestWinsInARow: number;
+  correctAnswers: number;
+  totalAnswers: number;
+};
+
+export type GameResultsPerDay = {
+  date: string; // date in 'YYYY-MM-DD' format. converter func is availbel in util
+  gameStats: CumulativeGameStats;
+};
+
+export type StatisticsOptional = {
+  historicalStats: {
+    [date: string]: {
+      // date in 'YYYY-MM-DD' format. converter func is availbel in util
+      lastDateGameSprintStats: CumulativeGameStats;
+      lastDateGameAudiocallStats: CumulativeGameStats;
+      lastDateCumulativeGameStats: CumulativeGameStats;
+    };
+  };
+};
+
 export type StatisticResponse = {
   id: string;
   learnedWords: number;
@@ -140,9 +170,9 @@ export type Optional = {
 
 export type UsersWordResponse = {
   id: string;
-  difficulty: Difficulty;
+  difficulty?: Difficulty;
   wordId: string;
-  optional: Optional;
+  optional?: Optional;
 };
 
 export type UsersWordData = Omit<UsersWordResponse, 'wordId'>;

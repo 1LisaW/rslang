@@ -16,7 +16,6 @@ function Authorization() {
   const currentUserId = useSelector(getCurrentUserId);
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    console.log('currentUserId ', currentUserId);
     dispatch(fetchAuth(StorageWorker.userId));
   }, [dispatch, currentUserId]);
   const navigate = useNavigate();
@@ -29,7 +28,6 @@ function Authorization() {
   }, [confirmOpen]);
 
   const onCloseModal = useCallback(() => {
-    console.log('location from auth ', location);
     navigate(location.pathname);
   }, [location.pathname]);
 

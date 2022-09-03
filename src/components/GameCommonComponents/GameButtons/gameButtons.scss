@@ -1,21 +1,20 @@
-@import '../../global/library';
+@import '../../../global/library';
 
 .game-card__actions button {
   margin: 10px;
   min-width: 45%;
     &:hover{
-      color: black;
+      -moz-box-shadow:0 0 25px rgb(218, 207, 62); 
+      -webkit-box-shadow:0 0 25px rgb(199, 190, 72); 
+      box-shadow:0 0 25px rgb(199, 190, 72);
     }
 }
 .game-card__actions .game-card__actions--correct{
   background-color: #6c3;
   border: 1px solid green;
   color: white;
-  &:active{
-    border: 2px solid black;
-  }
-  &:focus{
-    border: 2px solid white;
+  &:hover{
+    background-color: #6c3;
   }
 }
 
@@ -23,6 +22,9 @@
   background-color: rgb(212, 80, 36);
   border: 1px solid rgb(128, 41, 0);
   color: white;
+  &:hover{
+    background-color: rgb(212, 80, 36);
+  }
 }
 
 .game-card__actions--group{
@@ -33,6 +35,9 @@
 }
 
 .game-card__actions .game-card__actions--group .active{
-  background-color: white;
-  color: black;
+//   background-color: white;
+//   color: black;
+  -moz-box-shadow:0 0 25px rgb(218, 207, 62); 
+  -webkit-box-shadow:0 0 25px rgb(199, 190, 72); 
+  box-shadow:0 0 25px rgb(199, 190, 72);
 }

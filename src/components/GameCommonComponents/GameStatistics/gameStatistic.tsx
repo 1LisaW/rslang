@@ -1,6 +1,6 @@
 import { Grid, Paper, Typography } from '@mui/material';
 import React from 'react';
-import { PaginatedResults } from '../../Api/api-types';
+import { PaginatedResults } from '../../../Api/api-types';
 import './gameStatistic.scss';
 
 type WordResult = {
@@ -15,22 +15,21 @@ type Results = {
 };
 
 type StatisticProps = {
-  wordList: PaginatedResults[] | [];
+  gameWordList: PaginatedResults[] | [];
   icons: boolean[];
 };
 
-
 export default function GameStatistic(statisticProps: StatisticProps) {
-  const { wordList, icons } = statisticProps;
-  const initialWordList = [...wordList];
+  const { gameWordList, icons } = statisticProps;
+  const initialGameWordList = [...gameWordList];
   const gameResults = [...icons];
   const results: Results = { wins: [], fails: [] };
 
   results.ratio =
-    gameResults.filter(item => item).length / initialWordList.length;
-    
+    gameResults.filter(item => item).length / initialGameWordList.length;
+
   if (results.ratio < 0.3) {
-    results.title = 'Похоже, сегодня вы не в духе, попробуйте ещею';
+    results.title = 'Похоже, сегодня вы не в духе, попробуйте еще.';
   } else if (results.ratio < 0.6) {
     results.title = 'Неплохо! Вам еще есть чему поучиться.';
   } else if (results.ratio < 0.9) {
@@ -39,11 +38,11 @@ export default function GameStatistic(statisticProps: StatisticProps) {
     results.title = 'Отличный результат!';
   }
 
-  initialWordList.forEach((word, idx) => {
+  initialGameWordList.forEach((word, idx) => {
     const wordData = { word: word.word, wordTranslate: word.wordTranslate };
     if (gameResults[idx]) {
       results.wins.push(wordData);
-    } else {
+    } else if (gameResults[idx] === false) {
       results.fails.push(wordData);
     }
   });

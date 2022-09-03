@@ -60,7 +60,9 @@ function CustomToggleButton(props: ButtonProps) {
       <ToggleButton
         className={buttonData.className}
         value={buttonData.value}
-        onClick={() => changeCard(buttonData.isCorrect)}
+        onClick={() => {
+          changeCard(buttonData.isCorrect);
+        }}
       >
         {buttonData.text}
       </ToggleButton>

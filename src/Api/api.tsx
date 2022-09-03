@@ -2,7 +2,7 @@ import {
   Methods,
   Endpoints,
   QueryParams,
-  QueryParamsToStr,
+  // QueryParamsToStr,
   QueryParamsAggregated,
   QueryParamsAggregatedToStr,
   AuthData,
@@ -86,14 +86,6 @@ class Api {
       const content = await response.json();
 
       return content;
-
-      // const errorMessage = content.error.errors
-      //   .map((item: { message: string }) => item.message)
-      //   .join(',');
-
-      // return {
-      //   error: errorMessage,
-      // };
     } catch (error: unknown) {
       return error instanceof Error
         ? { error: error.message, status: StatusCodes.ServerError }
@@ -101,13 +93,14 @@ class Api {
     }
   };
 
-  static convertNumberAttrToStr = (
-    objectToConvert: QueryParams | QueryParamsAggregated,
-  ) => {
+  static convertNumberAttrToStr = (objectToConvert: QueryParamsAggregated) => {
     const convertedObject = Object.keys(objectToConvert).reduce(
-      (acc: QueryParamsToStr | QueryParamsAggregatedToStr, key) => {
+      (acc: QueryParamsAggregatedToStr, key) => {
         if (
-          (key === 'page' || key === 'group') &&
+          (key === 'page' ||
+            key === 'group' ||
+            key === 'wordsPerPage' ||
+            key === 'filter') &&
           (typeof objectToConvert[key] === 'number' ||
             typeof objectToConvert[key] === 'string')
         ) {
@@ -268,10 +261,9 @@ class Api {
     options: QueryParamsAggregated,
   ): Promise<UsersAggregatedWordsResponse[] | ErrorResponse> => {
     const convertedParams = this.convertNumberAttrToStr(options);
+
     const params = new URLSearchParams(convertedParams).toString();
-    const searchParams = params
-      ? `?${params}&wordsPerPage=20`
-      : '?wordsPerPage=20';
+    const searchParams = params ? `?${params}` : '';
     const path = `${Endpoints.Users}/${userId}/${Endpoints.AggregatedWords}${searchParams}`;
     const usersAggregatedWords: UsersAggregatedWordsResponse[] | ErrorResponse =
       await this.requestMethod(Methods.GET, path, Auth.Auth);

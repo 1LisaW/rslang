@@ -30,7 +30,6 @@ export default function AccountMenu() {
   const handleLogOut = () => {
     dispatch(logOut());
     navigate(location.pathname);
-    console.log('location from logout ', location);
   };
   return (
     <>

@@ -9,7 +9,9 @@ import './CircularStatic.scss';
 const GAME_TIME_INTERVAL = 60;
 
 function CircularProgressWithLabel(
-  props: CircularProgressProps & { value: number },
+  props: CircularProgressProps & {
+    value: number;
+  },
 ) {
   const innerProps = { ...props };
   return (
@@ -36,19 +38,24 @@ function CircularProgressWithLabel(
     </Box>
   );
 }
-
-export default function CircularStatic() {
+type CircularStaticProps = { onFinish: () => void };
+export default function CircularStatic(props: CircularStaticProps) {
+  const { onFinish } = props;
   const [progress, setProgress] = React.useState(100);
 
   React.useEffect(() => {
-    const timer = setInterval(() => {
+    const timer = setTimeout(() => {
       const step = 100 / GAME_TIME_INTERVAL;
+      if (progress <= 0) {
+        onFinish();
+        return;
+      }
       setProgress(prevProgress => Math.max(0, prevProgress - step));
     }, 1000);
     return () => {
-      clearInterval(timer);
+      clearTimeout(timer);
     };
-  }, []);
+  }, [progress]);
 
   return <CircularProgressWithLabel value={progress} />;
 }

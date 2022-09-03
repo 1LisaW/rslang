@@ -1,29 +1,32 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from './store';
-import { WordListState } from './types';
-import wordListFetch from './wordListFetch';
+import { GameWordListState } from './types';
+import wordListFetch from './gameWordListFetch';
 
-const initialState: WordListState = {
-  wordList: [],
+const initialState: GameWordListState = {
+  gameWordList: [],
 };
 
 export const gameWordListSlice = createSlice({
   name: 'gameWordList',
   initialState,
   reducers: {
-    updateGameWordList: (state, action: PayloadAction<WordListState>) => {
+    updateWordInGameWordList: (
+      state,
+      action: PayloadAction<GameWordListState>,
+    ) => {
       const {
-        payload: { wordList },
+        payload: { gameWordList },
       } = action;
 
-      state.wordList = wordList;
+      state.gameWordList = gameWordList;
     },
   },
   extraReducers: wordListFetch,
 });
 
-export const { updateGameWordList } = gameWordListSlice.actions;
+export const { updateWordInGameWordList } = gameWordListSlice.actions;
 
-export const getGameWordList = (state: RootState) => state.wordList;
+export const getGamesWordList = (state: RootState) => state.gameWordList;
 
 export default gameWordListSlice.reducer;
