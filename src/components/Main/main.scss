@@ -3,6 +3,8 @@
 $HERO-IMG-WIDTH: 978px;
 $HERO-IMG-HEIGHT: 590px;
 
+$START-PAGE-CONTENT-MIN-HEIGHT: 385px;
+
 $DECORATION-CONTAINER-WIDTH: 490px;
 $DECORATION-CONTAINER-HEIGHT: 330px;
 $DECORATION-CONTAINER-BOTTOM-INDENT:15em;
@@ -47,6 +49,7 @@ $YOUTUBE-MAX-WIDTH: 900px;
 }
 .start-page__content {
   max-width: $START-PAGE-TEXT-WIDTH;
+  min-height: $START-PAGE-CONTENT-MIN-HEIGHT;
   width: 55%;
   background-color: $MAIN-COLOR--PRIMARY-LIGHT;
   position: relative;
@@ -77,11 +80,17 @@ $YOUTUBE-MAX-WIDTH: 900px;
     .registration-button {
       width: $REGISTRATION-BUTTON-WIDTH;
       height: $REGISTRATION-BUTTON-HEIGHT;
-      color: $MAIN-COLOR--PRIMARY-LIGHT;
       @include font(1em, OpenSans);
       letter-spacing: 2.8px;
       transition: 1s all ease;
       cursor: pointer;
+    }
+    a {
+      text-decoration: none;
+      color: $MAIN-COLOR--PRIMARY-LIGHT;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }
