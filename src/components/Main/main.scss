@@ -17,7 +17,8 @@ $YOUTUBE-MAX-WIDTH: 900px;
 
 .main {
   position: relative;
-  background-color: $MAIN-COLOR--PRIMARY-DARK; 
+  background-color: $MAIN-COLOR--PRIMARY-DARK;
+  flex: 1;
 }
 /******************************************************/
 /*********************start page***********************/
