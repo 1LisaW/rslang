@@ -1,33 +1,43 @@
 @import '../../global/library';
 
-.header {
-  background-color: $MAIN-COLOR--PRIMARY-DARK;
-  width:100%;
-  display: none;
+.navbar {
+  width: 70%;
 }
-.header__container {
-  @include flex(space-between);
-  max-width:$BODY-CONTAINER-WIDTH;
-  width: 90vw;
-  margin: 0 auto;
-  height: $HEADER--HEIGHT;
-  background-color: $MAIN-COLOR--PRIMARY-DARK;
-  position: fixed;
-  top: 0;
-  left: auto;
-  z-index: 2;
-}
-.logo__container {
-  width: 20%;
-  background-color: $MAIN-COLOR--SECONDARY;
-  height: $HEADER-LOGO-CONTAINER--HEIGHT;
-  @include flex(center);
-  .logo__title {
-    font-family: Teko;
+.navbar__list {
+  display: flex;
+  list-style-type: none;
+  justify-content: right;
+  .navbar__item {
+    margin-left: 37px;
+    a {
     color: $MAIN-COLOR--PRIMARY-LIGHT;
-    letter-spacing: 5px;
-    padding-top: 10%;
+    font-family: OpenSans;
+    font-size: 1rem;
     text-decoration: none;
-    font-size: 3.5em;
+    letter-spacing: 2.8px;
+    &:hover {
+      font-weight: 800;
+    }
+    }
+  }
+}
+.css-1uwgr7b-MuiTypography-root a,
+.css-1w9osf6-MuiButtonBase-root-MuiButton-root a {
+  color: $MAIN-COLOR--PRIMARY-LIGHT;
+  font-family: OpenSans;
+  font-size: 1rem;
+  text-decoration: none;
+  letter-spacing: 2.8px;
+  &:hover {
+    font-weight: 800;
+  }
+}
+.css-1uwgr7b-MuiTypography-root a {
+  color: $MAIN-COLOR--PRIMARY-DARK;
+}
+
+@media only screen and (max-width: 1000px) {
+  .css-1w9osf6-MuiButtonBase-root-MuiButton-root a {
+    font-size: 1.4vw;
   }
 }

@@ -1,22 +1,31 @@
 import React from 'react';
 import { IconButton } from '@mui/material';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
-import VolumeOffIcon from '@mui/icons-material/VolumeOff';
+import PauseIcon from '@mui/icons-material/Pause';
 
-type Handler = (play: boolean, file: string) => void;
-interface IAudio {
-  play: boolean;
-  handler: Handler;
-  file: string;
+type Handler = (file: Array<string>) => void;
+export interface IAudio {
+  handlerPlay: Handler;
+  handlerPause: Handler;
+  file: Array<string>;
+  playCard: boolean
 }
 
-function AudioButton({ play, handler, file }: IAudio) {
+function AudioButton({ handlerPlay, handlerPause, file, playCard }: IAudio) {
   return (
-    <IconButton onClick={() => handler(play, file)}>
-      {play ?
+    <IconButton onClick={() => {
+      if (!playCard) {
+        handlerPlay(file);
+      } else {
+        handlerPause(file);
+      }
+    }}
+    >
+      {playCard ? (
+        <PauseIcon />
+      ) : (
         <VolumeUpIcon />
-        :
-        <VolumeOffIcon />}
+      )}
     </IconButton>
   );
 }

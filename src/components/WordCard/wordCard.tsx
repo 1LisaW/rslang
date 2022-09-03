@@ -1,5 +1,4 @@
-import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useCallback } from 'react';
 import { StylesProvider } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
@@ -7,10 +6,14 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import DOMPurify from 'dompurify';
-import { Difficulty, PaginatedResults } from '../../Api/api-types';
-import AudioButton from '../AudioFiles/audioFiles';
+import { useDispatch, useSelector } from 'react-redux';
 import CardButton from './CardButton/cardButton';
 import CircularProgressWithLabel from './CircularProgress/circularProgress';
+import AudioButton from '../AudioFiles/audioFiles';
+import AudioDecorator from '../AudioFiles/audioDecorator';
+import { start, stop, isSoundPlaying } from '../store/soundPlaySlice';
+import { AppDispatch } from '../store/store';
+import { Difficulty, PaginatedResults } from '../../Api/api-types';
 import { updateWordList } from '../store/wordListSlice';
 import {
   getDifficultyButtonData,
@@ -28,19 +31,42 @@ interface CardInput {
 }
 
 const { REACT_APP_PATH_TO_SERVER } = process.env;
+const decorator = new AudioDecorator();
 
-function WordCard({ data, isAuth, group, userId }: CardInput) {
-  const dispatch = useDispatch();
+function WordCard({ data, isAuth, group, userId }:CardInput) {
+  const IMG_PATH = REACT_APP_PATH_TO_SERVER?.concat(data.image);
+  const AUDIO_ARR: Array<string> = [
+    REACT_APP_PATH_TO_SERVER?.concat(data.audio) as string,
+    REACT_APP_PATH_TO_SERVER?.concat(data.audioMeaning) as string,
+    REACT_APP_PATH_TO_SERVER?.concat(data.audioExample) as string,
+  ];
+  const dispatch = useDispatch<AppDispatch>();
+  const isPlaying = useSelector(isSoundPlaying);
+  const [playCard, setPlayCard] = useState(false);
+  const setterPlayCard = (value: boolean) => {
+    setPlayCard(value);
+  };
   const difficultyData = getDifficultyButtonData(data);
   const isLearnedData = getIsLearnedButtonData(data);
 
   const audioButtonHandler = {
-    play: true,
-    handler: (play: boolean, file: string) => {
-      console.log(file);
-      const audio = new Audio(file);
-      audio.play();
-      console.log(play);
+    handlerPlay: (fileList: Array<string>) => {
+      if (isPlaying) {
+        decorator.runExecuteAfterStop();
+      }
+
+      dispatch(start());
+      decorator.setExecuteAfterStop(() => {
+        setterPlayCard(false);
+        dispatch(stop());
+      });
+      setPlayCard(true);
+      decorator.play(fileList);
+    },
+    handlerPause: () => {
+      setPlayCard(false);
+      dispatch(stop());
+      decorator.pause();
     },
   };
 
@@ -116,8 +142,6 @@ function WordCard({ data, isAuth, group, userId }: CardInput) {
       : 0,
   };
 
-  const IMG_PATH = REACT_APP_PATH_TO_SERVER?.concat(data.image);
-  const AUDIO_PATH = REACT_APP_PATH_TO_SERVER?.concat(data.audio);
   const groupColorClassName = `group${group}`;
 
   return (
@@ -147,9 +171,7 @@ function WordCard({ data, isAuth, group, userId }: CardInput) {
                   {data.transcription}
                 </Typography>
               </Box>
-              <AudioButton
-                {...{ ...audioButtonHandler, file: AUDIO_PATH as string }}
-              />
+              <AudioButton {...{ ...audioButtonHandler, file: AUDIO_ARR, playCard }} />
             </Box>
             <Box>
               <Typography
