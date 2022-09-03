@@ -71,7 +71,7 @@ function Tutorial() {
       : wordList.wordList;
 
   return (
-    <div>
+    <main className="tutorial-container">
       <h1 className="tutorial__title">УЧЕБНИК</h1>
       <div className="word-list__container">
         {wordListData.map(item => (
@@ -95,7 +95,7 @@ function Tutorial() {
           changeHandler={handlePageChange}
         />
       </div>
-    </div>
+    </main>
   );
 }
 
