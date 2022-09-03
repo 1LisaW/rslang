@@ -51,7 +51,8 @@ function WordCard({ data, isAuth, group, userId }: CardInput) {
         : Difficulty.Hard;
     const newWordData = {
       id: data._id || '',
-      ...data.userWord,
+      optional:
+        data.userWord && data.userWord.optional ? data.userWord.optional : {},
       difficulty,
     };
     dispatch(updateWordList(newWordData));

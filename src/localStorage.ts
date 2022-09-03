@@ -6,10 +6,19 @@ class StorageWorker {
 
   private myStorageRefreshToken;
 
+  private myStorageCurrentGroup;
+
+  private myStorageCurrentPage;
+
+  private myStoragePageInGroup;
+
   constructor() {
     this.myStorageUserId = `${REACT_APP_STORAGE_NAME}_UserId`;
     this.myStorageToken = `${REACT_APP_STORAGE_NAME}_Token`;
     this.myStorageRefreshToken = `${REACT_APP_STORAGE_NAME}_RefreshToken`;
+    this.myStorageCurrentGroup = `${REACT_APP_STORAGE_NAME}_CurrentGroup`;
+    this.myStorageCurrentPage = `${REACT_APP_STORAGE_NAME}_CurrentPage`;
+    this.myStoragePageInGroup = `${REACT_APP_STORAGE_NAME}_PageInGroup`;
   }
 
   get userId() {
@@ -41,6 +50,54 @@ class StorageWorker {
     localStorage.setItem(this.myStorageRefreshToken, JSON.stringify(newValue));
   }
 
+  get currentPage() {
+    const currentPage = localStorage.getItem(this.myStorageCurrentPage);
+    const res = currentPage ? JSON.parse(currentPage) : 0;
+    return res;
+  }
+
+  set currentPage(newValue) {
+    localStorage.setItem(this.myStorageCurrentPage, JSON.stringify(newValue));
+  }
+
+  get currentGroup() {
+    const currentGroup = localStorage.getItem(this.myStorageCurrentGroup);
+    const res = currentGroup ? JSON.parse(currentGroup) : 0;
+    return res;
+  }
+
+  set currentGroup(newValue) {
+    localStorage.setItem(this.myStorageCurrentGroup, JSON.stringify(newValue));
+  }
+
+  get pageInGroup() {
+    const pageInGroup = localStorage.getItem(this.myStoragePageInGroup);
+    const res = pageInGroup ? JSON.parse(pageInGroup) : 0;
+    return res;
+  }
+
+  set pageInGroup(newValue) {
+    localStorage.setItem(this.myStoragePageInGroup, JSON.stringify(newValue));
+  }
+
+  setUserSettings(currentGroup: number, pageInGroup: number) {
+    localStorage.setItem(
+      this.myStorageCurrentGroup,
+      JSON.stringify(currentGroup),
+    );
+    localStorage.setItem(
+      this.myStorageCurrentPage,
+      JSON.stringify(pageInGroup),
+    );
+    localStorage.setItem(
+      this.myStoragePageInGroup,
+      JSON.stringify({
+        ...this.pageInGroup,
+        [currentGroup]: pageInGroup,
+      }),
+    );
+  }
+
   initDataFromStorage = (name: string) => {
     switch (name) {
       case 'userId': {
@@ -51,6 +108,12 @@ class StorageWorker {
       }
       case 'refreshToken': {
         return this.refreshToken;
+      }
+      case 'currentPage': {
+        return this.currentPage;
+      }
+      case 'currentGroup': {
+        return this.currentGroup;
       }
       default: {
         return null;

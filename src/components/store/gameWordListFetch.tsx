@@ -34,15 +34,13 @@ export const fetchWordList = createAsyncThunk(
     if (isAuthorized && id) {
       const response = redirectedFromTutorial
         ? await Api.getUserAggregatedWords(id, {
-          group,
           wordsPerPage: wordsPerPage * ((page || 0) + 1),
           // eslint-disable-next-line @typescript-eslint/quotes
-          filter: `{"$and":[{"$or":[{"userWord.optional.isLearned":null},{"userWord.optional.isLearned":false},{"userWord":null},{"userWord.optional":null}]},{"$or":${pageFilterParams}}]}`,
+          filter: `{"$and":[{"group":${group}},{"$or":[{"userWord.optional.isLearned":null},{"userWord.optional.isLearned":false},{"userWord":null},{"userWord.optional":null}]},{"$or":${pageFilterParams}}]}`,
         })
         : await Api.getUserAggregatedWords(id, {
-          group,
-          page,
           wordsPerPage,
+          filter: `{"$and":[{"group":${group}},{"page":${page}}]}`,
         });
       return 'error' in response
         ? {

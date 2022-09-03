@@ -33,13 +33,6 @@ export const wordListSlice = createSlice({
       );
       state.isGameAvailable = !!notLearned.length;
     },
-    // updateGameAvailable: state => {
-    //   console.log('state.wordList', state);
-    //   const notLearned = state.wordList.filter(
-    //     word => !word.userWord?.optional?.isLearned,
-    //   );
-    //   state.isGameAvailable = !!notLearned.length;
-    // },
   },
   extraReducers: wordListFetch,
 });
