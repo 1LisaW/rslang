@@ -67,6 +67,7 @@ export const getWordsAudioCallGame = (wordList: GameWordListState) => {
     const correctIdx = randomWordsIdx.indexOf(idx);
     const dataItem = {
       audio: wordItem.audio,
+      image: wordItem.image,
       word: wordItem.word,
       words: randomWordsTranslate,
       correctButtonIdx: correctIdx,

@@ -1,4 +1,5 @@
 @import '../../global/library';
+
 sprint-container {
   height:100%;
 }
@@ -25,8 +26,10 @@ sprint-container {
   }
 }
 
-.content {
+main .content {
   position: relative;
+  max-width: 90vw;
+  min-height: 50vh;
   background-color:rgba(255,255,255,.8);
   border-radius:.25em;
   box-shadow:0 0 .25em rgba(0,0,0,.25);
@@ -37,8 +40,11 @@ sprint-container {
   text-align:center;
   top:50%;
   transform:translate(-50%, -50%);
+  margin-top: 40px;
 }
-
+.content__title {
+  padding: 50px 0;
+}
 .statistic-content {
   position: fixed;
   background-color:rgba(255,255,255,.8);
@@ -46,11 +52,12 @@ sprint-container {
   transform:translate(-50%, -50%);
   left: 50%;
   top: 50%;
-  width: 60%;
+  width:40%;
   min-height: 30vw;
   min-width: 320px;
   text-align:left;
-  padding-left: 10px;
+  box-sizing: border-box;
+  padding: 30px 55px;
 }
 
 
@@ -69,6 +76,8 @@ h1 {
 
 .sprint-card {
   margin: auto;
+  height: 50vh;
+  min-width: 50vw;
   &__actions{
     justify-content: center;
     min-width: 80%;
@@ -85,11 +94,10 @@ h1 {
 
 .sprint-container .sprint__grid-wrapper{
   flex-direction: row;
-  @media (max-width:630px) {
+  @media (max-width:720px) {
     flex-direction: column;
   }
 }
-
 
 .sprint-card__actions .sprint-card__actions--correct{
   background-color: #6c3;
@@ -110,18 +118,56 @@ h1 {
 
 .content .sprint__close-button {
   position: absolute;
-  top: -80px;
+  top: -56px;
   right: 20px;
 }
 
 .content .sprint-group-selector{
-  background-color: $MAIN-COLOR--SECONDARY;
   color: $MAIN-COLOR--PRIMARY-DARK;
   border-radius: 50%;
   margin: 5px;
   padding: 15px;
   &:hover{
-    background-color: $MAIN-COLOR--PRIMARY-DARK;
-    color: $MAIN-COLOR--SECONDARY;
+    background-color: $MAIN-COLOR--SECONDARY;
+    color: $MAIN-COLOR--PRIMARY-LIGHT;
+  }
+}
+
+.sprint-group-selector:nth-child(1) {
+  background-color: $BUTTON_GROUP_0_COLOR;
+}
+.sprint-group-selector:nth-child(2) {
+  background-color: $BUTTON_GROUP_1_COLOR;
+}
+.sprint-group-selector:nth-child(3) {
+  background-color: $BUTTON_GROUP_2_COLOR;
+}
+.sprint-group-selector:nth-child(4) {
+  background-color: $BUTTON_GROUP_3_COLOR;
+}
+.sprint-group-selector:nth-child(5) {
+  background-color: $BUTTON_GROUP_4_COLOR;
+}
+.sprint-group-selector:nth-child(6) {
+  background-color: $BUTTON_GROUP_5_COLOR;
+}
+.sprint-group-selector:nth-child(7) {
+  background-color: $BUTTON_GROUP_6_COLOR;
+}
+.game-card__actions {
+
+}
+/***************media********************/
+@media only screen and (max-width:550px) {
+  .sprint-group {
+    width: 20vw;
+    margin: 0 auto;
+  }
+  .content__title {
+    padding: 0;
+  }
+  .content {
+    height: auto;
+    margin: 30px auto;
   }
 }
