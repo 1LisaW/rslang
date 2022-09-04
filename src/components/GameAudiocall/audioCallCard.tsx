@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 // import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
 import GameButtons from '../GameCommonComponents/GameButtons/gameButtons';
-import AudioButton from '../AudioFiles/audioFiles';
+import AudioGame from '../AudioFiles/audioGame';
 import AudioDecorator from '../AudioFiles/audioDecorator';
 
 type CardData = {
@@ -27,20 +27,7 @@ function AudioCallCard(props: CardData) {
   console.log(word);
   const audioButtonHandler = {
     handlerPlay: () => {
-      // if (isPlaying) {
-      //   decorator.runExecuteAfterStop();
-      // }
-
-      // dispatch(start());
-      // decorator.setExecuteAfterStop(() => {
-      //   setterPlayCard(false);
-      //   dispatch(stop());
-      // });
-      // setPlayCard(true);
-      decorator.play(AUDIO_PATH);
-    },
-    handlerPause: () => {
-      decorator.play(AUDIO_PATH);
+      decorator.playImmediately(AUDIO_PATH);
     },
   };
 
@@ -66,22 +53,11 @@ function AudioCallCard(props: CardData) {
       <CardContent>
         {wasInGame ? (
           <Box className="audio-container">
-            {/* <Typography gutterBottom variant="h5" component="div">
-              {`${word} ${audio}`}
-            </Typography> */}
-            <AudioButton {...{ ...audioButtonHandler, file: AUDIO_PATH, playCard: false }} />
+            <AudioGame {...{ ...audioButtonHandler, file: AUDIO_PATH }} />
           </Box>
         ) : (
           <Box className="audio-container">
-            {/* <Typography
-              className="new-word"
-              gutterBottom
-              variant="h5"
-              component="div"
-            >
-              {`${word} ${audio}`}
-            </Typography> */}
-            <AudioButton {...{ ...audioButtonHandler, file: AUDIO_PATH, playCard: false }} />
+            <AudioGame {...{ ...audioButtonHandler, file: AUDIO_PATH }} />
           </Box>
         )}
       </CardContent>

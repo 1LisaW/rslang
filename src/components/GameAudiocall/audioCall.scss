@@ -1,3 +1,5 @@
+@import '../../global/library';
+
 .audioCall-container {
   .bg {
     animation:slide 3s ease-in-out infinite alternate;
@@ -27,10 +29,11 @@ button.audio-call-button {
   margin: 10px 10px;
   min-width: 50px;
   &:hover {
-    background-color: rgb(196, 181, 181);
+    background-color: rgb(174, 155, 155);
     -moz-box-shadow:0 0 25px rgb(199, 190, 72); 
     -webkit-box-shadow:0 0 25px rgb(199, 190, 72); 
     box-shadow:0 0 25px rgb(199, 190, 72);
+    color: $MAIN-COLOR--PRIMARY-DARK;
   }
 }
 .audio-call-button.active {
@@ -47,13 +50,13 @@ button.audio-call-button {
 .audio-call-button.incorrect {
   -moz-box-shadow:0 0 25px rgb(229, 123, 90); 
   -webkit-box-shadow:0 0 25px rgb(229, 123, 90); ; 
-  box-shadow:0 0 25px  rgb(229, 123, 90); ;
+  box-shadow:0 0 25px  rgb(229, 123, 90);
 }
 
 div.audio-call__content{
   min-height: 50vh;
-  max-height: 65vh;
-  max-width: 90vw;
+  max-height: 75vh;
+  max-width: 80vw;
   .audio-call-card{
     min-width: 80%;
     min-height: 50vh;
@@ -67,8 +70,23 @@ div.audio-call__content{
 }
 
 .audio-container {
-  min-height: 20vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgb(229, 123, 90);
+  margin: 0 auto;
+  border-radius: 100%;
+  width: 12vw;
+  height: 12vw;
+  .css-i4bv87-MuiSvgIcon-root { 
+    width: 12vw;
+    height: 12vw;
+    color: $MAIN-COLOR--PRIMARY-DARK;
+  }
+  &:hover {
+    background-color: rgb(200, 118, 155);
+    -moz-box-shadow:0 0 25px rgb(229, 123, 90); 
+    -webkit-box-shadow:0 0 25px rgb(229, 123, 90); ; 
+    box-shadow:0 0 25px  rgb(229, 123, 90);
+  }
 }

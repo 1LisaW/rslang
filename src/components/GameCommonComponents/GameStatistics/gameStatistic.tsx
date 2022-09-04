@@ -65,7 +65,7 @@ export default function GameStatistic(statisticProps: StatisticProps) {
         <Typography
           paragraph
           variant="h5"
-          sx={{ m: '5px', textAlign: 'center', p: '0 20px' }}
+          sx={{ m: '5px', textAlign: 'center', p: '20px' }}
           color="secondary"
         >
           {results.title}

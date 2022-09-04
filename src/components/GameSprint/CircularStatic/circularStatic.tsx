@@ -19,10 +19,11 @@ function CircularProgressWithLabel(
       <CircularProgress
         variant="determinate"
         {...props}
-        size={100}
+        size={150}
+        className="sprint-game-icon"
         sx={{
-          height: '100px',
-          width: '100px',
+          height: '150px',
+          width: '150px',
         }}
       />
       <Box className="sprint-game-timer">

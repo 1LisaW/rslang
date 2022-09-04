@@ -48,26 +48,27 @@ function SprintCard(props: CardData) {
     return { ...item, isCorrect };
   });
   return (
-    <Card className="sprint-card" sx={{ maxWidth: 345 }}>
+    <Card className="sprint-card" sx={{ maxWidth: 700 }}>
       <CardContent>
         <Box>
           <IconStatusList {...iconProps} />
         </Box>
         {wasInGame ? (
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="h5" component="div" color="textSecondary">
             {word}
           </Typography>
         ) : (
           <Typography
             className="new-word"
             gutterBottom
-            variant="h5"
+            variant="h4"
             component="div"
+            color="text.secondary"
           >
             {word}
           </Typography>
         )}
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="h6" color="text.secondary">
           {wordTranslate}
         </Typography>
       </CardContent>

@@ -36,17 +36,19 @@ export default function StartView(props: Props) {
         >
           Выберите категорию сложности:
         </Typography>
-        {actions.map((action) => (
-          <IconButton
-            className="sprint-group-selector"
-            key={action.value}
-            onClick={() => {
-              chooseGroupHandler(action.value);
-            }}
-          >
-            {action.icon}
-          </IconButton>
-        ))}
+        <Box className="sprint-group">
+          {actions.map((action) => (
+            <IconButton
+              className="sprint-group-selector"
+              key={action.value}
+              onClick={() => {
+                chooseGroupHandler(action.value);
+              }}
+            >
+              {action.icon}
+            </IconButton>
+          ))}
+        </Box>
       </Box>
     </Container>
   );

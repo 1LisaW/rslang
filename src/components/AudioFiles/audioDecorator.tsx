@@ -27,6 +27,11 @@ class AudioDecorator {
     this.audioArr[0].play();
   }
 
+  playImmediately(fileList: Array<string>) {
+    const audio = new Audio(fileList[0]);
+    audio.play();
+  }
+
   pause() {
     for (let i = 0; i < this.audioArr.length; i += 1) {
       this.audioArr[i].pause();

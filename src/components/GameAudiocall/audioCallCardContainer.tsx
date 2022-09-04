@@ -70,7 +70,7 @@ export default function AudioCallCardContainer(props: ContainerProps) {
           sx={{ maxHeight: '80%' }}
         >
           <Typography position="absolute" top="5%" variant="h5" color="textSecondary">
-            AUDIOCALL
+            АУДИОВЫЗОВ
           </Typography>
           <Grid
             className="audio-call__grid-wrapper"
