@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 // import { IconButton } from '@mui/material';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 
@@ -9,23 +9,10 @@ export interface IAudioGame {
 }
 
 function AudioGame({ handlerPlay, file }: IAudioGame) {
-  // useEffect(() => {
-  //   handlerPlay(file);
-  // }, []);
-
-  // return (
-  //   <VolumeUpIcon
-  //     onClick={() => {
-  //       handlerPlay(file);
-  //     }}
-  //   />
-  // );
   return (
     <VolumeUpIcon
       onClick={() => {
-        useEffect(() => {
-          handlerPlay(file);
-        }, []);
+        handlerPlay(file);
       }}
     />
   );

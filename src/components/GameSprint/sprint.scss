@@ -28,7 +28,7 @@ sprint-container {
 
 .content {
   position: relative;
-  max-width: 80vw;
+  max-width: 85vw;
   min-height: 50vh;
   background-color:rgba(255,255,255,.8);
   border-radius:.25em;
@@ -40,9 +40,7 @@ sprint-container {
   text-align:center;
   top:50%;
   transform:translate(-50%, -50%);
-  @media (max-width:720px) {
-    margin-top: 9vh;
-  }
+  margin-top: 40px;
 }
 .content__title {
   padding: 50px 0;
@@ -119,7 +117,7 @@ h1 {
 
 .content .sprint__close-button {
   position: absolute;
-  top: -80px;
+  top: -56px;
   right: 20px;
 }
 

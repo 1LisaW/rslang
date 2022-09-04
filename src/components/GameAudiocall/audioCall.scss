@@ -54,13 +54,17 @@ button.audio-call-button {
 }
 
 div.audio-call__content{
-  min-height: 50vh;
+  min-height: 70vh;
   max-height: 75vh;
-  max-width: 80vw;
+  max-width: 85vw;
+  margin-top: 40px;
   .audio-call-card{
-    min-width: 80%;
-    min-height: 50vh;
+    min-width: 95%;
+    height: 56vh;
     margin: auto auto;
+    @media (max-width:650px) {
+      height: auto;
+    }
   }
   .game-card__actions--group {
     display: flex;
@@ -68,7 +72,16 @@ div.audio-call__content{
     justify-content: center;
   }
 }
-
+.audio-call__card-content {
+  @include flex(space-evenly);
+}
+div .MuiCardMedia-media {
+  width: 29%;
+  border-radius: 10px;
+  @media (max-width:1000px) {
+    width: 35%;
+  }
+}
 .audio-container {
   display: flex;
   justify-content: center;
@@ -76,11 +89,11 @@ div.audio-call__content{
   background-color: rgb(229, 123, 90);
   margin: 0 auto;
   border-radius: 100%;
-  width: 12vw;
-  height: 12vw;
+  width: 11vw;
+  height: 11vw;
   .css-i4bv87-MuiSvgIcon-root { 
-    width: 12vw;
-    height: 12vw;
+    width: 10vw;
+    height: 10vw;
     color: $MAIN-COLOR--PRIMARY-DARK;
   }
   &:hover {
