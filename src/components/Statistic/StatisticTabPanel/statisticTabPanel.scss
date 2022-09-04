@@ -1,0 +1,15 @@
+@import '../../../global/library';
+
+.date-btns-container {
+  padding-top: 2rem;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 2rem;
+}
+
+.date-btns {
+  border: 1px solid lightgray;
+  border-radius: 10%;
+}
