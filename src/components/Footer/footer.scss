@@ -1,0 +1,68 @@
+@import '../../global/library';
+$FOOTER-HEIGHT: 50px;
+$FOOTER-RS-LOGO-HEIGHT: 9vw;
+
+.footer {
+  @include flex(space-between);
+  height: $FOOTER-HEIGHT;
+  padding: 15px;
+  @include font(2em, Teko);
+  background: linear-gradient(#eeeeee, #ffffff);
+  flex-shrink: 0;
+}
+.footer__rs-logo-link {
+  height: 100%;
+}
+.footer__rs-logo {
+  background-image: url(../../assets/icons/rs_school_img.svg);
+  height: 100%;
+  width: $FOOTER-RS-LOGO-HEIGHT;
+  background-repeat: no-repeat;
+}
+.footer__github-info {
+  width: 70%;
+  @include flex(space-between);
+  .footer__github-link {
+    text-decoration: none;
+    color: $MAIN-COLOR--PRIMARY-DARK;
+    &:hover {
+      color: $MAIN-COLOR--SECONDARY;
+    }
+    .footer__year {
+      font-size: 2.5em;
+    }
+  }
+}
+/***************media********************/
+@media only screen and (min-width: 750px) and (max-width: 1100px) {
+  .footer__rs-logo {
+    width: 15vw
+  }
+  .footer {
+    @include font(2em, Teko);
+  }
+}
+
+@media only screen and (min-width: 450px) and (max-width: 749px) {
+  .footer__rs-logo {
+    width: 17vw;
+  }
+  .footer {
+    @include font(3.7vw, Teko);
+  }
+}
+
+@media only screen and (max-width: 449px) {
+  .footer__github-info {
+    flex-direction: column;
+  }
+  .footer__rs-logo {
+    width: 20vw;
+  }
+  .footer {
+    @include font(3.7vw, Teko);
+  }
+  .footer__rs-logo-link {
+    height: 10vw;
+  }
+}

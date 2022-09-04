@@ -1,0 +1,242 @@
+@import '../../global/library';
+
+$HERO-IMG-WIDTH: 978px;
+$HERO-IMG-HEIGHT: 590px;
+
+$START-PAGE-CONTENT-MIN-HEIGHT: 385px;
+
+$DECORATION-CONTAINER-WIDTH: 490px;
+$DECORATION-CONTAINER-HEIGHT: 330px;
+$DECORATION-CONTAINER-BOTTOM-INDENT:15em;
+
+$START-PAGE-TEXT-WIDTH: 490px;
+$START-PAGE-TEXT-HEIGHT: 400px;
+
+$REGISTRATION-BUTTON-WIDTH: 45%;
+$REGISTRATION-BUTTON-HEIGHT: 4em;
+
+$YOUTUBE-MAX-WIDTH: 900px;
+
+.main {
+  position: relative;
+  background-color: $MAIN-COLOR--PRIMARY-DARK;
+  flex: 1;
+}
+/******************************************************/
+/*********************start page***********************/
+.start-page {
+  width: 90%;
+  margin: 0 auto;
+  height: calc($HERO-IMG-HEIGHT + 4em);
+}
+.start-page__hero-img {
+  height: $HERO-IMG-HEIGHT;
+  max-width: $HERO-IMG-WIDTH;
+  width: 70vw;
+  background-image: url('../../assets/imgs/start-page__hero-img.jpg');
+  background-size: cover;
+}
+.start-page__decoration-container {
+  max-height: $DECORATION-CONTAINER-HEIGHT;
+  height: 50%;
+  max-width: $DECORATION-CONTAINER-WIDTH;
+  width: 50%;
+  background-color: $MAIN-COLOR--SECONDARY;
+  position: relative;
+  bottom: $DECORATION-CONTAINER-BOTTOM-INDENT;
+  z-index: 0;
+  margin-left: auto;
+}
+.start-page__content {
+  max-width: $START-PAGE-TEXT-WIDTH;
+  min-height: $START-PAGE-CONTENT-MIN-HEIGHT;
+  width: 55%;
+  background-color: $MAIN-COLOR--PRIMARY-LIGHT;
+  position: relative;
+  bottom: 50em;
+  right: 6em;
+  z-index: 1;
+  margin-left: auto;
+  padding: 2.5em;
+  box-sizing: border-box;
+  .start-page__subtitle {
+    @include font(0.8em, OpenSans);
+    font-weight: 600;
+    letter-spacing: 2.8px;
+    color: $MAIN-COLOR--PRIMARY;
+  }
+  .start-page__title {
+    @include font(3.2em, Teko);
+    width: 70%;
+    margin-bottom: 15px;
+  }
+  .start-page__text {
+    @include font(1.5em, OpenSans);
+    color: $MAIN-COLOR--PRIMARY-DARK;
+    margin-bottom: 1em;
+  }
+  .start-page__registration-form {
+    @include flex(space-between);
+    .registration-button {
+      width: $REGISTRATION-BUTTON-WIDTH;
+      height: $REGISTRATION-BUTTON-HEIGHT;
+      @include font(1em, OpenSans);
+      letter-spacing: 2.8px;
+      transition: 1s all ease;
+      cursor: pointer;
+    }
+    a {
+      text-decoration: none;
+      color: $MAIN-COLOR--PRIMARY-LIGHT;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+.login__button,
+.registration__button {
+  transition: all 0.5s;
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(215, 215, 215, 0.9);
+    transition: all 0.3s;
+  }
+  &:hover::before {
+    opacity: 0 ;
+    transform: scale(0.5,0.5);
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: all 0.5s;
+    transform: scale(1.4,1.4);
+  }
+  &:hover::after {
+    opacity: 1;
+    transform: scale(1,1);
+  }
+}
+.login__button {
+  background-color: $MAIN-COLOR--SECONDARY;
+  &::before {
+    background-color: rgba(201, 201, 201, 0.2);
+  }
+}
+.registration__button {
+  background-color: $MAIN-COLOR--PRIMARY-DARK;
+  &::before {
+    background-color: rgba(114, 114, 114, 0.3);
+  }
+}
+/*********************youtube*************************/
+.youtube-video {
+  background-color: $MAIN-COLOR--PRIMARY-LIGHT;
+  text-align: center;
+  .youtube-video__video {
+    margin-bottom: 40px;
+    max-width: $YOUTUBE-MAX-WIDTH;
+    width: 70vw;
+    height: 40vw;
+  }
+}
+.youtube-video__title {
+  text-align: center;
+  padding: 80px 0 40px;
+  @include font(3.5rem, OpenSans, 600);
+  color: $MAIN-COLOR--SECONDARY;
+}
+/******************************************************/
+/*****************************media********************/
+@media only screen and (min-width: 750px) and (max-width: 1000px) {
+  .start-page__content {
+    width: 75%;
+  }
+  .start-page__hero-img {
+    width: 80vw;
+  }
+  .start-page__decoration-container {
+    height: 40vw;
+    width: 45vw;
+    bottom: 13em;
+  }
+}
+
+@media only screen and (min-width: 500px) and (max-width: 749px) {
+  .youtube-video__title{
+    font-size: 9vw;
+  }
+  .start-page__decoration-container {
+    display: none;
+  }
+  .start-page__hero-img {
+    width: auto;
+  }
+  .start-page__content
+  .start-page__title {
+    font-size: 2.6em;
+    width: 95%;
+  }
+  .start-page__content
+  .start-page__text {
+    font-size: 3vw;
+    margin-bottom: 2em;
+  }
+  .start-page__content {
+    width: 60vw;
+    bottom: 25em;
+    right: 5em;
+    padding: 6vw;
+  }
+  .start-page__content
+  .start-page__registration-form
+  .registration-button {
+    font-size: 2vw;
+  }
+}
+
+@media only screen and (max-width: 499px) {
+  .youtube-video__title{
+    font-size: 9vw;
+  }
+  .start-page__decoration-container {
+    display: none;
+  }
+  .start-page__hero-img {
+    width: auto;
+  }
+  .start-page__content
+  .start-page__title {
+    font-size: 2.2em;
+    width: 95%;
+  }
+  .start-page__content
+  .start-page__text {
+    font-size: 3vw;
+    margin-bottom: 2em;
+  }
+  .start-page__content {
+    width: 60vw;
+    bottom: 25em;
+    right: 3em;
+    padding: 6vw;
+  }
+  .start-page__content
+  .start-page__registration-form
+  .registration-button {
+    font-size: 2vw;
+  }
+}

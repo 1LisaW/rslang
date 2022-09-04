@@ -1,0 +1,20 @@
+@import '../../global/library';
+
+.tutorial-container {
+  background-color: $MAIN-COLOR--PRIMARY-LIGHT;
+  flex: 1;
+}
+.controls__container {
+  display: flex;
+  flex-direction: row;
+  position: sticky;
+  bottom :0px;
+  padding-right: 100px;
+  background-color: rgba($color: #ffffff, $alpha: 0.9);
+}
+.tutorial__title {
+  @include font(3rem, OpenSans, 600);
+  color: $MAIN-COLOR--SECONDARY;
+  text-align: center;
+  margin: 20px auto;
+}
