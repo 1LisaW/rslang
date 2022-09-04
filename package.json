@@ -1,6 +1,7 @@
 {
   "name": "boilerplate-react-typescript",
   "version": "0.1.0",
+  "homepage": "http://https://1lisaw.github.io/rslang/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.0",
