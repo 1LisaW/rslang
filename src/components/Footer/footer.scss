@@ -8,6 +8,7 @@ $FOOTER-RS-LOGO-HEIGHT: 9vw;
   padding: 15px;
   @include font(2em, Teko);
   background: linear-gradient(#eeeeee, #ffffff);
+  flex-shrink: 0;
 }
 .footer__rs-logo-link {
   height: 100%;

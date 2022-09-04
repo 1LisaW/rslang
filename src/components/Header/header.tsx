@@ -13,7 +13,10 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { StylesProvider } from '@material-ui/core/styles';
 
 import Button from '@mui/material/Button';
+import { useSelector } from 'react-redux';
 import Authorization from '../Authorization/authorization';
+import { getIsGameAvailable } from '../store/wordListSlice';
+import { isAuth } from '../store/authSlice';
 import './header.scss';
 
 const pages = [
@@ -21,35 +24,43 @@ const pages = [
     title: 'ГЛАВНАЯ',
     key: 'main',
     link: '/',
-    state: false,
+    state: true,
   },
   {
     title: 'УЧЕБНИК',
     key: 'tutorial',
     link: 'tutorial',
-    state: false,
+    state: true,
   },
   {
     title: 'АУДИОВЫЗОВ',
     key: 'audiocall',
     link: 'audiocall',
     state: true,
+    game: true,
   },
   {
     title: 'СПРИНТ',
     key: 'sprint',
     link: 'sprint',
     state: true,
+    game: true,
   },
   {
     title: 'СТАТИСТИКА',
     key: 'statistic',
     link: 'statistic',
-    state: false,
+    state: true,
+    statistic: true,
   },
 ];
 
 function ResponsiveAppBar() {
+  const isGameAvailable = useSelector(getIsGameAvailable);
+  const isAuthorized = useSelector(isAuth);
+  const checkAuthPages = isAuthorized
+    ? pages
+    : pages.filter(page => !page.statistic);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null,
   );
@@ -74,6 +85,8 @@ function ResponsiveAppBar() {
   });
 
   const location = useLocation();
+
+  const isCurrantPageTutorial = location.pathname.startsWith('/tutorial');
 
   return (
     <ThemeProvider theme={theme}>
@@ -129,7 +142,7 @@ function ResponsiveAppBar() {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                {pages.map(page => (
+                {checkAuthPages.map(page => (
                   <MenuItem
                     key={`menuItem ${page.key}`}
                     onClick={handleCloseNavMenu}
@@ -139,13 +152,27 @@ function ResponsiveAppBar() {
                       textAlign="center"
                       className="navbar__item"
                     >
-                      <Link
-                        key={`menuItem link ${page.key}`}
-                        to={page.link}
-                        state={{ prevPath: location.pathname }}
-                      >
-                        {page.title}
-                      </Link>
+                      {(!isCurrantPageTutorial ||
+                        !page.game ||
+                        (isGameAvailable && page.game)) && (
+                        <Link
+                          key={`menuItem link ${page.key}`}
+                          to={page.link}
+                          state={{ prevPath: location.pathname }}
+                        >
+                          {page.title}
+                        </Link>
+                      )}
+                      {isCurrantPageTutorial && page.game && !isGameAvailable && (
+                        <Link
+                          key={`menuItem link ${page.key}`}
+                          to={page.link}
+                          state={{ prevPath: location.pathname }}
+                          className="disabled-link"
+                        >
+                          {page.title}
+                        </Link>
+                      )}
                     </Typography>
                   </MenuItem>
                 ))}
@@ -171,7 +198,7 @@ function ResponsiveAppBar() {
               IngLang
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              {pages.map(page => (
+              {checkAuthPages.map(page => (
                 <StylesProvider key={`StylesProvider${page.key}`} injectFirst>
                   <Button
                     key={`button ${page.key}`}
@@ -179,13 +206,27 @@ function ResponsiveAppBar() {
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
-                    <Link
-                      key={`button link ${page.key}`}
-                      to={page.link}
-                      state={{ prevPath: location.pathname }}
-                    >
-                      {page.title}
-                    </Link>
+                    {(!isCurrantPageTutorial ||
+                      !page.game ||
+                      (isGameAvailable && page.game)) && (
+                      <Link
+                        key={`button link ${page.key}`}
+                        to={page.link}
+                        state={{ prevPath: location.pathname }}
+                      >
+                        {page.title}
+                      </Link>
+                    )}
+                    {isCurrantPageTutorial && page.game && !isGameAvailable && (
+                      <Link
+                        key={`button link ${page.key}`}
+                        to={page.link}
+                        state={{ prevPath: location.pathname }}
+                        className="disabled-link"
+                      >
+                        {page.title}
+                      </Link>
+                    )}
                   </Button>
                 </StylesProvider>
               ))}

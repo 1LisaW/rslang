@@ -1,13 +1,14 @@
 @import '../../global/library';
 
 $CARD-CONTENT-PADDING: 10px 20px;
-$CARD-MARGINE-TOP: 35px;
+$CARD-MARGINE: 20px;
 
 .card {
-  margin-top: $CARD-MARGINE-TOP;
   box-shadow: rgb(0 0 0 / 15%) 0px 0px 10px;
   border-radius: 10px;
   overflow: hidden;
+  width: 82vw;
+  margin: $CARD-MARGINE auto;
 }
 .card-word__container {
   display: flex;

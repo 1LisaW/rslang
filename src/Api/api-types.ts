@@ -95,17 +95,18 @@ export type CumulativeGameStats = {
 };
 
 export type GameResultsPerDay = {
-  date: string; // date in 'YYYY-MM-DD' format. converter func is availbel in util
+  date: string; // date in 'YYYY-MM-DD' format. converter func is availble in util
   gameStats: CumulativeGameStats;
 };
 
 export type StatisticsOptional = {
   historicalStats: {
     [date: string]: {
-      // date in 'YYYY-MM-DD' format. converter func is availbel in util
-      lastDateGameSprintStats: CumulativeGameStats;
-      lastDateGameAudiocallStats: CumulativeGameStats;
-      lastDateCumulativeGameStats: CumulativeGameStats;
+      // date in 'YYYY-MM-DD' format. converter func is availble in util
+      dailyGameSprintStats: CumulativeGameStats;
+      dailyGameAudiocallStats: CumulativeGameStats;
+      dailyCumulativeGameStats: CumulativeGameStats;
+      dailyTutorialLearnedWords: string[];
     };
   };
 };
@@ -187,10 +188,14 @@ export type UsersAggregatedWordsResponse = {
 };
 
 // TODO: add attributes to users settings object;
-export type SettingsOptional = {};
+export type SettingsOptional = {
+  currentGroup: number;
+  currentPage: number;
+  pageInGroup: { [key: number]: number };
+};
 export type SettingsResponse = {
   id: string;
   optional?: SettingsOptional;
-  wordsPerDay: string;
+  wordsPerDay?: string;
 };
 export type SettingsData = Omit<SettingsResponse, 'id'>;

@@ -4,6 +4,9 @@
   max-width: $BODY-CONTAINER-WIDTH;
   width: 90vw;
   margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 @font-face {
   font-family: "Rought";

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import VerifiedIcon from '@mui/icons-material/Verified';
 import { isAuth, getCurrentUserId } from '../store/authSlice';
 import {
   getCurrentGroup,
@@ -10,19 +11,22 @@ import {
 } from '../store/userSettingsSlice';
 import { AppDispatch } from '../store/store';
 import { fetchWordList } from '../store/wordListFetch';
-import { getWordList } from '../store/wordListSlice';
+import { getWordList, getIsGameAvailable } from '../store/wordListSlice';
 import WordCard from '../WordCard/wordCard';
 import GroupPagination from './GroupPagination/groupPagination';
 import GroupSelector from './GroupSelector/groupSelector';
 import { WordListState } from '../store/types';
 import { fetchAuth } from '../store/authFetch';
+import { fetchUserSettings } from '../store/userSettingsFetch';
 import StorageWorker from '../../localStorage';
 import './tutorial.scss';
+import Api from '../../Api/api';
 
 function Tutorial() {
   const isAuthorized: boolean = useSelector(isAuth);
   const currentUserId: string = useSelector(getCurrentUserId);
   const wordList: WordListState = useSelector(getWordList);
+  const isPageNotLearned = useSelector(getIsGameAvailable);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -32,6 +36,7 @@ function Tutorial() {
 
   useEffect(() => {
     dispatch(fetchAuth(StorageWorker.userId));
+    dispatch(fetchUserSettings({ id: StorageWorker.userId, isAuthorized }));
   }, [dispatch, currentUserId]);
 
   useEffect(() => {
@@ -49,20 +54,25 @@ function Tutorial() {
   const handleGroupChange = (newValue: number) => {
     const newGroup = newValue;
     const newGroupAndPage = {
-      ...groupAndPage,
       currentGroup: newGroup,
-      currentPage: groupAndPage.pageInGroup[newGroup],
+      currentPage: groupAndPage.pageInGroup[newGroup] || 0,
+      pageInGroup: groupAndPage.pageInGroup,
     };
     dispatch(setCurrentGroup(newGroupAndPage));
+    Api.updateUserSettings(currentUserId, { optional: newGroupAndPage });
   };
 
   const handlePageChange = (pageNum: number) => {
     const newGroupAndPage = {
-      ...groupAndPage,
-      [group]: pageNum - 1,
+      currentGroup: groupAndPage.currentGroup,
+      pageInGroup: {
+        ...groupAndPage,
+        [groupAndPage.currentGroup]: pageNum - 1,
+      },
       currentPage: pageNum - 1,
     };
     dispatch(setCurrentPage(newGroupAndPage));
+    Api.updateUserSettings(currentUserId, { optional: newGroupAndPage });
   };
 
   const wordListData =
@@ -71,9 +81,20 @@ function Tutorial() {
       : wordList.wordList;
 
   return (
-    <div>
+    <main className="tutorial-container">
       <h1 className="tutorial__title">УЧЕБНИК</h1>
       <div className="word-list__container">
+        {!isPageNotLearned && (
+          <VerifiedIcon
+            sx={{
+              position: 'fixed',
+              top: '100px',
+              right: '25px',
+              fontSize: '5rem',
+              color: 'green',
+            }}
+          />
+        )}
         {wordListData.map(item => (
           <section className="card" key={`section${item.id || item._id}`}>
             <WordCard
@@ -91,11 +112,11 @@ function Tutorial() {
 
         <GroupPagination
           group={group}
-          page={pageIndex + 1}
+          page={(pageIndex || 0) + 1}
           changeHandler={handlePageChange}
         />
       </div>
-    </div>
+    </main>
   );
 }
 

@@ -1,5 +1,9 @@
 @import '../../global/library';
 
+.tutorial-container {
+  background-color: $MAIN-COLOR--PRIMARY-LIGHT;
+  flex: 1;
+}
 .controls__container {
   display: flex;
   flex-direction: row;

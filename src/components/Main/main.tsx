@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { isAuth } from '../store/authSlice';
+import { fetchWordList } from '../store/wordListFetch';
+import { AppDispatch } from '../store/store';
 import OurGoals from '../OurGoals/ourGoals';
 import OurTeam from '../OurTeam/ourTeam';
 import './main.scss';
 
 function Main() {
+  const isAuthorized: boolean = useSelector(isAuth);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(
+      fetchWordList({
+        isAuthorized,
+      }),
+    );
+  }, [dispatch, isAuthorized]);
+
   return (
     <main className="main">
       <section className="start-page">
@@ -13,20 +29,24 @@ function Main() {
           <h4 className="start-page__subtitle">IngLang team</h4>
           <h2 className="start-page__title">Learning English is so fanny!</h2>
           <p className="start-page__text">Присоединяйся уже сегодня и начни весело изучать английский вместе с нами!</p>
-          <div className="start-page__registration-form">
-            <button
-              className="login__button registration-button"
-              type="button"
-            >
-              LOG IN
-            </button>
-            <button
-              className="registration__button registration-button"
-              type="button"
-            >
-              SIGN UP
-            </button>
-          </div>
+          {!isAuthorized ? (
+            <div className="start-page__registration-form">
+              <Link
+                to="/#logIn"
+                className="login__button registration-button"
+              >
+                LOG IN
+              </Link>
+              <Link
+                to="/#logIn"
+                className="registration__button registration-button"
+              >
+                SIGN UP
+              </Link>
+            </div>
+          ) : (
+            ''
+          )}
         </div>
       </section>
       <section className="youtube-video">

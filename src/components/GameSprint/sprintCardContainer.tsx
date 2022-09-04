@@ -71,7 +71,7 @@ export default function SprintCardContainer(props: ContainerProps) {
 
   return (
     <>
-      {!isGameOver && (
+      {!isGameOver && (dataForCards.length >= 20) && (
         <Container className="content">
           <Typography position="absolute" top="5%" variant="h5" color="textSecondary">
             СПРИНТ
@@ -95,6 +95,14 @@ export default function SprintCardContainer(props: ContainerProps) {
         </Container>
       )}
       {isGameOver && <GameStatistic {...statisticProps} />}
+      {dataForCards.length < 20 && (
+        <Container className="content" maxWidth="md" sx={{ maxHeight: '80%' }}>
+          <Typography position="absolute" top="50%" left="25%" width="50%">
+            Недостаточно слов для игры. Попробуйте вызвать игру на следующей
+            странице учебника.
+          </Typography>
+        </Container>
+      )}
     </>
   );
 }
