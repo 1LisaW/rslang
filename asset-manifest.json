@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e1d518af.css",
+    "main.js": "/static/js/main.584ab786.js",
+    "static/js/787.c86e4abc.chunk.js": "/static/js/787.c86e4abc.chunk.js",
+    "static/media/14.jpg": "/static/media/14.795fd0e32e4e461e5caf.jpg",
+    "static/media/19.jpg": "/static/media/19.cee59655aba8e1f47acd.jpg",
+    "static/media/start-page__hero-img.jpg": "/static/media/start-page__hero-img.bef52c6ddda313133978.jpg",
+    "static/media/22.jpg": "/static/media/22.26cb540ede2b7051b6f2.jpg",
+    "static/media/Weranika.jpg": "/static/media/Weranika.23ed6eb938f584edee4e.jpg",
+    "static/media/6.jpg": "/static/media/6.39319e79e173e8d06d80.jpg",
+    "static/media/26.jpg": "/static/media/26.8285929329f93011ab9d.jpg",
+    "static/media/17.jpg": "/static/media/17.3ffeba686db1f706034b.jpg",
+    "static/media/Humblle Rought Caps.woff": "/static/media/Humblle Rought Caps.82e890f6af0632dc3d6a.woff",
+    "static/media/1LisaW.jpg": "/static/media/1LisaW.16d12d2f2427e2e0de6c.jpg",
+    "static/media/madKorney.jpg": "/static/media/madKorney.07b7b80e81df2cd4e5ea.jpg",
+    "static/media/28.jpg": "/static/media/28.73272efe61a9bebdfc55.jpg",
+    "static/media/Teko-Regular.woff": "/static/media/Teko-Regular.e73c7b96fadee36a8b01.woff",
+    "static/media/open-sans.woff": "/static/media/open-sans.469db7e601bc2bc9cce3.woff",
+    "static/media/Github_logo.png": "/static/media/Github_logo.dbd0adc6d4684720f75a.png",
+    "static/media/rs_school_img.svg": "/static/media/rs_school_img.ad178c0df28bc133be34.svg",
+    "index.html": "/index.html",
+    "main.e1d518af.css.map": "/static/css/main.e1d518af.css.map",
+    "main.584ab786.js.map": "/static/js/main.584ab786.js.map",
+    "787.c86e4abc.chunk.js.map": "/static/js/787.c86e4abc.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e1d518af.css",
+    "static/js/main.584ab786.js"
+  ]
+}
