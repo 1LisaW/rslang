@@ -76,11 +76,9 @@ div.audio-call__content{
   @include flex(space-evenly);
 }
 div .MuiCardMedia-media {
-  width: 29%;
+  width: 20vw;
   border-radius: 10px;
-  @media (max-width:1000px) {
-    width: 35%;
-  }
+  height: 15vw;
 }
 .audio-container {
   display: flex;
