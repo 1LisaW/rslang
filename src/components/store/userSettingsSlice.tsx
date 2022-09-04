@@ -5,20 +5,11 @@ import userSettingsFetch from './userSettingsFetch';
 import StorageWorker from '../../localStorage';
 
 const DEFAULT_GROUP = TutorialWordsGroups.GROUP_1;
-// const DEFAULT_PAGE_IN_GROUP = 0;
 
 function getGroupFromSettings(): number {
   const group = StorageWorker.currentGroup || DEFAULT_GROUP;
-  // TODO get last group from user settings API or from local storage or set default
   return group;
 }
-
-// function getPagePerGroupFromSettings(group: TutorialWordsGroups): number {
-//   let pageInGroup = DEFAULT_PAGE_IN_GROUP;
-//   if (group === TutorialWordsGroups.GROUP_7_USER) pageInGroup = DEFAULT_PAGE_IN_GROUP;
-//   // TODO get last page in group from user settings API or from local storage or set default
-//   return pageInGroup;
-// }
 
 const initialState: UserSettings = {
   currentGroup: getGroupFromSettings(),

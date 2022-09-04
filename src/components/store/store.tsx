@@ -4,6 +4,7 @@ import soundPlaySlicer from './soundPlaySlice';
 import wordListSlicer from './wordListSlice';
 import gameWordListSlicer from './gameWordListSlice';
 import userSettingsSlicer from './userSettingsSlice';
+import isNotLearnedPagesSlicer from './isLearnedSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     gameWordList: gameWordListSlicer,
     soundPlay: soundPlaySlicer,
     userSettings: userSettingsSlicer,
+    isNotLearnedPages: isNotLearnedPagesSlicer,
   },
 });
 

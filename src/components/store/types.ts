@@ -33,8 +33,14 @@ export type WordListState = {
   wordList: PaginatedResults[] | [];
 };
 
+export type IsNotLearnedPagesState = {
+  isNotLearnedPages: { [key: number]: number[] };
+};
+
 export type GameWordListState = { gameWordList: PaginatedResults[] | [] };
 
 export type WordListReducer<T> = ReducerAction<WordListState, T>;
+
+export type IsNotLearnedPagesReducer<T> = ReducerAction<IsNotLearnedPagesState, T>;
 
 export type GameWordListReducer<T> = ReducerAction<GameWordListState, T>;
