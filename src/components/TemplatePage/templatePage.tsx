@@ -12,7 +12,6 @@ function TemplatePage() {
     location.pathname.startsWith('/audiocall');
 
   useEffect(() => {
-    console.log('Location changed');
     decorator.pause();
   }, [location]);
 

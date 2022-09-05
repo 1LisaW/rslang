@@ -24,6 +24,7 @@ const { REACT_APP_PATH_TO_SERVER } = process.env;
 const decorator = AudioDecorator;
 
 function AudioCallCard(props: CardData) {
+  console.log(props);
   const { audio, word, words, image, correctButtonIdx, wasInGame, changeCard } = props;
   const AUDIO_PATH: Array<string> = [REACT_APP_PATH_TO_SERVER?.concat(audio) as string];
   const IMG_PATH = REACT_APP_PATH_TO_SERVER?.concat(image) as string;

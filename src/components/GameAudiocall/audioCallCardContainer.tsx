@@ -60,7 +60,12 @@ export default function AudioCallCardContainer(props: ContainerProps) {
     setIcons([...icons, valid]);
   };
 
-  const cardProps = { icons, ...dataForCards[CardIdx], changeCard };
+  const setterGameOver = () => {
+    setGameOver(false);
+    setIcons(defaultIcon);
+  };
+
+  // const cardProps = { icons, ...dataForCards[CardIdx], changeCard };
   return (
     <>
       {!isGameOver && (dataForCards.length >= 20) && (
@@ -79,13 +84,13 @@ export default function AudioCallCardContainer(props: ContainerProps) {
             direction="column"
           >
             <Grid item xs={8}>
-              <AudioCallCard {...cardProps} />
+              <AudioCallCard {...{ icons, ...dataForCards[CardIdx], changeCard }} />
             </Grid>
           </Grid>
           <AlertDialogSlideOnClose />
         </Container>
       )}
-      {isGameOver && <GameStatistic {...statisticProps} />}
+      {isGameOver && <GameStatistic {...{ ...statisticProps, setterGameOver }} />}
       {dataForCards.length < 20 && (
         <Container
           className="audio-call__content content"

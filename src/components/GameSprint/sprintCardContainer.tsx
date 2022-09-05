@@ -34,6 +34,10 @@ export default function SprintCardContainer(props: ContainerProps) {
   const gameWordListState = useSelector(getGamesWordList);
   const [isGameOver, setGameOver] = useState(false);
   const { gameWordList } = gameWordListState;
+  const setterGameOver = () => {
+    setGameOver(false);
+    setIcons(defaultIcon);
+  };
 
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
@@ -67,7 +71,7 @@ export default function SprintCardContainer(props: ContainerProps) {
     sendDataToServer('sprintStats', currentUserId, statisticProps);
   };
 
-  const cardProps = { icons, ...dataForCards[CardIdx], changeCard };
+  // const cardProps = { icons, ...dataForCards[CardIdx], changeCard };
 
   return (
     <>
@@ -88,13 +92,13 @@ export default function SprintCardContainer(props: ContainerProps) {
               </StyledEngineProvider>
             </Grid>
             <Grid item xs={8}>
-              <SprintCard {...cardProps} />
+              <SprintCard {...{ icons, ...dataForCards[CardIdx], changeCard }} />
             </Grid>
           </Grid>
           <AlertDialogSlideOnClose />
         </Container>
       )}
-      {isGameOver && <GameStatistic {...statisticProps} />}
+      {isGameOver && <GameStatistic {...{ ...statisticProps, setterGameOver }} />}
       {dataForCards.length < 20 && (
         <Container className="content" maxWidth="md" sx={{ maxHeight: '80%' }}>
           <Typography position="absolute" top="50%" left="25%" width="50%">
