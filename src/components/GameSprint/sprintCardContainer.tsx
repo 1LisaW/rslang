@@ -52,7 +52,7 @@ export default function SprintCardContainer(props: ContainerProps) {
   const dataForCards = getWordsForGame(gameWordListState);
   const statisticProps = { icons, gameWordList };
 
-  const changeCard = (valid: boolean) => {
+  const setCancelRound = (valid: boolean) => {
     if (CardIdx === dataForCards.length - 1) {
       setGameOver(true);
       sendDataToServer('sprintStats', currentUserId, statisticProps);
@@ -67,7 +67,7 @@ export default function SprintCardContainer(props: ContainerProps) {
     sendDataToServer('sprintStats', currentUserId, statisticProps);
   };
 
-  const cardProps = { icons, ...dataForCards[CardIdx], changeCard };
+  const cardProps = { icons, ...dataForCards[CardIdx], setCancelRound };
 
   return (
     <>

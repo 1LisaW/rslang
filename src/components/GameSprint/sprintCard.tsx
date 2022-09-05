@@ -14,7 +14,7 @@ type CardData = {
   wordTranslate: string;
   correctButtonIdx: number;
   wasInGame: boolean | undefined;
-  changeCard: (valid: boolean) => void;
+  setCancelRound: (valid: boolean) => void;
 };
 
 const buttonsDataSprint = [
@@ -39,7 +39,7 @@ function SprintCard(props: CardData) {
     wordTranslate,
     correctButtonIdx,
     wasInGame,
-    changeCard,
+    setCancelRound,
   } = props;
 
   const iconProps = { icons };
@@ -73,7 +73,7 @@ function SprintCard(props: CardData) {
         </Typography>
       </CardContent>
       <CardActions className="game-card__actions">
-        <GameButtons {...{ buttonsData: dataForButtons, changeCard }} />
+        <GameButtons {...{ buttonsData: dataForButtons, setCancelRound }} />
       </CardActions>
     </Card>
   );
