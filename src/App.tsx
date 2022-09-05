@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route, HashRouter } from 'react-router-dom';
 import TemplatePage from './components/TemplatePage/templatePage';
 import Main from './components/Main/main';
 import Tutorial from './components/Tutorial/tutorial';
@@ -11,7 +11,7 @@ import './global/reset.css';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<TemplatePage />}>
           <Route path="/" element={<Main />} />
@@ -21,7 +21,7 @@ function App() {
           <Route path="statistic" element={<Statistic />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
