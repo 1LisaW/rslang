@@ -121,7 +121,7 @@ export default function GameStatistic(statisticProps: StatisticProps) {
           {results.wins.map(item => (
             <React.Fragment key={`frag${item.word}`}>
               <Box className="statistic__row">
-                <Grid item xs={5} key={`grid-corr-word${item.word}`} className="statistic__audio">
+                <Grid item xs={5} key={`grid-corr-word_audio${item.word}`} className="statistic__audio">
                   <AudioButton {...{ ...audioButtonHandler,
                     file: [REACT_APP_PATH_TO_SERVER?.concat(item.audio) as string],
                     playItem: false }}
@@ -145,7 +145,7 @@ export default function GameStatistic(statisticProps: StatisticProps) {
               </Box>
             </React.Fragment>
           ))}
-          <Grid item xs={8}>
+          <Grid item xs={8} key="grid-unmached-words">
             <Typography
               variant="h5"
               sx={{ fontWeight: 600, m: '20px 0' }}

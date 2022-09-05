@@ -32,7 +32,7 @@ function GameStats(props: GameStatProps) {
     props;
 
   return (
-    <div>
+    <div key={gameName}>
       <Item>
         <Grid container spacing={2}>
           <Grid xs={12}>

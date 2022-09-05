@@ -113,7 +113,7 @@ export type StatisticsOptional = {
 
 export type StatisticResponse = {
   id: string;
-  learnedWords: number;
+  learnedWords?: number;
   optional: StatisticsOptional;
 };
 export type StatisticData = Omit<StatisticResponse, 'id'>;
