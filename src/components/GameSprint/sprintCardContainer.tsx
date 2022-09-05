@@ -55,13 +55,12 @@ export default function SprintCardContainer(props: ContainerProps) {
   const statisticProps = { icons, gameWordList };
 
   const setCancelRound = (valid: boolean) => {
+    setIcons(prevState => [...prevState, valid]);
     if (CardIdx === dataForCards.length - 1) {
       setGameOver(true);
       sendDataToServer('sprintStats', currentUserId, statisticProps);
     }
-
     setCardData(CardIdx + 1 < dataForCards.length ? CardIdx + 1 : 0);
-    setIcons([...icons, valid]);
   };
 
   const handleGameOver: () => void = () => {

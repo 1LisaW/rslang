@@ -171,13 +171,15 @@ export const sendDataToServer = (
         item.optional.isLearned &&
         (!initialGameWordList[idx].userWord ||
           (initialGameWordList[idx].userWord &&
-            !initialGameWordList[idx].userWord!.optional))) {
+            !initialGameWordList[idx].userWord!.optional) ||
+          !initialGameWordList[idx].userWord!.optional!.isLearned)
+      ) {
         acc.learnedWords.push(initialGameWordList[idx]._id || '');
       }
       if (
         !initialGameWordList[idx].userWord ||
         !initialGameWordList[idx].userWord!.optional ||
-        !initialGameWordList[idx].userWord!.optional!.isLearned
+        !initialGameWordList[idx].userWord!.optional!.wasInGame
       ) {
         acc.newWordsQty += 1;
       }

@@ -1,4 +1,8 @@
-import { StatisticsOptional, CumulativeGameStats, StatisticData } from '../../Api/api-types';
+import {
+  StatisticsOptional,
+  CumulativeGameStats,
+  StatisticData,
+} from '../../Api/api-types';
 import Api from '../../Api/api';
 import getSimplifiedDate from '../../util/util';
 
