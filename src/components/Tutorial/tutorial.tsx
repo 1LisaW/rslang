@@ -18,6 +18,7 @@ import GroupSelector from './GroupSelector/groupSelector';
 import { WordListState } from '../store/types';
 import { fetchAuth } from '../store/authFetch';
 import { fetchUserSettings } from '../store/userSettingsFetch';
+import { fetchIsNotLearnedPages } from '../store/isLearnedFetch';
 import StorageWorker from '../../localStorage';
 import './tutorial.scss';
 import Api from '../../Api/api';
@@ -35,11 +36,7 @@ function Tutorial() {
   const pageIndex = useSelector(getPageInCurrentGroup);
 
   useEffect(() => {
-    dispatch(fetchAuth(StorageWorker.userId));
     dispatch(fetchUserSettings({ id: StorageWorker.userId, isAuthorized }));
-  }, [dispatch, currentUserId]);
-
-  useEffect(() => {
     dispatch(
       fetchWordList({
         isAuthorized,
@@ -49,7 +46,15 @@ function Tutorial() {
         wordsPerPage: 20,
       }),
     );
-  }, [dispatch, isAuthorized, group, pageIndex]);
+    dispatch(
+      fetchIsNotLearnedPages({
+        page: pageIndex,
+        group,
+        isAuthorized: false,
+      }),
+    );
+    dispatch(fetchAuth(StorageWorker.userId));
+  }, [dispatch, currentUserId, group, pageIndex]);
 
   const handleGroupChange = (newValue: number) => {
     const newGroup = newValue;

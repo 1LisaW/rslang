@@ -1,6 +1,7 @@
-import { PaginatedResults, Difficulty, Optional } from '../../../Api/api-types';
+import { PaginatedResults, Difficulty, Optional, CumulativeGameStats } from '../../../Api/api-types';
 import { GameWordListState } from '../../store/types';
 import Api from '../../../Api/api';
+import sendStatisticToServer from '../../Statistic/statisticService';
 
 const VARIANTS_IN_AUDIO_CALL = 5;
 
@@ -158,4 +159,43 @@ export const sendDataToServer = (
       });
     }
   });
+
+  type LearnedAndNewWords = {
+    learnedWords: string[],
+    newWordsQty: number,
+  };
+
+  const learnedAndNewWords: LearnedAndNewWords = userData
+    .reduce((acc: LearnedAndNewWords, item, idx) => {
+      if (
+        item.optional.isLearned &&
+        (!initialGameWordList[idx].userWord ||
+          (initialGameWordList[idx].userWord &&
+            !initialGameWordList[idx].userWord!.optional))) {
+        acc.learnedWords.push(initialGameWordList[idx]._id || '');
+      }
+      if (
+        !initialGameWordList[idx].userWord ||
+        !initialGameWordList[idx].userWord!.optional ||
+        !initialGameWordList[idx].userWord!.optional!.isLearned
+      ) {
+        acc.newWordsQty += 1;
+      }
+      return acc;
+    }, { learnedWords: [], newWordsQty: 0 });
+
+  const longestWinsInARow = icons
+    .join('')
+    .split('false')
+    .sort((a, b) => b.length - a.length)[0].length / 'true'.length;
+  const gameStats: CumulativeGameStats = {
+    newWordsQty: learnedAndNewWords.newWordsQty,
+    learnedWords: learnedAndNewWords.learnedWords,
+    longestWinsInARow,
+    correctAnswers: icons.filter(item => item).length,
+    totalAnswers: icons.length,
+  };
+  console.log('before sendStatisticToServer');
+  const statsName = gameID === 'sprintStats' ? 'dailyGameSprintStats' : 'dailyGameAudiocallStats';
+  sendStatisticToServer(currentUserId, statsName, gameStats);
 };

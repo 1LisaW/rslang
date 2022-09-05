@@ -1,17 +1,29 @@
 @import '../../global/library';
 
 $CARD-CONTENT-PADDING: 10px 20px;
-$CARD-MARGINE: 20px;
+$CARD-MARGIN: 20px;
 
 .card {
   box-shadow: rgb(0 0 0 / 15%) 0px 0px 10px;
   border-radius: 10px;
   overflow: hidden;
   width: 82vw;
-  margin: $CARD-MARGINE auto;
+  margin: $CARD-MARGIN auto;
 }
 .card-word__container {
   display: flex;
+}
+
+.card-word-tutorial__container {
+  display: flex;
+}
+.card-word-tutorial__container .card-word-tutorial__img {
+  height: auto;
+  width: 40%;
+  background-color: #fff;
+  @media (max-width: 650px) {
+    display: none;
+  }
 }
 .MuiCardActionArea-root {
   display: flex;

@@ -102,9 +102,13 @@ function WordCard({ data, isAuth, group, userId }:CardInput) {
       ...currentOptional,
       isLearned,
     };
+    const newDifficulty =
+      data.userWord && data.userWord.difficulty
+        ? data.userWord.difficulty
+        : Difficulty.Easy;
     const newWordData = {
       id: data._id || '',
-      difficulty: data.userWord?.difficulty,
+      difficulty: isLearned ? Difficulty.Easy : newDifficulty,
       optional,
     };
     dispatch(updateWordList(newWordData));
@@ -147,12 +151,12 @@ function WordCard({ data, isAuth, group, userId }:CardInput) {
 
   return (
     <StylesProvider injectFirst>
-      <Card className="card-word__container">
+      <Card className="card-word-tutorial__container">
         <CardMedia
-          className="card-word__img"
+          className="card-word-tutorial__img"
           component="img"
           image={IMG_PATH}
-          width="50%"
+          // width="50%"
           title={data.word}
         />
         <Box className="card__content">

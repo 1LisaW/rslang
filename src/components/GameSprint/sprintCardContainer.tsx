@@ -41,22 +41,24 @@ export default function SprintCardContainer(props: ContainerProps) {
 
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    dispatch(
-      fetchWordList({
-        redirectedFromTutorial,
-        isAuthorized,
-        id: currentUserId,
-        page,
-        group,
-        wordsPerPage,
-      }),
-    );
+    if (group !== undefined) {
+      dispatch(
+        fetchWordList({
+          redirectedFromTutorial,
+          isAuthorized,
+          id: currentUserId,
+          page,
+          group,
+          wordsPerPage,
+        }),
+      );
+    }
   }, [dispatch, group]);
 
   const dataForCards = getWordsForGame(gameWordListState);
   const statisticProps = { icons, gameWordList };
 
-  const changeCard = (valid: boolean) => {
+  const setCancelRound = (valid: boolean) => {
     if (CardIdx === dataForCards.length - 1) {
       setGameOver(true);
       sendDataToServer('sprintStats', currentUserId, statisticProps);
@@ -70,8 +72,6 @@ export default function SprintCardContainer(props: ContainerProps) {
     setGameOver(true);
     sendDataToServer('sprintStats', currentUserId, statisticProps);
   };
-
-  // const cardProps = { icons, ...dataForCards[CardIdx], changeCard };
 
   return (
     <>
@@ -92,7 +92,7 @@ export default function SprintCardContainer(props: ContainerProps) {
               </StyledEngineProvider>
             </Grid>
             <Grid item xs={8}>
-              <SprintCard {...{ icons, ...dataForCards[CardIdx], changeCard }} />
+              <SprintCard {...{ icons, ...dataForCards[CardIdx], setCancelRound }} />
             </Grid>
           </Grid>
           <AlertDialogSlideOnClose />

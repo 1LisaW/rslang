@@ -3,9 +3,14 @@
 $BUTTON-STAT-HEIGHT: 40px;
 $BUTTON-STAT-CONTEINER-HEIGHT: 50px;
 
+.statistic-content {
+  min-width: 460px;
+}
+
 .statistic__list {
-  overflow-y: scroll;
+  overflow: scroll;
   max-height: 45vh;
+  min-width: 300px;
   background-color: rgba($color: #f6c7ac, $alpha: 0.1);
   &::-webkit-scrollbar {
     width: 5px;
@@ -21,13 +26,14 @@ $BUTTON-STAT-CONTEINER-HEIGHT: 50px;
 .statistic__row {
   display: flex;
   width: 40vw;
+  min-width: 340px;
   align-items: center;
   margin-left: 15px;
   .statistic__audio {
-    max-width: 4vw;
+    max-width: 45px;
   }
   .statistic__word {
-    min-width: 10vw;
+    min-width: 50px;
   }
 }
 .statistic__buttons-cont {
