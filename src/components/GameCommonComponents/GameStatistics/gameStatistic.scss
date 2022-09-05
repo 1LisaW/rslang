@@ -1,8 +1,13 @@
 @import '../../../global/library';
 
+.statistic-content {
+  min-width: 460px;
+}
+
 .statistic__list {
-  overflow-y: scroll;
+  overflow: scroll;
   max-height: 48vh;
+  min-width: 300px;
   &::-webkit-scrollbar {
     width: 5px; 
     background-color: $MAIN-COLOR--PRIMARY-LIGHT;
@@ -16,12 +21,13 @@
 .statistic__row {
   display: flex;
   width: 40vw;
+  min-width: 340px;
   align-items: center;
   margin-left: 15px;
   .statistic__audio {
-    max-width: 4vw;
+    max-width: 45px;
   }
   .statistic__word {
-    min-width: 10vw;
+    min-width: 50px;
   }
 }

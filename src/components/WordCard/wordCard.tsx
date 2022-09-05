@@ -151,12 +151,12 @@ function WordCard({ data, isAuth, group, userId }:CardInput) {
 
   return (
     <StylesProvider injectFirst>
-      <Card className="card-word__container">
+      <Card className="card-word-tutorial__container">
         <CardMedia
-          className="card-word__img"
+          className="card-word-tutorial__img"
           component="img"
           image={IMG_PATH}
-          width="50%"
+          // width="50%"
           title={data.word}
         />
         <Box className="card__content">
