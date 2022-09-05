@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Grid, Typography } from '@mui/material';
 import { AppDispatch } from '../store/store';
@@ -47,20 +47,25 @@ export default function AudioCallCardContainer(props: ContainerProps) {
     );
   }, [dispatch, group]);
 
-  const dataForCards = getWordsAudioCallGame(gameWordListState);
+  const dataForCards = useMemo(
+    () => getWordsAudioCallGame(gameWordListState),
+    [CardIdx],
+  );
   const statisticProps = { icons, gameWordList };
 
-  const changeCard = (valid: boolean) => {
+  const cancelRound = (valid: boolean) => {
     if (CardIdx === dataForCards.length - 1) {
       setGameOver(true);
       sendDataToServer('audioCallStats', currentUserId, statisticProps);
     }
-
-    setCardData(CardIdx + 1 < dataForCards.length ? CardIdx + 1 : 0);
     setIcons([...icons, valid]);
   };
 
-  const cardProps = { icons, ...dataForCards[CardIdx], changeCard };
+  const changeCard = () => {
+    setCardData(CardIdx + 1 < dataForCards.length ? CardIdx + 1 : 0);
+  };
+
+  const cardProps = { icons, ...dataForCards[CardIdx], cancelRound, changeCard };
   return (
     <>
       {!isGameOver && (dataForCards.length >= 20) && (

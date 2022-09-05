@@ -12,12 +12,12 @@ type ButtonData = {
 
 type ButtonsProps = {
   buttonsData: ButtonData[];
-  changeCard: (valid: boolean) => void;
+  setCancelRound: (valid: boolean) => void;
 };
 
 type ButtonProps = {
   buttonData: ButtonData;
-  changeCard: (valid: boolean) => void;
+  setCancelRound: (valid: boolean) => void;
 };
 
 type KeyProps = {
@@ -54,14 +54,14 @@ const useKeyPress = (targetKey: string) => {
 };
 
 function CustomToggleButton(props: ButtonProps) {
-  const { buttonData, changeCard } = props;
+  const { buttonData, setCancelRound } = props;
   return (
     <div>
       <ToggleButton
         className={buttonData.className}
         value={buttonData.value}
         onClick={() => {
-          changeCard(buttonData.isCorrect);
+          setCancelRound(buttonData.isCorrect);
         }}
       >
         {buttonData.text}
@@ -71,7 +71,7 @@ function CustomToggleButton(props: ButtonProps) {
 }
 
 function GameButtons(props: ButtonsProps) {
-  const { buttonsData, changeCard } = props;
+  const { buttonsData, setCancelRound } = props;
 
   const rightPress = useKeyPress('ArrowRight');
   const leftPress = useKeyPress('ArrowLeft');
@@ -98,7 +98,7 @@ function GameButtons(props: ButtonsProps) {
   }, [leftPress]);
   useEffect(() => {
     if (buttonsData.length && enterPress && cursor !== undefined) {
-      changeCard(buttonsData[cursor].isCorrect);
+      setCancelRound(buttonsData[cursor].isCorrect);
     }
   }, [cursor, enterPress]);
 
@@ -107,7 +107,7 @@ function GameButtons(props: ButtonsProps) {
       ...item,
       className: idx === cursor ? `${item.className} active` : item.className,
     };
-    const data: ButtonProps = { buttonData: itemWthClass, changeCard };
+    const data: ButtonProps = { buttonData: itemWthClass, setCancelRound };
     return <CustomToggleButton key={data.buttonData.value} {...data} />;
   });
 
