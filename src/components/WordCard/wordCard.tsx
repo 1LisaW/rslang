@@ -104,7 +104,7 @@ function WordCard({ data, isAuth, group, userId }:CardInput) {
     };
     const newWordData = {
       id: data._id || '',
-      difficulty: data.userWord?.difficulty,
+      difficulty: Difficulty.Easy,
       optional,
     };
     dispatch(updateWordList(newWordData));
