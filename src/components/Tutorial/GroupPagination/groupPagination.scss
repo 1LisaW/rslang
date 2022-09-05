@@ -12,3 +12,11 @@
   align-self: center;
 
 }
+
+.pagination .css-1j4k3n5-MuiButtonBase-root-MuiPaginationItem-root {
+  @media (max-width:590px) {
+    min-width: 25px;
+    height: 25px;
+    width: 25px;
+  }
+}
