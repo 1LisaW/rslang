@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "//1lisaw.github.io/rslang/static/css/main.ad7fe315.css",
-    "main.js": "//1lisaw.github.io/rslang/static/js/main.11e1033e.js",
+    "main.js": "//1lisaw.github.io/rslang/static/js/main.11f4df86.js",
     "static/js/787.c86e4abc.chunk.js": "//1lisaw.github.io/rslang/static/js/787.c86e4abc.chunk.js",
     "static/media/14.jpg": "//1lisaw.github.io/rslang/static/media/14.795fd0e32e4e461e5caf.jpg",
     "static/media/19.jpg": "//1lisaw.github.io/rslang/static/media/19.cee59655aba8e1f47acd.jpg",
@@ -21,11 +21,11 @@
     "static/media/rs_school_img.svg": "//1lisaw.github.io/rslang/static/media/rs_school_img.ad178c0df28bc133be34.svg",
     "index.html": "//1lisaw.github.io/rslang/index.html",
     "main.ad7fe315.css.map": "//1lisaw.github.io/rslang/static/css/main.ad7fe315.css.map",
-    "main.11e1033e.js.map": "//1lisaw.github.io/rslang/static/js/main.11e1033e.js.map",
+    "main.11f4df86.js.map": "//1lisaw.github.io/rslang/static/js/main.11f4df86.js.map",
     "787.c86e4abc.chunk.js.map": "//1lisaw.github.io/rslang/static/js/787.c86e4abc.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ad7fe315.css",
-    "static/js/main.11e1033e.js"
+    "static/js/main.11f4df86.js"
   ]
 }
