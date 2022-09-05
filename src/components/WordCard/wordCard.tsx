@@ -102,9 +102,13 @@ function WordCard({ data, isAuth, group, userId }:CardInput) {
       ...currentOptional,
       isLearned,
     };
+    const newDifficulty =
+      data.userWord && data.userWord.difficulty
+        ? data.userWord.difficulty
+        : Difficulty.Easy;
     const newWordData = {
       id: data._id || '',
-      difficulty: Difficulty.Easy,
+      difficulty: isLearned ? Difficulty.Easy : newDifficulty,
       optional,
     };
     dispatch(updateWordList(newWordData));
