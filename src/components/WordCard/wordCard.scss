@@ -21,9 +21,9 @@ $CARD-MARGIN: 20px;
   height: auto;
   width: 40%;
   background-color: #fff;
-  @media (max-width: 650px) {
-    display: none;
-  }
+  // @media (max-width: 650px) {
+  //   display: none;
+  // }
 }
 .MuiCardActionArea-root {
   display: flex;
@@ -102,10 +102,17 @@ div .card-word__img {
     padding-left: 0;
   }
 }
-@media only screen and (max-width: 699px) {
+@media only screen and (max-width:800px) {
   .card {
     width: 80%;
     margin: 20px auto;
+  }
+  .card-word-tutorial__container {
+    display: block;
+  }
+  .card-word-tutorial__container .card-word-tutorial__img {
+    height: auto;
+    width: 100%;
   }
   .card__title {
     display: block;
