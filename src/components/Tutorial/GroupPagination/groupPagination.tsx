@@ -24,8 +24,7 @@ export default function GroupPagination(props: PaginationProps) {
   const isCurrentGroupLearned = new Set(
     isNotLearnedPages.isNotLearnedPages[group],
   );
-  const isPageNotLearned = isCurrentGroupLearned.has(page);
-  console.log(isPageNotLearned);
+  // const isPageNotLearned = isCurrentGroupLearned.has(page);
 
   return (
     <div className="pagination__container">

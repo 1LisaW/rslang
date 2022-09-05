@@ -49,7 +49,7 @@ export default function AudioCallCardContainer(props: ContainerProps) {
 
   const dataForCards = useMemo(
     () => getWordsAudioCallGame(gameWordListState),
-    [CardIdx],
+    [CardIdx, gameWordListState],
   );
   const statisticProps = { icons, gameWordList };
 
@@ -68,7 +68,9 @@ export default function AudioCallCardContainer(props: ContainerProps) {
   const cardProps = { icons, ...dataForCards[CardIdx], cancelRound, changeCard };
   return (
     <>
-      {!isGameOver && (dataForCards.length >= 20) && (
+      {(!isAuthorized ||
+        !redirectedFromTutorial ||
+        (!isGameOver && dataForCards.length >= 20)) && (
         <Container
           className="audio-call__content content"
           maxWidth="md"
@@ -91,7 +93,7 @@ export default function AudioCallCardContainer(props: ContainerProps) {
         </Container>
       )}
       {isGameOver && <GameStatistic {...statisticProps} />}
-      {dataForCards.length < 20 && (
+      {isAuthorized && redirectedFromTutorial && dataForCards.length < 20 && (
         <Container
           className="audio-call__content content"
           maxWidth="md"

@@ -33,7 +33,6 @@ export default function SprintCardContainer(props: ContainerProps) {
   const currentUserId = useSelector(getCurrentUserId);
   const gameWordListState = useSelector(getGamesWordList);
   const [isGameOver, setGameOver] = useState(false);
-  const { gameWordList } = gameWordListState;
 
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
@@ -49,10 +48,13 @@ export default function SprintCardContainer(props: ContainerProps) {
         }),
       );
     }
-  }, [dispatch, group]);
+  }, [dispatch, page]);
 
   const dataForCards = getWordsForGame(gameWordListState);
-  const statisticProps = { icons, gameWordList };
+  const statisticProps = {
+    icons,
+    gameWordList: gameWordListState.gameWordList,
+  };
 
   const setCancelRound = (valid: boolean) => {
     setIcons(prevState => [...prevState, valid]);
@@ -72,7 +74,9 @@ export default function SprintCardContainer(props: ContainerProps) {
 
   return (
     <>
-      {!isGameOver && (dataForCards.length >= 20) && (
+      {(!isAuthorized ||
+        !redirectedFromTutorial ||
+        (!isGameOver && dataForCards.length >= 20)) && (
         <Container className="content">
           <Typography position="absolute" top="5%" variant="h5" color="textSecondary">
             СПРИНТ
@@ -96,7 +100,7 @@ export default function SprintCardContainer(props: ContainerProps) {
         </Container>
       )}
       {isGameOver && <GameStatistic {...statisticProps} />}
-      {dataForCards.length < 20 && (
+      { isAuthorized && redirectedFromTutorial && dataForCards.length < 20 && (
         <Container className="content" maxWidth="md" sx={{ maxHeight: '80%' }}>
           <Typography position="absolute" top="50%" left="25%" width="50%">
             Недостаточно слов для игры. Попробуйте вызвать игру на следующей
