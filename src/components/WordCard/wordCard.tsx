@@ -31,7 +31,7 @@ interface CardInput {
 }
 
 const { REACT_APP_PATH_TO_SERVER } = process.env;
-const decorator = new AudioDecorator();
+const decorator = AudioDecorator;
 
 function WordCard({ data, isAuth, group, userId }:CardInput) {
   const IMG_PATH = REACT_APP_PATH_TO_SERVER?.concat(data.image);

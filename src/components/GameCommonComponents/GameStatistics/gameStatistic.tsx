@@ -39,7 +39,7 @@ const theme = createTheme({
 });
 
 const { REACT_APP_PATH_TO_SERVER } = process.env;
-const decorator = new AudioDecorator();
+const decorator = AudioDecorator;
 
 export default function GameStatistic(statisticProps: StatisticProps) {
   const { gameWordList, icons } = statisticProps;

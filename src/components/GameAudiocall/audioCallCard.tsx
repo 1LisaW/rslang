@@ -21,7 +21,7 @@ type CardData = {
 };
 
 const { REACT_APP_PATH_TO_SERVER } = process.env;
-const decorator = new AudioDecorator();
+const decorator = AudioDecorator;
 
 function AudioCallCard(props: CardData) {
   const { audio, word, words, image, correctButtonIdx, wasInGame, changeCard } = props;
@@ -62,7 +62,6 @@ function AudioCallCard(props: CardData) {
           className="card-word__img"
           component="img"
           image={IMG_PATH}
-          width="40%"
           title={word}
         />
         <Box>
