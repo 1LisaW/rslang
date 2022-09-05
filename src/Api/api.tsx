@@ -298,7 +298,7 @@ class Api {
   ): Promise<StatisticResponse | ErrorResponse> => {
     const path = `${Endpoints.Users}/${userId}/${Endpoints.Statistics}`;
     const usersAggregatedWord: StatisticResponse | ErrorResponse =
-      await this.requestMethod(Methods.GET, path, Auth.Auth, statisticData);
+      await this.requestMethod(Methods.PUT, path, Auth.Auth, statisticData);
 
     return usersAggregatedWord;
   };
