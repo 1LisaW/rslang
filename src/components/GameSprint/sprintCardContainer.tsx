@@ -37,16 +37,18 @@ export default function SprintCardContainer(props: ContainerProps) {
 
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    dispatch(
-      fetchWordList({
-        redirectedFromTutorial,
-        isAuthorized,
-        id: currentUserId,
-        page,
-        group,
-        wordsPerPage,
-      }),
-    );
+    if (group !== undefined) {
+      dispatch(
+        fetchWordList({
+          redirectedFromTutorial,
+          isAuthorized,
+          id: currentUserId,
+          page,
+          group,
+          wordsPerPage,
+        }),
+      );
+    }
   }, [dispatch, group]);
 
   const dataForCards = getWordsForGame(gameWordListState);
