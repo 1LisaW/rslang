@@ -35,11 +35,9 @@ function OurTeam() {
           </div>
           <h5 className="person__subtitle">Team leader, Frontend developer</h5>
           <p className="person__info">
-            Координировала команду...Lorem Ipsum is simply dummy
-            text of the printing and typesetting industry. Lorem
-            Ipsum has been the industry standard dummy text ever
-            since the 1500s, when an unknown printer took a galley
-            of type and scrambled it to make a type specimen book.
+            Координанор и лидер команды. Отвечала за server-client API,
+            shared/reusable components игр, частичный дизайн и логику игр.
+            Создла авторизацию UI/services и redux-store.
           </p>
         </div>
       </article>
@@ -70,11 +68,10 @@ function OurTeam() {
           </div>
           <h5 className="person__subtitle">Frontend developer</h5>
           <p className="person__info">
-            Создала навигацию, настроила роутинг...Lorem Ipsum is
-            simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry standard dummy text ever
-            since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
+            Определение единого дизайна приложения. Создание навигации и настройка роутинга.
+            Вёрстка, адаптив и UI главной страницы и списка слов. Создание карточки слова,
+            аудиокомпонента электронного учебника, аудио в Аудиовызове и игровой статистике.
+            Частичный дизайн игр и учебника, частичная логика игр.
           </p>
         </div>
       </article>
@@ -105,11 +102,10 @@ function OurTeam() {
           </div>
           <h5 className="person__subtitle">Frontend developer</h5>
           <p className="person__info">
-            Создал статистику, пагинацию...Lorem Ipsum is simply dummy
-            text of the printing and typesetting industry. Lorem Ipsum
-            has been the industry standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to
-            make a type specimen book.
+            Создал страницу статистики с графической визуализацией,
+            спроектировал структуру данных для работы со статистикой.
+            Так же внедрил постраничное отображение данных в учебнике
+            и навигацию по страницам и разделам учебника.
           </p>
         </div>
       </article>

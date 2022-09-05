@@ -34,4 +34,4 @@ class AudioDecorator {
   }
 }
 
-export default AudioDecorator;
+export default new AudioDecorator();

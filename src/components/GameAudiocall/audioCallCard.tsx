@@ -22,7 +22,7 @@ type CardData = {
 };
 
 const { REACT_APP_PATH_TO_SERVER } = process.env;
-const decorator = new AudioDecorator();
+const decorator = AudioDecorator;
 
 function AudioCallCard(props: CardData) {
   const {

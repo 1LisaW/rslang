@@ -2,6 +2,7 @@ import { Grid, Paper, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Box } from '@material-ui/core';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { PaginatedResults } from '../../../Api/api-types';
 import AudioButton from '../../AudioFiles/audioFiles';
@@ -25,6 +26,7 @@ type Results = {
 type StatisticProps = {
   gameWordList: PaginatedResults[] | [];
   icons: boolean[];
+  setterGameOver: () => void;
 };
 
 const theme = createTheme({
@@ -39,10 +41,10 @@ const theme = createTheme({
 });
 
 const { REACT_APP_PATH_TO_SERVER } = process.env;
-const decorator = new AudioDecorator();
+const decorator = AudioDecorator;
 
 export default function GameStatistic(statisticProps: StatisticProps) {
-  const { gameWordList, icons } = statisticProps;
+  const { gameWordList, icons, setterGameOver } = statisticProps;
   const initialGameWordList = [...gameWordList];
   const gameResults = [...icons];
   const results: Results = { wins: [], fails: [] };
@@ -64,7 +66,7 @@ export default function GameStatistic(statisticProps: StatisticProps) {
     const wordData = { word: word.word, wordTranslate: word.wordTranslate, audio: word.audio };
     if (gameResults[idx]) {
       results.wins.push(wordData);
-    } else if (gameResults[idx] === false) {
+    } else {
       results.fails.push(wordData);
     }
   });
@@ -104,8 +106,6 @@ export default function GameStatistic(statisticProps: StatisticProps) {
         <Grid
           container
           rowSpacing={1}
-          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          sx={{ p: '20px' }}
           className="statistic__list"
         >
 
@@ -181,6 +181,24 @@ export default function GameStatistic(statisticProps: StatisticProps) {
             </React.Fragment>
           ))}
         </Grid>
+        <Box className="statistic__buttons-cont">
+          <Link
+            key="menuItem link main"
+            to="/"
+            className="statistic__word"
+          >
+            ГЛАВНАЯ
+          </Link>
+          <button
+            className="statistic__word"
+            type="button"
+            onClick={() => {
+              setterGameOver();
+            }}
+          >
+            НАЧАТЬ ЗАНОВО
+          </button>
+        </Box>
       </Paper>
     </ThemeProvider>
   );
