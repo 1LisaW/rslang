@@ -13,6 +13,7 @@
   background-color: #6c3;
   border: 1px solid green;
   color: white;
+  min-width: 100px;
   &:hover{
     background-color: #6c3;
   }
@@ -22,6 +23,7 @@
   background-color: rgb(212, 80, 36);
   border: 1px solid rgb(128, 41, 0);
   color: white;
+  min-width: 100px;
   &:hover{
     background-color: rgb(212, 80, 36);
   }

@@ -42,9 +42,9 @@ function WordCard({ data, isAuth, group, userId }:CardInput) {
   ];
   const dispatch = useDispatch<AppDispatch>();
   const isPlaying = useSelector(isSoundPlaying);
-  const [playCard, setPlayCard] = useState(false);
-  const setterPlayCard = (value: boolean) => {
-    setPlayCard(value);
+  const [playItem, setPlayItem] = useState(false);
+  const setterPlayItem = (value: boolean) => {
+    setPlayItem(value);
   };
   const difficultyData = getDifficultyButtonData(data);
   const isLearnedData = getIsLearnedButtonData(data);
@@ -57,14 +57,14 @@ function WordCard({ data, isAuth, group, userId }:CardInput) {
 
       dispatch(start());
       decorator.setExecuteAfterStop(() => {
-        setterPlayCard(false);
+        setterPlayItem(false);
         dispatch(stop());
       });
-      setPlayCard(true);
+      setPlayItem(true);
       decorator.play(fileList);
     },
     handlerPause: () => {
-      setPlayCard(false);
+      setPlayItem(false);
       dispatch(stop());
       decorator.pause();
     },
@@ -172,7 +172,7 @@ function WordCard({ data, isAuth, group, userId }:CardInput) {
                   {data.transcription}
                 </Typography>
               </Box>
-              <AudioButton {...{ ...audioButtonHandler, file: AUDIO_ARR, playCard }} />
+              <AudioButton {...{ ...audioButtonHandler, file: AUDIO_ARR, playItem }} />
             </Box>
             <Box>
               <Typography

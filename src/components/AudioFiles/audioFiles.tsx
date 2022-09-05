@@ -8,20 +8,20 @@ export interface IAudio {
   handlerPlay: Handler;
   handlerPause: Handler;
   file: Array<string>;
-  playCard: boolean
+  playItem: boolean
 }
 
-function AudioButton({ handlerPlay, handlerPause, file, playCard }: IAudio) {
+function AudioButton({ handlerPlay, handlerPause, file, playItem }: IAudio) {
   return (
     <IconButton onClick={() => {
-      if (!playCard) {
+      if (!playItem) {
         handlerPlay(file);
       } else {
         handlerPause(file);
       }
     }}
     >
-      {playCard ? (
+      {playItem ? (
         <PauseIcon />
       ) : (
         <VolumeUpIcon />

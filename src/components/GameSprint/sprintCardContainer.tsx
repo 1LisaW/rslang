@@ -72,9 +72,9 @@ export default function SprintCardContainer(props: ContainerProps) {
   return (
     <>
       {!isGameOver && (dataForCards.length >= 20) && (
-        <Container className="content" maxWidth="md">
-          <Typography position="absolute" top="5%">
-            SPRINT
+        <Container className="content">
+          <Typography position="absolute" top="5%" variant="h5" color="textSecondary">
+            СПРИНТ
           </Typography>
           <Grid
             className="sprint__grid-wrapper"

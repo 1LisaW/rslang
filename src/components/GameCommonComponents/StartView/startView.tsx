@@ -27,20 +27,28 @@ export default function StartView(props: Props) {
   return (
     <Container className="content" maxWidth="md" sx={{ maxHeight: '80%' }}>
       <Box sx={{ height: 320, transform: 'translateZ(0px)', flexGrow: 1 }}>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="div"
+          color="textSecondary"
+          className="content__title"
+        >
           Выберите категорию сложности:
         </Typography>
-        {actions.map((action) => (
-          <IconButton
-            className="sprint-group-selector"
-            key={action.value}
-            onClick={() => {
-              chooseGroupHandler(action.value);
-            }}
-          >
-            {action.icon}
-          </IconButton>
-        ))}
+        <Box className="sprint-group">
+          {actions.map((action) => (
+            <IconButton
+              className="sprint-group-selector"
+              key={action.value}
+              onClick={() => {
+                chooseGroupHandler(action.value);
+              }}
+            >
+              {action.icon}
+            </IconButton>
+          ))}
+        </Box>
       </Box>
     </Container>
   );

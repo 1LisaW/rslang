@@ -12,14 +12,14 @@ function IconStatusList(props: Props) {
       {icons.slice(-5).map((item: boolean, idx: number) => {
         const success = (
           <InsertEmoticonIcon
-            fontSize="small"
+            fontSize="large"
             color="success"
             key={`success${idx + 1}`}
           />
         );
         const fail = (
           <SentimentVeryDissatisfiedIcon
-            fontSize="small"
+            fontSize="large"
             sx={{ color: pink[500] }}
             key={`fail${idx + 1}`}
           />
