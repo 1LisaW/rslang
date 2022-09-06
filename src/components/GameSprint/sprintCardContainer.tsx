@@ -33,7 +33,7 @@ export default function SprintCardContainer(props: ContainerProps) {
   const currentUserId = useSelector(getCurrentUserId);
   const gameWordListState = useSelector(getGamesWordList);
   const [isGameOver, setGameOver] = useState(false);
-  const { gameWordList } = gameWordListState;
+  // const { gameWordList } = gameWordListState;
   const setterGameOver = () => {
     setGameOver(false);
     setIcons(defaultIcon);
@@ -53,19 +53,21 @@ export default function SprintCardContainer(props: ContainerProps) {
         }),
       );
     }
-  }, [dispatch, group]);
+  }, [dispatch, page]);
 
   const dataForCards = getWordsForGame(gameWordListState);
-  const statisticProps = { icons, gameWordList };
+  const statisticProps = {
+    icons,
+    gameWordList: gameWordListState.gameWordList,
+  };
 
   const setCancelRound = (valid: boolean) => {
+    setIcons(prevState => [...prevState, valid]);
     if (CardIdx === dataForCards.length - 1) {
       setGameOver(true);
       sendDataToServer('sprintStats', currentUserId, statisticProps);
     }
-
     setCardData(CardIdx + 1 < dataForCards.length ? CardIdx + 1 : 0);
-    setIcons([...icons, valid]);
   };
 
   const handleGameOver: () => void = () => {
@@ -75,7 +77,9 @@ export default function SprintCardContainer(props: ContainerProps) {
 
   return (
     <>
-      {!isGameOver && (dataForCards.length >= 20) && (
+      {(!isAuthorized ||
+        !redirectedFromTutorial ||
+        (!isGameOver && dataForCards.length >= 20)) && (
         <Container className="content">
           <Typography position="absolute" top="5%" variant="h5" color="textSecondary">
             СПРИНТ
@@ -98,8 +102,12 @@ export default function SprintCardContainer(props: ContainerProps) {
           <AlertDialogSlideOnClose />
         </Container>
       )}
-      {isGameOver && <GameStatistic {...{ ...statisticProps, setterGameOver }} />}
-      {dataForCards.length < 20 && (
+      {isGameOver && (
+        <GameStatistic {...{ ...statisticProps, setterGameOver }} />
+      )}
+      { isAuthorized && redirectedFromTutorial && dataForCards.length < 20 && (
+      // {isGameOver && <GameStatistic {...{ ...statisticProps, setterGameOver }} />}
+      // {dataForCards.length < 20 && (
         <Container className="content" maxWidth="md" sx={{ maxHeight: '80%' }}>
           <Typography position="absolute" top="50%" left="25%" width="50%">
             Недостаточно слов для игры. Попробуйте вызвать игру на следующей
