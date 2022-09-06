@@ -54,7 +54,7 @@ function Tutorial() {
       }),
     );
     dispatch(fetchAuth(StorageWorker.userId));
-  }, [dispatch, currentUserId, group, pageIndex]);
+  }, [dispatch, currentUserId, group, pageIndex, isAuthorized]);
 
   const handleGroupChange = (newValue: number) => {
     const newGroup = newValue;

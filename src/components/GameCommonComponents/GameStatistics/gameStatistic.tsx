@@ -184,7 +184,7 @@ export default function GameStatistic(statisticProps: StatisticProps) {
         <Box className="statistic__buttons-cont">
           <Link
             key="menuItem link main"
-            to="/"
+            to="/rslang"
             className="statistic__word"
           >
             ГЛАВНАЯ

@@ -22,6 +22,54 @@ type HistoricalData = { [data: string]: {
 };
 };
 
+export const generateUpdateUserTutorialStatistic = async (
+  id: string,
+  userId: string,
+) => {
+  const currentDate = getSimplifiedDate(new Date());
+  const initialHistoricalStats: HistoricalData = {
+    [currentDate]: {
+      dailyCumulativeGameStats: { ...emptyGameStats },
+      dailyGameSprintStats: { ...emptyGameStats },
+      dailyGameAudiocallStats: { ...emptyGameStats },
+      dailyTutorialLearnedWords: [],
+    },
+  };
+  const initialStats: StatisticsOptional = {
+    historicalStats: initialHistoricalStats };
+  const lastUserStats = await Api.getUserStatistic();
+  const newUserState =
+    'error' in lastUserStats
+      ? { optional: initialStats }
+      : { optional: lastUserStats.optional };
+
+  const newUserStateOptional = newUserState.optional || {
+    optional: { ...initialStats },
+  };
+
+  const dailyStats = newUserStateOptional.historicalStats[currentDate];
+  const oldDailyTutorialLearnedWords = new Set(
+    newUserStateOptional.historicalStats[currentDate].dailyTutorialLearnedWords || [],
+  );
+  oldDailyTutorialLearnedWords.add(id);
+  const dailyTutorialLearnedWords = Array.from(oldDailyTutorialLearnedWords);
+
+  const statisticData: StatisticData = {
+    ...newUserState,
+    optional: {
+      historicalStats: {
+        ...newUserStateOptional.historicalStats,
+        [currentDate]: {
+          ...dailyStats,
+          dailyTutorialLearnedWords: [...dailyTutorialLearnedWords],
+        },
+      },
+    },
+  };
+  Api.updateUserStatistic(userId, statisticData);
+  return statisticData;
+};
+
 const generateUpdateUserGameStatistic = async (
   statsName: 'dailyGameSprintStats' | 'dailyGameAudiocallStats',
   gameStats: CumulativeGameStats,
@@ -116,6 +164,7 @@ const generateUpdateUserGameStatistic = async (
     ...newUserState,
     optional: {
       historicalStats: {
+        ...newUserStateOptional.historicalStats,
         [currentDate]: {
           dailyGameAudiocallStats,
           dailyGameSprintStats,
