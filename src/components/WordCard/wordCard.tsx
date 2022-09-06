@@ -15,6 +15,7 @@ import { start, stop, isSoundPlaying } from '../store/soundPlaySlice';
 import { AppDispatch } from '../store/store';
 import { Difficulty, PaginatedResults } from '../../Api/api-types';
 import { updateWordList } from '../store/wordListSlice';
+import { generateUpdateUserTutorialStatistic } from '../Statistic/statisticService';
 import {
   getDifficultyButtonData,
   getIsLearnedButtonData,
@@ -96,6 +97,7 @@ function WordCard({ data, isAuth, group, userId }:CardInput) {
 
   const handlerIsLearnedSwitch = useCallback(() => {
     const isLearned = !isLearnedData.isLearned;
+    if (isLearned && data._id) generateUpdateUserTutorialStatistic(data._id, userId);
     const currentOptional =
       data.userWord && data.userWord.optional ? data.userWord.optional : {};
     const optional = {

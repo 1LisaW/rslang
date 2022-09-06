@@ -197,7 +197,6 @@ export const sendDataToServer = (
     correctAnswers: icons.filter(item => item).length,
     totalAnswers: icons.length,
   };
-  console.log('before sendStatisticToServer');
   const statsName = gameID === 'sprintStats' ? 'dailyGameSprintStats' : 'dailyGameAudiocallStats';
   sendStatisticToServer(currentUserId, statsName, gameStats);
 };

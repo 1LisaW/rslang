@@ -145,7 +145,7 @@ export default function StatisticTabs(props: StatProps) {
               newWordsQty={statsAtDate.dailyGameSprintStats.newWordsQty}
               percentGood={Math.trunc(
                 (statsAtDate.dailyGameSprintStats.correctAnswers /
-                  statsAtDate.dailyGameSprintStats.totalAnswers) *
+                  (statsAtDate.dailyGameSprintStats.totalAnswers || 1)) *
                   100,
               )}
               longestStreak={statsAtDate.dailyGameSprintStats.longestWinsInARow}
@@ -159,7 +159,7 @@ export default function StatisticTabs(props: StatProps) {
               newWordsQty={statsAtDate.dailyGameAudiocallStats.newWordsQty}
               percentGood={Math.trunc(
                 (statsAtDate.dailyGameAudiocallStats.correctAnswers /
-                  statsAtDate.dailyGameAudiocallStats.totalAnswers) *
+                  (statsAtDate.dailyGameAudiocallStats.totalAnswers || 1)) *
                   100,
               )}
               longestStreak={
@@ -174,11 +174,12 @@ export default function StatisticTabs(props: StatProps) {
               newWordsQty={statsAtDate.dailyCumulativeGameStats.newWordsQty}
               percentGood={Math.trunc(
                 (statsAtDate.dailyCumulativeGameStats.correctAnswers /
-                  statsAtDate.dailyCumulativeGameStats.totalAnswers) *
+                  (statsAtDate.dailyCumulativeGameStats.totalAnswers || 1)) *
                   100,
               )}
               learnedWordsQty={
-                statsAtDate.dailyCumulativeGameStats.longestWinsInARow
+                statsAtDate.dailyCumulativeGameStats.learnedWords.length +
+                statsAtDate.dailyTutorialLearnedWords.length
               }
             />
           </Grid>
