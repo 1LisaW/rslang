@@ -1,0 +1,17 @@
+@import '../../../global/library';
+
+.popup{
+  color: $MAIN-COLOR--PRIMARY-DARK;
+  [type='submit']{
+    background-color: $MAIN-COLOR--PRIMARY;
+  }
+  [type='submit']:hover{
+    background-color: $MAIN-COLOR--SECONDARY;
+  }
+  [role='tab'][aria-selected='true']{
+    color: $MAIN-COLOR--SECONDARY;
+  }
+  .MuiTabs-indicator{
+    background-color: $MAIN-COLOR--SECONDARY;
+  }
+}

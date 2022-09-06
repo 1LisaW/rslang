@@ -1,0 +1,26 @@
+@import './library';
+
+.body__container {
+  max-width: $BODY-CONTAINER-WIDTH;
+  width: 90vw;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+@font-face {
+  font-family: "Rought";
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/Humblle\ Rought\ Caps.woff') format('woff');
+}
+@font-face {
+  font-family: "OpenSans"; 
+  src: url('../assets/fonts/open-sans.woff') format('woff');
+  font-style: normal;
+}
+@font-face {
+  font-family: "Teko"; 
+  src: url('../assets/fonts/Teko-Regular.woff') format('woff');
+  font-style: normal;
+}
