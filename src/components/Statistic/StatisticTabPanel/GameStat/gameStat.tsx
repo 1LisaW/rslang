@@ -51,10 +51,7 @@ function GameStats(props: GameStatProps) {
           <Grid xs={8} className="aligned-left">
             Процент правильных ответов за день:
           </Grid>
-          <Grid xs={4}>
-            {percentGood}
-            %
-          </Grid>
+          <Grid xs={4}>{`${percentGood}%`}</Grid>
 
           <Grid xs={8} className="aligned-left">
             Серия правильных ответов за день:

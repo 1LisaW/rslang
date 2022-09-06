@@ -1,7 +1,5 @@
 /* eslint-disable react/require-default-props */
 import React, { useState } from 'react';
-// import React, { useState, useEffect } from 'react';
-// import { useSelector } from 'react-redux';
 import Grid from '@mui/material/Unstable_Grid2';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -10,33 +8,12 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-// import Stack from '@mui/material/Stack';
-// import { styled } from '@mui/material/styles';
-// import { Divider } from '@mui/material';
-// import { Divider } from '@mui/material';
 import GameStat from './GameStat/gameStat';
 import WordsStat from './WordsStat/wordsStat';
 import StatChart from './StatChart/statChart';
-import getSimplifiedDate from '../../../util/util';
-// import type { CumulativeGameStats, StatisticsOptional } from '../../../Api/api-types';
+import type { StatisticsOptional } from '../../../Api/api-types';
 
 import './statisticTabPanel.scss';
-
-type Histo = {
-  new: number;
-  perc: number;
-  streak: number;
-};
-type Histor = {
-  [date: string]: Histo;
-};
-
-const historicData: Histor = {
-  '2022-09-02': { new: 3, perc: 65, streak: 0 },
-  '2022-09-01': { new: 2, perc: 35, streak: 3 },
-  '2022-08-31': { new: 0, perc: 22, streak: 6 },
-  '2022-08-25': { new: 4, perc: 77, streak: 2 },
-};
 
 interface StatisticTabPanelProps {
   children?: React.ReactNode;
@@ -71,20 +48,37 @@ function a11yProps(index: number) {
   };
 }
 
-export default function StatisticTabs() {
+type StatProps = {
+  statData: StatisticsOptional;
+};
+
+export default function StatisticTabs(props: StatProps) {
+  const { statData } = props;
+  const history = statData.historicalStats;
   const [value, setValue] = useState(0);
-  const [currentDate, setCurrentDate] = useState(getSimplifiedDate(new Date()));
-  const [historicDat, setHistoricDat] = useState(historicData['2022-09-02']);
+  const dateKeysInStats = Object.keys(history).sort();
+  const [currentDate, setCurrentDate] = useState(
+    dateKeysInStats.at(-1) as string,
+  );
+  const [statsAtDate, setStatsAtDate] = useState(history[currentDate]);
+  const wordsData = {
+    labels: dateKeysInStats,
+    newWords: dateKeysInStats.map(
+      dateKey => history[dateKey].dailyCumulativeGameStats.newWordsQty,
+    ),
+    learnedWords: dateKeysInStats.map(
+      dateKey => history[dateKey].dailyCumulativeGameStats.learnedWords.length
+        + history[dateKey].dailyTutorialLearnedWords.length,
+    ),
+  };
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
   const handleDateChange = (dir: 'prev' | 'next') => {
-    const dateKeysInStats = Object.keys(historicData).sort();
     if (!dateKeysInStats.length) return;
 
-    // const dateOffset = 24 * 60 * 60 * 1000 * (dir === 'prev' ? -1 : 1);
     let dateIndex =
       dateKeysInStats.indexOf(currentDate) === -1
         ? dateKeysInStats.length - 1
@@ -98,16 +92,35 @@ export default function StatisticTabs() {
 
     const newDate = dateKeysInStats[dateIndex];
     if (newDate !== currentDate) {
-      const newValues = historicData[newDate];
+      const newValues = history[newDate];
       setCurrentDate(newDate);
-      setHistoricDat(newValues);
+      setStatsAtDate(newValues);
     }
   };
+
   const handlePrevDate = () => {
     handleDateChange('prev');
   };
+
   const handleNextDate = () => {
     handleDateChange('next');
+  };
+
+  const getDays = (num: number): string => {
+    let days = 'дней';
+    switch (num % 10) {
+      case 1:
+        days = 'день';
+        break;
+      case 2:
+      case 3:
+      case 4:
+        days = 'дня';
+        break;
+      default:
+        days = 'дней';
+    }
+    return `${num} ${days}`;
   };
 
   return (
@@ -129,9 +142,13 @@ export default function StatisticTabs() {
             <GameStat
               gameName="Sprint"
               currentDate={currentDate}
-              newWordsQty={historicDat.new}
-              percentGood={historicDat.perc}
-              longestStreak={historicDat.streak}
+              newWordsQty={statsAtDate.dailyGameSprintStats.newWordsQty}
+              percentGood={Math.trunc(
+                (statsAtDate.dailyGameSprintStats.correctAnswers /
+                  statsAtDate.dailyGameSprintStats.totalAnswers) *
+                  100,
+              )}
+              longestStreak={statsAtDate.dailyGameSprintStats.longestWinsInARow}
             />
           </Grid>
 
@@ -139,18 +156,30 @@ export default function StatisticTabs() {
             <GameStat
               gameName="Audiocall"
               currentDate={currentDate}
-              newWordsQty={historicDat.new}
-              percentGood={historicDat.perc}
-              longestStreak={historicDat.streak}
+              newWordsQty={statsAtDate.dailyGameAudiocallStats.newWordsQty}
+              percentGood={Math.trunc(
+                (statsAtDate.dailyGameAudiocallStats.correctAnswers /
+                  statsAtDate.dailyGameAudiocallStats.totalAnswers) *
+                  100,
+              )}
+              longestStreak={
+                statsAtDate.dailyGameAudiocallStats.longestWinsInARow
+              }
             />
           </Grid>
 
           <Grid xs={12}>
             <WordsStat
               currentDate={currentDate}
-              newWordsQty={historicDat.new}
-              percentGood={historicDat.perc}
-              learnedWordsQty={historicDat.streak}
+              newWordsQty={statsAtDate.dailyCumulativeGameStats.newWordsQty}
+              percentGood={Math.trunc(
+                (statsAtDate.dailyCumulativeGameStats.correctAnswers /
+                  statsAtDate.dailyCumulativeGameStats.totalAnswers) *
+                  100,
+              )}
+              learnedWordsQty={
+                statsAtDate.dailyCumulativeGameStats.longestWinsInARow
+              }
             />
           </Grid>
         </Grid>
@@ -159,8 +188,9 @@ export default function StatisticTabs() {
             <ArrowBackIosNewIcon />
           </Button>
           <Typography>
-            Дата:
-            {` ${currentDate}`}
+            {`Дата: ${currentDate} (доступно ${getDays(
+              dateKeysInStats.length,
+            )})`}
           </Typography>
           <Button className="date-btns" onClick={handleNextDate}>
             <ArrowForwardIosIcon />
@@ -169,7 +199,7 @@ export default function StatisticTabs() {
       </StatisticTabPanel>
 
       <StatisticTabPanel value={value} index={1}>
-        <StatChart chartName="Исория изучения слов" wordsData={[0, 1, 2]} />
+        <StatChart chartName="Исория изучения слов" wordsData={wordsData} />
       </StatisticTabPanel>
     </Box>
   );
