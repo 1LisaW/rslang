@@ -99,7 +99,7 @@ function ResponsiveAppBar() {
               variant="h2"
               noWrap
               component="a"
-              href="/"
+              href="/rslang"
               sx={{
                 fontFamily: 'Teko',
                 mr: 2,
@@ -184,7 +184,7 @@ function ResponsiveAppBar() {
               variant="h2"
               noWrap
               component="a"
-              href="/"
+              href="/rslang"
               sx={{
                 mr: 2,
                 fontFamily: 'Teko',
