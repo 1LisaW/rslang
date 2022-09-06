@@ -32,20 +32,18 @@ export default function GroupPagination(props: PaginationProps) {
         <Stack spacing={1}>
           <Typography
             className="pagination__header"
-            // sx={{ color: isPageNotLearned ? 'black' : 'green' }}
           >
             {PAGES_TITLE}
             {page}
           </Typography>
           <Pagination
+            siblingCount={0}
             className="pagination"
             count={PAGES_IN_GROUP}
+            color="secondary"
             page={page}
             variant="outlined"
-            shape="rounded"
             size="large"
-            showFirstButton
-            showLastButton
             onChange={(_, num) => {
               changeHandler(num);
             }}

@@ -26,7 +26,7 @@ export default function StartView(props: Props) {
   const { chooseGroupHandler } = props;
   return (
     <Container className="content" maxWidth="md" sx={{ maxHeight: '80%' }}>
-      <Box sx={{ height: 320, transform: 'translateZ(0px)', flexGrow: 1 }}>
+      <Box className="content__container" sx={{ transform: 'translateZ(0px)', flexGrow: 1 }}>
         <Typography
           gutterBottom
           variant="h5"

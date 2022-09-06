@@ -61,11 +61,15 @@ export default function AudioCallCardContainer(props: ContainerProps) {
     setIcons([...icons, valid]);
   };
 
+  const setterGameOver = () => {
+    setGameOver(false);
+    setCardData(0);
+  };
+
   const changeCard = () => {
     setCardData(CardIdx + 1 < dataForCards.length ? CardIdx + 1 : 0);
   };
 
-  const cardProps = { icons, ...dataForCards[CardIdx], cancelRound, changeCard };
   return (
     <>
       {(!isAuthorized ||
@@ -86,14 +90,18 @@ export default function AudioCallCardContainer(props: ContainerProps) {
             direction="column"
           >
             <Grid item xs={8}>
-              <AudioCallCard {...cardProps} />
+              <AudioCallCard {...{ icons, ...dataForCards[CardIdx], cancelRound, changeCard }} />
             </Grid>
           </Grid>
           <AlertDialogSlideOnClose />
         </Container>
       )}
-      {isGameOver && <GameStatistic {...statisticProps} />}
+      {isGameOver && (
+        <GameStatistic {...{ ...statisticProps, setterGameOver }} />
+      )}
       {isAuthorized && redirectedFromTutorial && dataForCards.length < 20 && (
+      //       {isGameOver && <GameStatistic {...{ ...statisticProps, setterGameOver }} />}
+      //       {dataForCards.length < 20 && (
         <Container
           className="audio-call__content content"
           maxWidth="md"

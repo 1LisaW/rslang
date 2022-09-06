@@ -29,7 +29,11 @@ ChartJS.register(
 
 interface StatChartProps {
   chartName: string;
-  wordsData: number[];
+  wordsData: {
+    labels: string[];
+    newWords: number[];
+    learnedWords: number[];
+  };
 }
 const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
@@ -77,7 +81,8 @@ export const chartData = {
       type: 'line' as const,
       label: DATASET_NAME_NEW_WORDS,
       fill: false,
-      data: labels.map(() => Math.random() * 2000 - 1000),
+      data: [0],
+      // labels.map(() => Math.random() * 2000 - 1000),
       // data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
       borderColor: 'rgb(255, 99, 132)',
       backgroundColor: 'rgba(255, 99, 132, 0.5)',
@@ -87,7 +92,8 @@ export const chartData = {
       type: 'line' as const,
       label: DATASET_NAME_LEARNED_WORDS,
       fill: 'start' as const,
-      data: labels.map(() => Math.trunc(Math.random() * 300)).sort((a, b) => a - b),
+      data: [0],
+      // labels.map(() => Math.trunc(Math.random() * 300)).sort((a, b) => a - b),
       // data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
       borderColor: 'rgb(53, 162, 235)',
       backgroundColor: 'rgba(53, 162, 235, 0.5)',
@@ -99,10 +105,12 @@ export const chartData = {
 function StatChart(props: StatChartProps) {
   const { chartName, wordsData } = props;
   chartOptions.plugins.title.text = chartName;
+  chartData.labels = wordsData.labels;
+  chartData.datasets[0].data = wordsData.newWords;
+  chartData.datasets[1].data = wordsData.learnedWords;
 
   return (
     <div>
-      {wordsData.length}
       <Chart type="line" options={chartOptions} data={chartData as ChartData} />
     </div>
   );

@@ -33,6 +33,11 @@ export default function SprintCardContainer(props: ContainerProps) {
   const currentUserId = useSelector(getCurrentUserId);
   const gameWordListState = useSelector(getGamesWordList);
   const [isGameOver, setGameOver] = useState(false);
+  // const { gameWordList } = gameWordListState;
+  const setterGameOver = () => {
+    setGameOver(false);
+    setIcons(defaultIcon);
+  };
 
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
@@ -70,8 +75,6 @@ export default function SprintCardContainer(props: ContainerProps) {
     sendDataToServer('sprintStats', currentUserId, statisticProps);
   };
 
-  const cardProps = { icons, ...dataForCards[CardIdx], setCancelRound };
-
   return (
     <>
       {(!isAuthorized ||
@@ -93,14 +96,18 @@ export default function SprintCardContainer(props: ContainerProps) {
               </StyledEngineProvider>
             </Grid>
             <Grid item xs={8}>
-              <SprintCard {...cardProps} />
+              <SprintCard {...{ icons, ...dataForCards[CardIdx], setCancelRound }} />
             </Grid>
           </Grid>
           <AlertDialogSlideOnClose />
         </Container>
       )}
-      {isGameOver && <GameStatistic {...statisticProps} />}
+      {isGameOver && (
+        <GameStatistic {...{ ...statisticProps, setterGameOver }} />
+      )}
       { isAuthorized && redirectedFromTutorial && dataForCards.length < 20 && (
+      // {isGameOver && <GameStatistic {...{ ...statisticProps, setterGameOver }} />}
+      // {dataForCards.length < 20 && (
         <Container className="content" maxWidth="md" sx={{ maxHeight: '80%' }}>
           <Typography position="absolute" top="50%" left="25%" width="50%">
             Недостаточно слов для игры. Попробуйте вызвать игру на следующей

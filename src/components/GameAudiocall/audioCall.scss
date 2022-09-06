@@ -75,7 +75,7 @@ div.audio-call__content{
 .audio-call__card-content {
   @include flex(space-evenly);
 }
-div .MuiCardMedia-media {
+.audio-call__card-content .card-word__img {
   width: 20vw;
   border-radius: 10px;
   height: 15vw;

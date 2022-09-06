@@ -49,11 +49,7 @@ function WordsStat(props: WordsStatProps) {
           <Grid xs={8} className="aligned-left">
             Процент правильных ответов за день:
           </Grid>
-          <Grid xs={4}>
-            {percentGood}
-            %
-          </Grid>
-
+          <Grid xs={4}>{`${percentGood}%`}</Grid>
         </Grid>
       </Item>
     </div>

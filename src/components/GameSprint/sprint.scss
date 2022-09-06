@@ -44,6 +44,9 @@ main .content {
   transform:translate(-50%, -50%);
   margin-top: 40px;
 }
+.content__container {
+  height: auto;
+}
 .content__title {
   padding: 50px 0;
 }
@@ -60,8 +63,14 @@ main .content {
   text-align:left;
   box-sizing: border-box;
   padding: 5% 5%;
+  margin-top: 20px;
+  @media (max-width:1040px) {
+    width: 70vw;
+  }
+  @media (max-width:750px) {
+    width: 95vw;
+  }
 }
-
 
 h1 {
   font-family:monospace;
@@ -78,7 +87,6 @@ h1 {
 
 .sprint-card {
   margin: auto;
-  height: 50vh;
   min-width: 50vw;
   &__actions{
     justify-content: center;
@@ -156,8 +164,8 @@ h1 {
 .sprint-group-selector:nth-child(7) {
   background-color: $BUTTON_GROUP_6_COLOR;
 }
-.game-card__actions {
-
+.sprint-group {
+  height: auto;
 }
 /***************media********************/
 @media only screen and (max-width:550px) {
